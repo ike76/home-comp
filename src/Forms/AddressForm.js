@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FormSection } from "./FormSection";
+import { Field } from "redux-form";
 
 export default class AddressFrom extends Component {
   handleChange = e => {
@@ -11,26 +12,11 @@ export default class AddressFrom extends Component {
     return (
       <FormSection>
         <label htmlFor="addressInput">Street Address</label>
-        <input
-          type="text"
-          name="address"
-          value={this.props.values.address}
-          onChange={this.handleChange}
-        />
+        <Field component="input" type="text" name="address" />
         <label htmlFor="addressInput">City</label>
-        <input
-          type="text"
-          name="city"
-          value={this.props.values.city}
-          onChange={this.handleChange}
-        />
+        <Field component="input" type="text" name="city" />
         <label htmlFor="addressInput">State</label>
-        <input
-          type="text"
-          name="state"
-          value={this.props.values.state}
-          onChange={this.handleChange}
-        />
+        <Field component="input" type="text" name="state" />
       </FormSection>
     );
   }

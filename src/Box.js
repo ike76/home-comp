@@ -11,7 +11,19 @@ export class Box extends Component {
     this.setState({ editing: !this.state.editing });
   };
   render() {
-    const { home, slug } = this.props;
+    const { home, slug, colNumber, rowNumber, name } = this.props;
+
+    const StyleBox = styled.div`
+      border: 1px black solid;
+      border-radius: 4px;
+      display: grid;
+      grid-template-rows: 1.5rem 1rem;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      margin: 2px 5px;
+      padding: 3px;
+    `;
     const handleSubmit = e => {
       e.preventDefault();
       const newValue = this.textInput.value;
@@ -20,7 +32,8 @@ export class Box extends Component {
     const { editing } = this.state;
     return (
       <StyleBox>
-        {!editing && <p>{home[slug] && home[slug].value}</p>}
+        {!editing && <Value>{home[slug] && home[slug].value}</Value>}
+        <Attribute>{name.pretty}</Attribute>
         {editing && (
           <form onSubmit={handleSubmit} className="number-form">
             <input type="text" ref={x => (this.textInput = x)} />
@@ -32,14 +45,13 @@ export class Box extends Component {
     );
   }
 }
-const StyleBox = styled.div`
-  border: 1px black solid;
-  border-radius: 4px;
-  // width: 15rem;
-  display: flex;
-  position: relative;
-  align-content: center;
-  justify-content: center;
+const Value = styled.div`
+  text-align: center;
+`;
+const Attribute = styled.div`
+  color: lightgrey;
+  font-size: 0.8rem;
+  text-align: center;
 `;
 const mapStateToProps = state => ({});
 export default connect(mapStateToProps)(Box);

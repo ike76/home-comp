@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "faker": "^4.1.0",
+    "popmotion-pose": "^2.0.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-flip-move": "^3.0.2",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "react-spring": "^5.3.8",

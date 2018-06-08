@@ -1,19 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import FlipMove from "react-flip-move";
 
 import styled from "styled-components";
 import Column from "./Column";
+import HomeDecoration from "./HomeDecoration";
 import AttrNames from "./AttrNames";
 import AddressBox from "./AddressBox";
-import NewHomeForm from "./Forms/NewHomeForm";
-
+import FormContainer from "./Forms/FormContainer";
 import Modal from "./Utilities/Modal";
 import "./HomeGrid.css";
 export class Homegrid extends Component {
   state = {
     columns: 4,
     rows: 2,
-    showModal: true
+    showModal: false
   };
   closeModal = () => {
     this.setState({ showModal: false });
@@ -37,14 +38,17 @@ export class Homegrid extends Component {
       <div className="grid-wrapper">
         <Grid>
           <AttrNames />
-          {homes.map(home => (
-            <Column key={home.id} home={home} attrNames={attrNames} />
+          {homes.map((home, i) => (
+            <Fragment key={home.id}>
+              <HomeDecoration index={i} />
+              <Column home={home} attrNames={attrNames} index={i} />
+            </Fragment>
           ))}
           <AddressBox addy="NEW" />
         </Grid>
         {this.state.showModal && (
           <Modal close={this.closeModal}>
-            <NewHomeForm />
+            <FormContainer />
           </Modal>
         )}
         <button onClick={() => this.setState({ showModal: true })}>show</button>
