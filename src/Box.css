@@ -1,0 +1,11 @@
+.fa-edit.box-edit {
+  color: #b1b1b1;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  cursor: pointer;
+}
+
+.number-form {
+  align-self: center;
+}
