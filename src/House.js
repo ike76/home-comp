@@ -1,31 +1,38 @@
-import React, { Component, Fragment } from "react";
-import Box from "./Box";
+import React, { Component } from "react";
+import Box from "./Boxes/Box";
 import AddressBox from "./AddressBox";
-import styled from "styled-components";
 import RoofBackground from "./Images/bwRoof.jpg";
 import "./House.css";
-
+import ImageBox from "./Boxes/ImageBox";
 export default class House extends Component {
   render() {
-    const { home, attrNames, index } = this.props;
-    const colNumber = index + 2;
+    const { home, attrNames } = this.props;
+
     return (
       <div className="house">
-        <AddressBox
-          addy={home.location.address}
-          colNumber={colNumber}
-          roofImage={RoofBackground}
-        />
-        {attrNames.map((name, i) => (
-          <Box
-            key={name + i}
-            name={name}
-            home={home}
-            slug={name.slug}
-            colNumber={colNumber}
-            rowNumber={i + 2}
-          />
-        ))}
+        <AddressBox addy={home.location.address} roofImage={RoofBackground} />
+        {attrNames.map((name, i) => {
+          switch (name.type) {
+            case "number":
+            case "price":
+              return (
+                <Box
+                  key={name + i}
+                  name={name}
+                  home={home}
+                  slug={name.slug}
+                  index={i}
+                />
+              );
+
+            case "image":
+              return (
+                <ImageBox key={name + i} name={name} home={home} index={i} />
+              );
+            default:
+              return null;
+          }
+        })}
       </div>
     );
   }

@@ -24,6 +24,10 @@ const fakeHome = () => ({
   bedrooms: {
     boxType: "number",
     value: faker.random.number(5)
+  },
+  kitchen: {
+    boxType: "image",
+    value: faker.random.number(7)
   }
 });
 

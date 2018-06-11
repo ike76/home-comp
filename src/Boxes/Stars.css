@@ -1,0 +1,11 @@
+.fa-star {
+  color: lightgrey;
+  cursor: pointer;
+  transition: 0.3s font-size;
+}
+.fa-star:hover {
+  font-size: 1rem;
+}
+.filled {
+  color: orange;
+}

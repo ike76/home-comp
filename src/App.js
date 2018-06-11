@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import HomeGrid from "./HomeGrid";
-import HomeLister from "./HomeLister";
+import Layout from "./Layout/Layout";
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        <HomeGrid />
-        <HomeLister />
-      </div>
-    );
+    return <Layout />;
   }
 }
 

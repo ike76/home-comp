@@ -1,0 +1,45 @@
+.fa-edit.box-edit {
+  color: #b1b1b1;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
+}
+
+.number-form {
+  align-self: center;
+}
+
+.box,
+.controlBox {
+  align-items: center;
+  padding: 3px;
+  margin: 2px 5px;
+  align-content: center;
+  position: relative;
+  text-align: center;
+  display: flex;
+}
+.box {
+  border: 1px black solid;
+  border-radius: 4px;
+  display: grid;
+  grid-template-rows: 1.5rem 1rem;
+  justify-content: center;
+  min-width: 7rem;
+}
+.controlBox {
+  display: grid;
+  grid-template-columns: 1fr 2rem;
+  justify-content: center;
+}
+.controlBox i.selected {
+  color: red;
+}
+.controlBox i.unselected {
+  color: lightgray;
+}
+.controlButton {
+  font-size: 1.5rem;
+  cursor: pointer;
+}

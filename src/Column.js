@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import Box from "./Box";
+import Box from "./Boxes/Box";
 import AddressBox from "./AddressBox";
 import styled from "styled-components";
 import RoofBackground from "./Images/bwRoof.jpg";

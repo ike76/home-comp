@@ -1,16 +1,36 @@
 import React, { Component } from "react";
-import NewHomeForm from "./NewHomeForm";
+import { connect } from "react-redux";
+import slugify from "slugify";
 
-export default class FormContainer extends Component {
+import NewHomeForm from "./NewHomeForm";
+import AttributeForm from "./AttributeForm";
+import {
+  addAttribute,
+  editAttribute,
+  deleteAttribute
+} from "../actions/actions";
+
+class FormContainer extends Component {
   submit = values => {
-    console.log(values);
+    const pretty = values.attrName;
+    const slug = slugify(pretty, { replacement: "_", lower: true });
+    const attrType = "image";
+    const attr = { pretty, slug, type: attrType };
+    this.props.dispatch(addAttribute(attr));
   };
   render() {
     return (
       <div>
-        <h2>Add a Home or whatever</h2>
-        <NewHomeForm onSubmit={this.submit} />
+        <h2>Add an Attribute</h2>
+        {/* <NewHomeForm onSubmit={this.submit} /> */}
+        <AttributeForm
+          onSubmit={this.submit}
+          initialValues={{ attrName: "" }}
+        />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps)(FormContainer);

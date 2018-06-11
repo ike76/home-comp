@@ -21,6 +21,7 @@ export default props => {
     background: #00000082;
     display: inline;
     padding: 3px;
+    font-size: 0.9rem;
   `;
   return (
     <Roof>
