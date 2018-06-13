@@ -33,8 +33,8 @@ const listStyle = {
   padding: "1.5rem"
 };
 const mapStateToProps = state => ({
-  attrNames: state.main.attrNames,
-  customAttrNames: state.main.customAttrNames,
-  homes: state.main.homes
+  attrNames: state.house.attrNames,
+  customAttrNames: state.house.customAttrNames,
+  homes: state.house.homes
 });
 export default connect(mapStateToProps)(HomeLister);

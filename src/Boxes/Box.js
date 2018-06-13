@@ -61,5 +61,5 @@ export class Box extends Component {
 //   font-size: 0.8rem;
 //   text-align: center;
 // `;
-const mapStateToProps = state => ({ heights: state.main.heights });
+const mapStateToProps = state => ({ heights: state.house.heights });
 export default connect(mapStateToProps)(Box);

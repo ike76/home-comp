@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import { mainReducer } from "./reducers/reducers";
+import { houseReducer } from "./reducers/houseReducer";
 import { reducer as formReducer } from "redux-form";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
-  main: mainReducer,
+  house: houseReducer,
   form: formReducer
 });
 // TODO user, addHome etc.  not "main"

@@ -4,7 +4,7 @@ import ControlBox from "./Boxes/ControlBox";
 import AddressBox from "./AddressBox";
 import { sortByCustom } from "./actions/actions";
 import Button from "./UIElements/Button";
-import FormContainer from "./Forms/FormContainer";
+import FormContainer from "./Forms/AttributeFormContainer";
 import Modal from "./Utilities/Modal";
 
 class ControlHouse extends Component {
@@ -57,8 +57,8 @@ class ControlHouse extends Component {
 }
 
 const mapStateToProps = state => ({
-  sortedBy: state.main.sortedBy,
-  attrNames: state.main.attrNames,
-  heights: state.main.heights
+  sortedBy: state.house.sortedBy,
+  attrNames: state.house.attrNames,
+  heights: state.house.heights
 });
 export default connect(mapStateToProps)(ControlHouse);

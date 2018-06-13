@@ -4,12 +4,19 @@
 .layout {
   display: grid;
   grid-template-columns: max-content minmax(400px, 750px) 5rem;
-  grid-template-rows: 4rem 1fr 5rem;
+  grid-template-rows: auto 1fr 5rem;
 }
 
 .header {
   background: lightblue;
+  padding: 0.5rem;
   grid-area: 1 / 1 / 1 / -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.header * {
+  margin: 0;
 }
 .sidebar {
   background: #fdfdfd;

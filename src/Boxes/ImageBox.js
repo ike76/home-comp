@@ -78,7 +78,7 @@ class ImageBox extends Component {
   }
 }
 const mapStateToProps = state => ({
-  displayMessage: state.main.displayMessage,
-  heights: state.main.heights
+  displayMessage: state.house.displayMessage,
+  heights: state.house.heights
 });
 export default connect(mapStateToProps)(ImageBox);

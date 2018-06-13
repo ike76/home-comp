@@ -45,8 +45,8 @@ const SortArrows = props => {
 };
 
 const mapStateToProps = state => ({
-  currentSortAttr: state.main.sortedBy.attr,
-  currentAscending: state.main.sortedBy.ascending,
-  homes: state.main.homes
+  currentSortAttr: state.house.sortedBy.attr,
+  currentAscending: state.house.sortedBy.ascending,
+  homes: state.house.homes
 });
 export default connect(mapStateToProps)(SortArrows);

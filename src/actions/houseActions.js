@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const ADD_NEW_HOME = "ADD_NEW_HOME";
-export const addHouse = houseObj => dispatch => {
+export const addHome = houseObj => dispatch => {
   axios
     .post("http://localhost:8000/house", houseObj)
     .then(response => response.data)

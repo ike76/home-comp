@@ -46,7 +46,7 @@ class NewHomeForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  attrNames: state.main.attrNames
+  attrNames: state.house.attrNames
 });
 NewHomeForm = connect(mapStateToProps)(NewHomeForm);
 

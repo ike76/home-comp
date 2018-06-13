@@ -27,8 +27,8 @@ const AttrName = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  attrNames: state.main.attrNames,
-  sortedBy: state.main.sortedBy
+  attrNames: state.house.attrNames,
+  sortedBy: state.house.sortedBy
 });
 
 export default connect(mapStateToProps)(AttrNames);
