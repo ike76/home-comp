@@ -20,7 +20,7 @@ export class Box extends Component {
     const handleSubmit = e => {
       e.preventDefault();
       const newValue = this.textInput.value;
-      dispatch(changeHomeValue(home.id, slug, newValue));
+      dispatch(changeHomeValue(home._id, slug, newValue));
       this.textInput.value = "";
       this.setState({ editing: false });
     };
@@ -31,13 +31,12 @@ export class Box extends Component {
           return monify(val);
         case "number":
           return commafy(val);
+
         default:
           return val;
       }
     };
-    const value = formatValue(
-      home[slug] ? home[slug].value : home.customAttrs[slug].value
-    );
+    const value = formatValue(home.attributes[slug].value);
     return (
       <StyledBox className="box">
         {!editing && <Value>{value}</Value>}

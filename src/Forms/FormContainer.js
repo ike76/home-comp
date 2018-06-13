@@ -14,14 +14,13 @@ class FormContainer extends Component {
     const pretty = values.attrName;
     const slug = slugify(pretty, { replacement: "_", lower: true });
     const attrType = "image";
-    const attr = { pretty, slug, type: attrType };
-    this.props.dispatch(addAttribute(attr));
+    const attrObject = { pretty, slug, type: attrType };
+    this.props.dispatch(addAttribute(attrObject));
   };
   render() {
     return (
       <div>
         <h2>Add an Attribute</h2>
-        {/* <NewHomeForm onSubmit={this.submit} /> */}
         <AttributeForm
           onSubmit={this.submit}
           initialValues={{ attrName: "" }}

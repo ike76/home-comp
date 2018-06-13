@@ -12,11 +12,33 @@ export default class AddressFrom extends Component {
     return (
       <FormSection>
         <label htmlFor="addressInput">Street Address</label>
-        <Field component="input" type="text" name="address" />
-        <label htmlFor="addressInput">City</label>
-        <Field component="input" type="text" name="city" />
-        <label htmlFor="addressInput">State</label>
-        <Field component="input" type="text" name="state" />
+        <Field
+          component="input"
+          type="text"
+          name="location.address"
+          id="addressInput"
+        />
+        <label htmlFor="cityInput">City</label>
+        <Field
+          component="input"
+          type="text"
+          name="location.city"
+          id="cityInput"
+        />
+        <label htmlFor="stateInput">State</label>
+        <Field
+          component="input"
+          type="text"
+          name="location.state"
+          id="stateInput"
+        />
+        <label htmlFor="zipInput">Zip</label>
+        <Field
+          component="input"
+          type="text"
+          name="location.zip"
+          id="zipInput"
+        />
       </FormSection>
     );
   }

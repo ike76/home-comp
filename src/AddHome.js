@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+
 import Modal from "./Utilities/Modal";
 import NewHomeForm from "./Forms/NewHomeForm";
+import { addHouse } from "./actions/houseActions";
 
-export default class AddHome extends Component {
+class AddHome extends Component {
   state = {
     showModal: false
   };
@@ -14,6 +17,7 @@ export default class AddHome extends Component {
   };
   handleSubmit = values => {
     console.log(values);
+    this.props.dispatch(addHouse(values));
   };
   render() {
     return (
@@ -28,3 +32,5 @@ export default class AddHome extends Component {
     );
   }
 }
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps)(AddHome);

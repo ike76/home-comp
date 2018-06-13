@@ -1,8 +1,12 @@
-const ADD_HOUSE = "ADD_HOUSE";
-const addHouse = obj => dispatch => {
-  type: ADD_HOUSE,
-    axios.post("http://localhost:8000/house", obj).then(res => {
-      console.log("axios response", res);
+import axios from "axios";
+
+export const ADD_NEW_HOME = "ADD_NEW_HOME";
+export const addHouse = houseObj => dispatch => {
+  axios
+    .post("http://localhost:8000/house", houseObj)
+    .then(response => response.data)
+    .then(house => {
+      console.log("axios response", house);
+      dispatch({ type: ADD_NEW_HOME, house });
     });
-  dispatch({ type: "SUP" });
 };

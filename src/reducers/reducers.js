@@ -38,8 +38,8 @@ export const mainReducer = (state = initialState, action) => {
     case SORT_BY_CUSTOM: {
       const sortedHomes = state.homes.sort((a, b) => {
         const { attr } = action;
-        const aValue = a[attr].value;
-        const bValue = b[attr].value;
+        const aValue = a.attributes[attr].value;
+        const bValue = b.attributes[attr].value;
         const sort = action.ascending ? aValue - bValue : bValue - aValue;
         return sort;
       });
@@ -50,26 +50,30 @@ export const mainReducer = (state = initialState, action) => {
       };
     }
     case CHANGE_HOME_VALUE: {
-      const homeIndex = state.homes.findIndex(h => h.id === action.homeId);
-      const home = state.homes.find(h => h.id === action.homeId);
+      const homeIndex = state.homes.findIndex(h => h._id === action.homeId);
+      const home = state.homes.find(h => h._id === action.homeId);
       const newHome = {
         ...home,
-        [action.attr]: { ...home[action.attr], value: action.newValue }
+        attributes: {
+          ...home.attributes,
+          [action.attr]: {
+            ...home.attributes[action.attr],
+            value: action.newValue
+          }
+        }
       };
       const newHomes = [...state.homes];
       newHomes[homeIndex] = newHome;
-      return { ...state, homes: [...newHomes] };
+      return { ...state, homes: newHomes };
     }
     case ADD_NEW_HOME: {
-      return { ...state, homes: [...state.homes, action.newHomeObj] };
+      return { ...state, homes: [...state.homes, action.house] };
     }
-    case DISPLAY_MESSAGE: {
-      return { ...state, displayMessage: action.message };
-    }
+
     case ADD_ATTRIBUTE: {
       const updatedHomes = state.homes.map(home => ({
         ...home,
-        [action.attr.slug]: { value: 0 }
+        attributes: { ...home.attributes, [action.attr.slug]: { value: 0 } }
       }));
       localStorage.setItem(
         "myAttrs",
@@ -89,11 +93,14 @@ export const mainReducer = (state = initialState, action) => {
     }
     case SET_IMAGE_PUBLIC_ID: {
       const { homeId, attr, publicId } = action;
-      const homeIndex = state.homes.findIndex(home => home.id === homeId);
+      const homeIndex = state.homes.findIndex(home => home._id === homeId);
       const home = state.homes[homeIndex];
       const newHome = {
         ...home,
-        [attr]: { ...home[attr], imagePublicId: publicId }
+        attributes: {
+          ...home.attributes,
+          [attr]: { ...home.attributes[attr], imagePublicId: publicId }
+        }
       };
       const newHomes = [...state.homes];
       newHomes[homeIndex] = newHome;

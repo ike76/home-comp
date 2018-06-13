@@ -38,7 +38,7 @@ class ImageBox extends Component {
 
   setImagePublicID = publicId => {
     const obj = {
-      homeId: this.props.home.id,
+      homeId: this.props.home._id,
       attr: this.props.name.slug,
       publicId
     };
@@ -49,7 +49,7 @@ class ImageBox extends Component {
   };
   render() {
     const { home, name, heights } = this.props;
-    const imagePublicId = home[name.slug].imagePublicId;
+    const imagePublicId = home.attributes[name.slug].imagePublicId;
     const image = `http://res.cloudinary.com/homecomp/image/upload/c_scale,w_300/v1528808824/${imagePublicId}.jpg`;
     const StyledBox = styled.div`
       height: ${heights.image};

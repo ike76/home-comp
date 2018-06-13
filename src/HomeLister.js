@@ -15,7 +15,7 @@ class HomeLister extends Component {
               attrNames={attrNames}
               customAttrNames={customAttrNames}
               index={i}
-              key={home.id}
+              key={home._id}
             />
           ))}
         </FlipMove>

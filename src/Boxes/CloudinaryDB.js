@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Dropzone from "react-dropzone";
+import styled from "styled-components";
 import request from "superagent";
 import { Image } from "cloudinary-react";
 const CLOUDINARY_UPLOAD_PRESET = "homecomp";
@@ -11,7 +12,13 @@ export default class ContactForm extends React.Component {
 
     this.state = {
       uploadedFileCloudinaryUrl: "",
-      cloudPublicId: ""
+      cloudPublicId: "",
+      images: [
+        "homecomp/uuhtruwznqfxuftmom32",
+        "homecomp/ksahe7evkjegxtfvqqmc",
+        "homecomp/b7ct8bpakfdybvqwzbxt"
+      ],
+      selectedImageIndex: 0
     };
   }
   onImageDrop(files) {
@@ -19,7 +26,7 @@ export default class ContactForm extends React.Component {
     this.handleImageUpload(files[[0]]);
   }
   onClickSave = () => {
-    this.props.setImagePublicID(this.state.cloudPublicId);
+    this.props.setImagePublicID(this.state.images[0]);
   };
   handleImageUpload(file) {
     let upload = request
@@ -36,7 +43,7 @@ export default class ContactForm extends React.Component {
         console.log("response body", response.body);
         this.setState({
           uploadedFileCloudinaryUrl: response.body.secure_url,
-          cloudPublicId: response.body.public_id
+          images: [response.body.public_id, ...this.state.images]
         });
       }
     });
@@ -46,32 +53,45 @@ export default class ContactForm extends React.Component {
       multiple={false}
       accept="image/*"
       onDrop={this.onImageDrop.bind(this)}
+      style={{ background: "lightblue", padding: "1rem" }}
+      activeStyle={{ background: "blue" }}
     >
       <p>Drop an image or click to select a file to upload.</p>
     </Dropzone>
   );
+
   render() {
     return (
-      <Fragment>
-        <div>
+      <ImageGrid>
+        <Header>
           {this.state.uploadedFileCloudinaryUrl === "" ? (
             this.dropZone
           ) : (
             <div>
               <Image
                 cloudName="homecomp"
-                publicId={this.state.cloudPublicId}
+                publicId={this.state.images[0]}
                 width="250"
                 crop="scale"
               />
               <button onClick={this.onClickSave}>Use This Image</button>
             </div>
           )}
-        </div>
-      </Fragment>
+        </Header>
+      </ImageGrid>
     );
   }
 }
+
+const ImageGrid = styled.div`
+  background: lightgrey;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+`;
+const Header = styled.div`
+  grid-column: 1 / -1;
+  text-align: center;
+`;
 
 const rex = {
   bytes: 1634825,

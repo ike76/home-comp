@@ -1,23 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-
 import AddressForm from "./AddressForm";
 
 import { FormSection } from "./FormSection";
 import FormStarRow from "./FormStarRow";
 
 class NewHomeForm extends Component {
-  handleSubmit = values => {
-    values.preventDefault();
-    console.log(values);
-  };
-
-  updateLocation = (attr, val) => {
-    this.setState(prevState => ({
-      location: { ...prevState.location, [attr]: val }
-    }));
-  };
   render() {
     const { attrNames } = this.props;
     return (
@@ -28,9 +17,9 @@ class NewHomeForm extends Component {
             const fieldOptions = () => {
               switch (attr.type) {
                 case "number":
-                  return { component: "input", type: "text" };
+                  return { component: "input", type: "number" };
                 case "price":
-                  return { component: "input", type: "text" };
+                  return { component: "input", type: "number" };
                 case "image":
                   return { component: FormStarRow, type: "" };
                 default:
@@ -44,7 +33,7 @@ class NewHomeForm extends Component {
                   component={fieldOptions().component}
                   type={fieldOptions().type}
                   id={`${attr.slug}input`}
-                  name={attr.slug}
+                  name={`attributes[${attr.slug}].value`}
                 />
               </Fragment>
             );
@@ -57,8 +46,7 @@ class NewHomeForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  attrNames: state.main.attrNames,
-  customAttrNames: state.main.customAttrNames
+  attrNames: state.main.attrNames
 });
 NewHomeForm = connect(mapStateToProps)(NewHomeForm);
 
