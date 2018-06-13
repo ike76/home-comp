@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Field, reduxForm } from "redux-form";
 import styled from "styled-components";
-
-import Button from "../UIElements/Button";
 
 let AttributeForm = props => {
   const { handleSubmit } = props;

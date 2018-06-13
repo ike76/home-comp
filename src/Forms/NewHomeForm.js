@@ -5,6 +5,7 @@ import { Field, reduxForm } from "redux-form";
 import AddressForm from "./AddressForm";
 
 import { FormSection } from "./FormSection";
+import FormStarRow from "./FormStarRow";
 
 class NewHomeForm extends Component {
   handleSubmit = values => {
@@ -23,17 +24,31 @@ class NewHomeForm extends Component {
       <form onSubmit={this.props.handleSubmit}>
         <AddressForm />
         <FormSection>
-          {attrNames.map(attr => (
-            <Fragment key={attr.slug}>
-              <label htmlFor={`${attr.slug}input`}> {attr.pretty} </label>
-              <Field
-                component="input"
-                type="text"
-                id={`${attr.slug}input`}
-                name={attr.slug}
-              />
-            </Fragment>
-          ))}
+          {attrNames.map(attr => {
+            const fieldOptions = () => {
+              switch (attr.type) {
+                case "number":
+                  return { component: "input", type: "text" };
+                case "price":
+                  return { component: "input", type: "text" };
+                case "image":
+                  return { component: FormStarRow, type: "" };
+                default:
+                  return null;
+              }
+            };
+            return (
+              <Fragment key={attr.slug}>
+                <label htmlFor={`${attr.slug}input`}> {attr.pretty} </label>
+                <Field
+                  component={fieldOptions().component}
+                  type={fieldOptions().type}
+                  id={`${attr.slug}input`}
+                  name={attr.slug}
+                />
+              </Fragment>
+            );
+          })}
         </FormSection>
         <button type="submit"> SAVE </button>
       </form>
@@ -42,7 +57,8 @@ class NewHomeForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  attrNames: state.main.attrNames
+  attrNames: state.main.attrNames,
+  customAttrNames: state.main.customAttrNames
 });
 NewHomeForm = connect(mapStateToProps)(NewHomeForm);
 

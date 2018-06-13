@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import slugify from "slugify";
 
-import NewHomeForm from "./NewHomeForm";
 import AttributeForm from "./AttributeForm";
 import {
   addAttribute,

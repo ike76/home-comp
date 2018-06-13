@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import FlipMove from "react-flip-move";
 import { connect } from "react-redux";
-import ControlHouse from "./ControlHouse";
 import House from "./House";
 
 class HomeLister extends Component {
   render() {
-    const { homes, attrNames } = this.props;
+    const { homes, attrNames, customAttrNames } = this.props;
     return (
       <div>
         <FlipMove style={listStyle}>
           {homes.map((home, i) => (
-            <House home={home} attrNames={attrNames} index={i} key={home.id} />
+            <House
+              home={home}
+              attrNames={attrNames}
+              customAttrNames={customAttrNames}
+              index={i}
+              key={home.id}
+            />
           ))}
         </FlipMove>
       </div>
@@ -22,7 +27,6 @@ class HomeLister extends Component {
 const listStyle = {
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-around",
   border: "5px solid black",
   overflow: "scroll",
   justifyContent: "safe",
@@ -30,6 +34,7 @@ const listStyle = {
 };
 const mapStateToProps = state => ({
   attrNames: state.main.attrNames,
+  customAttrNames: state.main.customAttrNames,
   homes: state.main.homes
 });
 export default connect(mapStateToProps)(HomeLister);

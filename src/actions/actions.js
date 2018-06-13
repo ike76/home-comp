@@ -44,6 +44,13 @@ export const deleteAttribute = attr => ({
   type: DELETE_ATTRIBUTE,
   attr
 });
+export const SET_IMAGE_PUBLIC_ID = "SET_IMAGE_PUBLIC_ID";
+export const setImagePublicID = ({ homeId, attr, publicId }) => ({
+  type: SET_IMAGE_PUBLIC_ID,
+  homeId,
+  attr,
+  publicId
+});
 export const thunkDisplayMessage = message => dispatch => {
   dispatch(displayMessage(message));
 };

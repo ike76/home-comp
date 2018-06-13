@@ -7,7 +7,8 @@ export default class StarRow extends Component {
   };
   render() {
     const { home, name } = this.props;
-    const rating = home[name].value;
+    const rating =
+      (home[name] && home[name].value) || home.customAttrs[name].value;
     return (
       <StarDiv>
         {[1, 1, 1, 1, 1, 1, 1].map((x, i) => (

@@ -44,6 +44,7 @@ class ControlHouse extends Component {
             />
           );
         })}
+
         <Button text="ADD" click={this.openModal} />
         {this.state.modalOpen && (
           <Modal close={this.closeModal}>

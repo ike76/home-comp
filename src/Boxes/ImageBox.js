@@ -1,18 +1,21 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import styled from "styled-components";
-import { Image, CloudinaryContext } from "cloudinary-react";
-import cloudinary from "cloudinary-core";
 import { connect } from "react-redux";
-import { thunkDisplayMessage, getHouse } from "../actions/actions";
-import { Value, Attribute } from "../UIElements/StyledText";
+import { Image } from "cloudinary-react";
+
+import { getHouse, setImagePublicID } from "../actions/actions";
+import { Attribute } from "../UIElements/StyledText";
 import StarRow from "./StarRow";
+import ImageDropBox from "./ImageDropBox";
+import CloudinaryDB from "./CloudinaryDB";
+import Modal from "../Utilities/Modal";
 import "./Box.css";
 
-const cl = new cloudinary.Cloudinary({
-  cloud_name: "homecomp",
-  api_key: "785168849222268",
-  api_secret: "2UZoBuaVETf3ElpxCpUcxZATAAg"
-});
+// const cl = new cloudinary.Cloudinary({
+//   cloud_name: "homecomp",
+//   api_key: "785168849222268",
+//   api_secret: "2UZoBuaVETf3ElpxCpUcxZATAAg"
+// });
 // cloudinary.config({
 //   cloud_name: "homecomp",
 //   api_key: "785168849222268",
@@ -21,15 +24,33 @@ const cl = new cloudinary.Cloudinary({
 
 class ImageBox extends Component {
   state = {
-    selectedFile: null
+    selectedFile: null,
+    showModal: false,
+    imageURL: ""
   };
 
-  doMessage = message => {
-    this.props.dispatch(getHouse(1234));
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
+  setImagePublicID = publicId => {
+    const obj = {
+      homeId: this.props.home.id,
+      attr: this.props.name.slug,
+      publicId
+    };
+    this.props.dispatch(setImagePublicID(obj));
+  };
+  setImageURL = url => {
+    this.setState({ imageURL: url });
   };
   render() {
-    const image = `https://res.cloudinary.com/homecomp/image/upload/v1528742172/kitchen2.jpg`;
     const { home, name, heights } = this.props;
+    const imagePublicId = home[name.slug].imagePublicId;
+    const image = `http://res.cloudinary.com/homecomp/image/upload/c_scale,w_300/v1528808824/${imagePublicId}.jpg`;
     const StyledBox = styled.div`
       height: ${heights.image};
       display: grid;
@@ -39,10 +60,20 @@ class ImageBox extends Component {
       background-size: cover;
     `;
     return (
-      <StyledBox className="box">
-        <StarRow home={home} name={name.slug} style={{ zIndex: "5" }} />
-        <Attribute style={{ zIndex: "5" }}>{name.pretty}</Attribute>
-      </StyledBox>
+      <Fragment>
+        <StyledBox className="box ">
+          {!imagePublicId && (
+            <button onClick={this.openModal}>ADD IMAGE</button>
+          )}
+          <StarRow home={home} name={name.slug} style={{ zIndex: "5" }} />
+          <Attribute style={{ zIndex: "5" }}>{name.pretty}</Attribute>
+        </StyledBox>
+        {this.state.showModal && (
+          <Modal close={this.closeModal}>
+            <CloudinaryDB setImagePublicID={this.setImagePublicID} />
+          </Modal>
+        )}
+      </Fragment>
     );
   }
 }

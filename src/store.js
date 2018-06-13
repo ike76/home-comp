@@ -7,6 +7,7 @@ const rootReducer = combineReducers({
   main: mainReducer,
   form: formReducer
 });
+// TODO user, addHome etc.  not "main"
 
 const store = createStore(
   rootReducer,

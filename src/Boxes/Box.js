@@ -35,8 +35,9 @@ export class Box extends Component {
           return val;
       }
     };
-    const value = formatValue(home[slug].value);
-    name.type === "price" ? monify(home[slug].value) : home[slug].value;
+    const value = formatValue(
+      home[slug] ? home[slug].value : home.customAttrs[slug].value
+    );
     return (
       <StyledBox className="box">
         {!editing && <Value>{value}</Value>}

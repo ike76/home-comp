@@ -14,21 +14,15 @@ const fakeHome = () => ({
     lng: faker.address.longitude()
   },
   price: {
-    boxType: "price",
     value: faker.random.number(1000000)
   },
   square_ft: {
-    boxType: "number",
     value: faker.random.number(5000)
   },
   bedrooms: {
-    boxType: "number",
     value: faker.random.number(5)
   },
-  kitchen: {
-    boxType: "image",
-    value: faker.random.number(7)
-  }
+  kitchen: { value: faker.random.number(7) }
 });
 
 export { fakeHome };
