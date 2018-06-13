@@ -9,7 +9,9 @@
 # production
 /build
 .netlify
+
 # misc
+/other_files
 .DS_Store
 .env.local
 .env.development.local

@@ -5,7 +5,11 @@ export default class Header extends Component {
     return (
       <Fragment>
         <h3>HomeComp</h3>
-        <button>sign in</button>
+        <div className="links">
+          <a href="">Preferences</a>
+          {/* <a href="">Sign In</a> */}
+          <a href="">ike76@me.com</a>
+        </div>
       </Fragment>
     );
   }

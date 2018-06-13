@@ -1,7 +1,7 @@
 import React from "react";
 import HomeLister from "../HomeLister";
 import ControlHouse from "../ControlHouse";
-import Header from "../Header";
+import Header from "./Header";
 import NewHomeFormContainer from "../Forms/NewHomeFormContainer";
 import "./Layout.css";
 export default () => {

@@ -28,3 +28,9 @@
   background: lightgreen;
   grid-area: -2 / 1 / -1 / -1;
 }
+.links {
+}
+.links a {
+  color: white;
+  margin: 0 5px;
+}
