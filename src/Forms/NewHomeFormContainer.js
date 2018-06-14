@@ -21,7 +21,6 @@ class AddHome extends Component {
   };
   componentDidMount() {
     console.log(this.props.attrNames);
-    console.log("fake?", this.props.fake);
   }
   render() {
     const zeroValues = () => {

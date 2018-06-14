@@ -2,25 +2,26 @@ const monify = numStr => {
   const num = Number(numStr);
   let result;
   if (num === Math.floor(num)) {
-    result = num.formatMoney(0);
+    result = formatMoney(num, 0);
   } else {
-    result = num.formatMoney(2);
+    formatMoney(num, 2);
   }
   return "$" + result;
 };
 
 const commafy = num => {
-  return Number(num).formatMoney(0, ".", ",");
+  return formatMoney(num, 0, ".", ",");
 };
 
-Number.prototype.formatMoney = function(c, d, t) {
-  var n = this,
-    c = isNaN((c = Math.abs(c))) ? 2 : c,
-    d = d == undefined ? "." : d,
-    t = t == undefined ? "," : t,
+const formatMoney = function(num, _c, _d, _t) {
+  let n = Number(num),
+    c = isNaN((_c = Math.abs(_c))) ? 2 : _c,
+    d = _d === undefined ? "." : _d,
+    t = _t === undefined ? "," : _t,
     s = n < 0 ? "-" : "",
-    i = String(parseInt((n = Math.abs(Number(n) || 0).toFixed(c)))),
-    j = (j = i.length) > 3 ? j % 3 : 0;
+    i = String(parseInt((n = Math.abs(Number(n) || 0).toFixed(c)), 10));
+  let j;
+  j = (j = i.length) > 3 ? j % 3 : 0;
   return (
     s +
     (j ? i.substr(0, j) + t : "") +

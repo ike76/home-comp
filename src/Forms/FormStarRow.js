@@ -6,9 +6,6 @@ export default class FormStarRow extends Component {
     this.props.input.onChange(num);
   };
   render() {
-    const {
-      input: { value, onChange }
-    } = this.props;
     return (
       <div>
         {[1, 2, 3, 4, 5, 6, 7].map(num => {

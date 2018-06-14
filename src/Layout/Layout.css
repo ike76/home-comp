@@ -29,6 +29,8 @@
   grid-area: -2 / 1 / -1 / -1;
 }
 .links {
+  display: flex;
+  justify-content: space-around;
 }
 .links a {
   color: white;

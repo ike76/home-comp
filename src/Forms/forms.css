@@ -1,0 +1,33 @@
+* {
+  font-family: "Open Sans", sans-serif;
+}
+.form-error {
+}
+.login-form {
+  display: grid;
+  grid-gap: 4px;
+  grid-template-columns: max-content 5px max-content 5px;
+  justify-items: end;
+}
+
+.warning,
+.error {
+  z-index: 5;
+  color: red;
+}
+
+.form-input {
+  position: relative;
+  /* background: lightgreen; */
+}
+.form-input label {
+  color: #6b6b6b;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Roboto Condensed", sans-serif;
+}

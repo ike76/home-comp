@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Dropzone from "react-dropzone";
 import styled from "styled-components";
 import request from "superagent";
@@ -93,24 +93,24 @@ const Header = styled.div`
   text-align: center;
 `;
 
-const rex = {
-  bytes: 1634825,
-  created_at: "2018-06-12T14:07:02Z",
-  etag: "31ce9c49967da42a82f0ced8505f0d65",
-  format: "jpg",
-  height: 4032,
-  original_extension: "JPG",
-  original_filename: "IMG_1317",
-  placeholder: false,
-  public_id: "homecomp/rhbriedlijjnwumssomt",
-  resource_type: "image",
-  secure_url:
-    "https://res.cloudinary.com/homecomp/image/upload/v1528812422/homecomp/rhbriedlijjnwumssomt.jpg",
-  signature: "defc452c7deea9b6dcf114ed92e88bbddfccba00",
-  tags: [],
-  type: "upload",
-  url:
-    "http://res.cloudinary.com/homecomp/image/upload/v1528812422/homecomp/rhbriedlijjnwumssomt.jpg",
-  version: 1528812422,
-  width: 3024
-};
+// const rex = {
+//   bytes: 1634825,
+//   created_at: "2018-06-12T14:07:02Z",
+//   etag: "31ce9c49967da42a82f0ced8505f0d65",
+//   format: "jpg",
+//   height: 4032,
+//   original_extension: "JPG",
+//   original_filename: "IMG_1317",
+//   placeholder: false,
+//   public_id: "homecomp/rhbriedlijjnwumssomt",
+//   resource_type: "image",
+//   secure_url:
+//     "https://res.cloudinary.com/homecomp/image/upload/v1528812422/homecomp/rhbriedlijjnwumssomt.jpg",
+//   signature: "defc452c7deea9b6dcf114ed92e88bbddfccba00",
+//   tags: [],
+//   type: "upload",
+//   url:
+//     "http://res.cloudinary.com/homecomp/image/upload/v1528812422/homecomp/rhbriedlijjnwumssomt.jpg",
+//   version: 1528812422,
+//   width: 3024
+// };

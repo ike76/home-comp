@@ -3,11 +3,7 @@ import { connect } from "react-redux";
 import slugify from "slugify";
 
 import AttributeForm from "./AttributeForm";
-import {
-  addAttribute,
-  editAttribute,
-  deleteAttribute
-} from "../actions/actions";
+import { addAttribute } from "../actions/actions";
 
 class FormContainer extends Component {
   submit = values => {

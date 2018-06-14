@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Image } from "cloudinary-react";
 
-import { getHouse, setImagePublicID } from "../actions/actions";
+import { setImagePublicID } from "../actions/actions";
 import { Attribute } from "../UIElements/StyledText";
 import StarRow from "./StarRow";
-import ImageDropBox from "./ImageDropBox";
 import CloudinaryDB from "./CloudinaryDB";
 import Modal from "../Utilities/Modal";
 import "./Box.css";
