@@ -1,6 +1,8 @@
 language: node_js
-node_js: node
-
+node_js: "8"
+cache:
+  directories:
+    - node_modules
 script:
   - npm test
 env:
@@ -16,4 +18,3 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-    
