@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "./Box.css";
 
 const ControlBox = props => {
-  const { sortedBy, attr, click, height } = props;
+  const { sortedBy, attr, click, height, editAttribute } = props;
   const StyledBox = styled.div`
     height: ${height};
   `;
@@ -17,9 +17,9 @@ const ControlBox = props => {
   );
   return (
     <StyledBox className="controlBox">
-      <span className={selected ? "selected" : "unselected"}>{`${
-        attr.pretty
-      }:`}</span>
+      <span className={selected ? "selected" : "unselected"}>
+        <a href="#!" onClick={editAttribute}>{`${attr.pretty}:`}</a>
+      </span>
       {
         <div onClick={click} className="controlButton">
           {icon}

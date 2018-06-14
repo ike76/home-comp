@@ -2,13 +2,15 @@ import {
   SORT_BY_CUSTOM,
   CHANGE_HOME_VALUE,
   ADD_NEW_HOME,
-  ADD_ATTRIBUTE,
-  EDIT_ATTRIBUTE,
-  DELETE_ATTRIBUTE,
   SET_IMAGE_PUBLIC_ID
 } from "../actions/actions";
+import {
+  ADD_ATTRIBUTE,
+  DELETE_ATTRIBUTE,
+  EDIT_ATTRIBUTE
+} from "../actions/houseActions";
 import { fakeHome } from "../Helpers/fakeHome";
-
+import uuid from "uuid";
 const homes = JSON.parse(localStorage.getItem("myHomes")) || [
   fakeHome(),
   fakeHome(),
@@ -18,10 +20,10 @@ const homes = JSON.parse(localStorage.getItem("myHomes")) || [
 ];
 
 const attrNames = JSON.parse(localStorage.getItem("myAttrs")) || [
-  { slug: "price", pretty: "Price", type: "price" },
-  { slug: "square_ft", pretty: "Square Ft", type: "number" },
-  { slug: "bedrooms", pretty: "Bedrooms", type: "number" },
-  { slug: "kitchen", pretty: "Kitchen", type: "image" }
+  { slug: "price", pretty: "Price", type: "price", id: uuid() },
+  { slug: "square_ft", pretty: "Square Ft", type: "number", id: uuid() },
+  { slug: "bedrooms", pretty: "Bedrooms", type: "number", id: uuid() },
+  { slug: "kitchen", pretty: "Kitchen", type: "image", id: uuid() }
 ];
 
 const initialState = {
@@ -70,6 +72,10 @@ export const houseReducer = (state = initialState, action) => {
     }
 
     case ADD_ATTRIBUTE: {
+      if (state.attrNames.find(attr => attr.slug === action.attr.slug)) {
+        console.log("that attribute already exists");
+        return state;
+      }
       const updatedHomes = state.homes.map(home => ({
         ...home,
         attributes: { ...home.attributes, [action.attr.slug]: { value: 0 } }
@@ -81,11 +87,24 @@ export const houseReducer = (state = initialState, action) => {
       localStorage.setItem("myHomes", JSON.stringify(updatedHomes));
       return {
         ...state,
-        homes: updatedHomes
+        homes: [...updatedHomes]
       };
     }
     case EDIT_ATTRIBUTE: {
-      return state;
+      const { attr } = action;
+      console.log("attr", attr);
+      const newAttrNames = state.attrNames.map(attrName => {
+        if (attrName.slug !== attr.slug) {
+          return attr;
+        }
+        return attrName;
+      });
+      const newHomes = state.homes.map(home => {
+        const newAttributes = { ...home.attributes };
+        const newHome = { ...home, attributes: newAttributes };
+      });
+      console.log("newAttrNames", newAttrNames);
+      return { ...state, attrNames: newAttrNames };
     }
     case DELETE_ATTRIBUTE: {
       return state;

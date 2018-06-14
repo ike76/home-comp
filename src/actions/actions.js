@@ -29,21 +29,7 @@ export const displayMessage = message => ({
   type: DISPLAY_MESSAGE,
   message
 });
-export const ADD_ATTRIBUTE = "ADD_ATTRIBUTE";
-export const addAttribute = attr => ({
-  type: ADD_ATTRIBUTE,
-  attr
-});
-export const EDIT_ATTRIBUTE = "EDIT_ATTRIBUTE";
-export const editAttribute = attr => ({
-  type: EDIT_ATTRIBUTE,
-  attr
-});
-export const DELETE_ATTRIBUTE = "DELETE_ATTRIBUTE";
-export const deleteAttribute = attr => ({
-  type: DELETE_ATTRIBUTE,
-  attr
-});
+
 export const SET_IMAGE_PUBLIC_ID = "SET_IMAGE_PUBLIC_ID";
 export const setImagePublicID = ({ homeId, attr, publicId }) => ({
   type: SET_IMAGE_PUBLIC_ID,

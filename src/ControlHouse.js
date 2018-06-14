@@ -3,27 +3,33 @@ import { connect } from "react-redux";
 import ControlBox from "./Boxes/ControlBox";
 import AddressBox from "./AddressBox";
 import { sortByCustom } from "./actions/actions";
+import { openModal, closeModal } from "./actions/uiActions";
+
 import Button from "./UIElements/Button";
-import FormContainer from "./Forms/AttributeFormContainer";
+import AttributeFormContainer from "./Forms/AttributeFormContainer";
 import Modal from "./Utilities/Modal";
 
 class ControlHouse extends Component {
   state = {
-    modalOpen: false
+    editingAttribute: {}
   };
   handleClick = attr => {
     console.log("attr", attr.slug);
     const ascending =
       this.props.sortedBy.attr === attr.slug
         ? !this.props.sortedBy.ascending
-        : "true";
+        : true;
     this.props.dispatch(sortByCustom(attr.slug, ascending));
   };
+  editAttribute = attr => {
+    this.setState({ editingAttribute: attr });
+    this.props.dispatch(openModal("attributeForm"));
+  };
   closeModal = () => {
-    this.setState({ modalOpen: false });
+    this.props.dispatch(closeModal());
   };
   openModal = () => {
-    this.setState({ modalOpen: true });
+    this.props.dispatch(openModal("attributeForm"));
   };
   render() {
     const { attrNames, sortedBy, heights } = this.props;
@@ -41,14 +47,15 @@ class ControlHouse extends Component {
               click={() => this.handleClick(attr)}
               sortedBy={sortedBy}
               height={heights[attr.type]}
+              editAttribute={() => this.editAttribute(attr)}
             />
           );
         })}
 
-        <Button text="ADD" click={this.openModal} />
-        {this.state.modalOpen && (
+        <Button text="ADD" click={() => this.editAttribute()} />
+        {this.props.modalOpen === "attributeForm" && (
           <Modal close={this.closeModal}>
-            <FormContainer />
+            <AttributeFormContainer attr={this.state.editingAttribute} />
           </Modal>
         )}
       </div>
@@ -59,6 +66,7 @@ class ControlHouse extends Component {
 const mapStateToProps = state => ({
   sortedBy: state.house.sortedBy,
   attrNames: state.house.attrNames,
-  heights: state.house.heights
+  heights: state.house.heights,
+  modalOpen: state.ui.modalOpen
 });
 export default connect(mapStateToProps)(ControlHouse);

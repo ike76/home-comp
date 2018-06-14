@@ -4,16 +4,18 @@ import faker from "faker";
 import Modal from "../Utilities/Modal";
 import NewHomeForm from "./NewHomeForm";
 import { addHome } from "../actions/houseActions";
-
+import { openModal, closeModal } from "../actions/uiActions";
 class AddHome extends Component {
   state = {
     showModal: false
   };
   openModal = () => {
-    this.setState({ showModal: true });
+    // this.setState({ showModal: true });
+    this.props.dispatch(openModal("newHomeModal"));
   };
   closeModal = () => {
-    this.setState({ showModal: false });
+    // this.setState({ showModal: false });
+    this.props.dispatch(closeModal());
   };
   handleSubmit = values => {
     console.log(values);
@@ -40,7 +42,6 @@ class AddHome extends Component {
     };
     const fakeInitialValues = () => {
       const attributes = {};
-      console.log(this.props.attrNames);
       this.props.attrNames.forEach(
         attr =>
           (attributes[attr.slug] = {
@@ -64,7 +65,7 @@ class AddHome extends Component {
         <button onClick={this.openModal}>
           ADD {this.props.fake ? "FAKE " : null}HOME
         </button>
-        {this.state.showModal && (
+        {this.props.modalOpen === "newHomeModal" && (
           <Modal close={this.closeModal}>
             <NewHomeForm
               onSubmit={this.handleSubmit}
@@ -77,6 +78,7 @@ class AddHome extends Component {
   }
 }
 const mapStateToProps = state => ({
-  attrNames: state.house.attrNames
+  attrNames: state.house.attrNames,
+  modalOpen: state.ui.modalOpen
 });
 export default connect(mapStateToProps)(AddHome);
