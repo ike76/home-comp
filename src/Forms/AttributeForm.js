@@ -16,8 +16,6 @@ let AttributeForm = props => {
           <button type="submit" disabled={pristine}>
             SAVE
           </button>
-          <button>DELETE</button>
-          <button>SAVE CHANGES</button>
         </div>
       </Form>
     </div>

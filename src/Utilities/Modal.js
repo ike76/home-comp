@@ -1,27 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-
+import { connect } from "react-redux";
+import { closeModal } from "../actions/uiActions";
 import { CloseButton } from "../UIElements";
 import Portal from "./Portal";
-
-export default class Modal extends Component {
-  closeModal = () => {
-    this.props.close();
-  };
-  render() {
-    return (
-      <Portal>
-        <ModalWrapper>
-          <Card>
-            <CloseButton click={this.closeModal} />
-            {this.props.children}
-          </Card>
-        </ModalWrapper>
-        <Background onClick={this.closeModal} />
-      </Portal>
-    );
-  }
-}
 
 const Card = styled.div`
   width: 300px;
@@ -39,7 +21,8 @@ const Background = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  background: #0000009e;
+  background: #9e9e9e7a;
+  box-shadow: 4px 5px 20px 0px #00000021;
   z-index: 5;
 `;
 
@@ -53,3 +36,24 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export class Modal extends Component {
+  closeModal = () => {
+    this.props.dispatch(closeModal());
+  };
+  render() {
+    return (
+      <Portal>
+        <ModalWrapper>
+          <Card>
+            <CloseButton click={this.closeModal} />
+            {this.props.children}
+          </Card>
+        </ModalWrapper>
+        <Background onClick={this.closeModal} />
+      </Portal>
+    );
+  }
+}
+
+export default connect()(Modal);

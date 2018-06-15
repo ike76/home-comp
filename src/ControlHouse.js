@@ -4,7 +4,7 @@ import ControlBox from "./Boxes/ControlBox";
 import AddressBox from "./AddressBox";
 import { sortByCustom } from "./actions/actions";
 import { openModal, closeModal } from "./actions/uiActions";
-
+import { Link } from "react-router-dom";
 import Button from "./UIElements/Button";
 import AttributeFormContainer from "./Forms/AttributeFormContainer";
 import Modal from "./Utilities/Modal";
@@ -21,8 +21,9 @@ class ControlHouse extends Component {
         : true;
     this.props.dispatch(sortByCustom(attr.slug, ascending));
   };
-  editAttribute = attr => {
-    this.setState({ editingAttribute: attr });
+
+  newAttribute = () => {
+    this.setState({ editingAttribute: {} });
     this.props.dispatch(openModal("attributeForm"));
   };
   closeModal = () => {
@@ -47,12 +48,11 @@ class ControlHouse extends Component {
               click={() => this.handleClick(attr)}
               sortedBy={sortedBy}
               height={heights[attr.type]}
-              editAttribute={() => this.editAttribute(attr)}
             />
           );
         })}
 
-        <Button text="ADD" click={() => this.editAttribute()} />
+        <Link to="/attributes">Manage Attributes</Link>
         {this.props.modalOpen === "attributeForm" && (
           <Modal close={this.closeModal}>
             <AttributeFormContainer attr={this.state.editingAttribute} />

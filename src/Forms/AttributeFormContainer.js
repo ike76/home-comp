@@ -12,9 +12,7 @@ class FormContainer extends Component {
     const attrType = "image";
     const id = (this.props.attr && this.props.attr.id) || uuid();
     const attrObject = { pretty, slug, type: attrType, id };
-    this.props.attr
-      ? this.props.dispatch(editAttribute(attrObject))
-      : this.props.dispatch(addAttribute(attrObject));
+    this.props.dispatch(addAttribute(attrObject));
   };
   render() {
     const { attr } = this.props;
@@ -25,7 +23,7 @@ class FormContainer extends Component {
         };
     return (
       <div>
-        <h2>{attr ? "Edit" : "Add New"} Attribute</h2>
+        <h2> Add New Attribute</h2>
         <AttributeForm onSubmit={this.submit} initialValues={attrValues} />
       </div>
     );

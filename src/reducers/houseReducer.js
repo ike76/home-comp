@@ -50,6 +50,7 @@ export const houseReducer = (state = initialState, action) => {
         sortedBy: { attr: action.attr, ascending: action.ascending }
       };
     }
+
     case CHANGE_HOME_VALUE: {
       const homeIndex = state.homes.findIndex(h => h._id === action.homeId);
       const home = state.homes.find(h => h._id === action.homeId);
@@ -87,7 +88,8 @@ export const houseReducer = (state = initialState, action) => {
       localStorage.setItem("myHomes", JSON.stringify(updatedHomes));
       return {
         ...state,
-        homes: [...updatedHomes]
+        attrNames: [...state.attrNames, action.attr],
+        homes: updatedHomes
       };
     }
     case EDIT_ATTRIBUTE: {
@@ -107,7 +109,16 @@ export const houseReducer = (state = initialState, action) => {
       return { ...state, attrNames: newAttrNames };
     }
     case DELETE_ATTRIBUTE: {
-      return state;
+      const { attr } = action;
+      // remove from attrNames
+      const newAttrNames = state.attrNames.filter(
+        attrName => attrName.id !== attr.id
+      );
+      const newHomes = state.homes.map(home => {
+        delete home.attributes[attr.slug];
+        return home;
+      });
+      return { ...state, attrNames: newAttrNames, homes: newHomes };
     }
     case SET_IMAGE_PUBLIC_ID: {
       const { homeId, attr, publicId } = action;

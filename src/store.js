@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { houseReducer } from "./reducers/houseReducer";
 import { reducer as formReducer } from "redux-form";
-import { uiReducer } from "./actions/uiReducer";
+import { uiReducer } from "./reducers/uiReducer";
 
 import thunk from "redux-thunk";
 

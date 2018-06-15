@@ -10,7 +10,11 @@ export default class House extends Component {
 
     return (
       <div className="house">
-        <AddressBox addy={home.location.address} roofImage={RoofBackground} />
+        <AddressBox
+          addy={home.location.address}
+          homeId={home._id}
+          roofImage={RoofBackground}
+        />
 
         {attrNames.map((name, i) => {
           switch (name.type) {

@@ -1,4 +1,4 @@
-import { OPEN_MODAL, CLOSE_MODAL } from "./uiActions";
+import { OPEN_MODAL, CLOSE_MODAL } from "../actions/uiActions";
 
 const initialState = {
   modalOpen: false

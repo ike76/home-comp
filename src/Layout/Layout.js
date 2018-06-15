@@ -4,6 +4,8 @@ import HomeLister from "../HomeLister";
 import ControlHouse from "../ControlHouse";
 import NewHomeFormContainer from "../Forms/NewHomeFormContainer";
 import RegistrationFormContainer from "../Forms/RegistrationFormContainer";
+import SignInFormContainer from "../Forms/SignInFormContainer";
+import AttributeManager from "../AttributeManager";
 import "./Layout.css";
 export default () => {
   return (
@@ -14,6 +16,7 @@ export default () => {
           <div className="links">
             <Link to="/compare">Compare</Link>
             <Link to="/signup">Sign Up</Link>
+            <Link to="/signin">Sign In</Link>
             <Link to="/preferences">Preferences</Link>
             <a href="">ike76@me.com</a>
           </div>
@@ -23,7 +26,9 @@ export default () => {
         </section>
         <main className="main">
           <Route path="/compare" component={HomeLister} />
+          <Route path="/attributes" component={AttributeManager} />
           <Route path="/signup" component={RegistrationFormContainer} />
+          <Route path="/signin" component={SignInFormContainer} />
         </main>
         <section className="sidebar2">
           <NewHomeFormContainer />

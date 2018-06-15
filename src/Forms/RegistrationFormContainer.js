@@ -12,9 +12,7 @@ export function RegistrationFormContainer(props) {
   }
   return (
     <div className="home">
-      <h2>Register for HomeComp</h2>
       <RegistrationForm />
-      <Link to="/">Login</Link>
     </div>
   );
 }

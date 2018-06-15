@@ -18,7 +18,7 @@ const ControlBox = props => {
   return (
     <StyledBox className="controlBox">
       <span className={selected ? "selected" : "unselected"}>
-        <a href="#!" onClick={editAttribute}>{`${attr.pretty}:`}</a>
+        {`${attr.pretty}:`}
       </span>
       {
         <div onClick={click} className="controlButton">
