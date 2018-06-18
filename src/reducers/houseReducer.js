@@ -8,7 +8,8 @@ import {
   ADD_ATTRIBUTE,
   DELETE_ATTRIBUTE,
   EDIT_ATTRIBUTE,
-  EDIT_HOME
+  EDIT_HOME,
+  UPDATE_ALL_HOMES
 } from "../actions/houseActions";
 import { fakeHome } from "../Helpers/fakeHome";
 import uuid from "uuid";
@@ -148,6 +149,10 @@ export const houseReducer = (state = initialState, action) => {
       );
       console.log("newHomes", newHomes);
       return { ...state, homes: [...newHomes] };
+    }
+    case UPDATE_ALL_HOMES: {
+      const { newHomes } = action;
+      return { ...state, homes: newHomes };
     }
     default:
       return state;

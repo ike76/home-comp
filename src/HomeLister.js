@@ -9,6 +9,9 @@ class HomeLister extends Component {
   }
   render() {
     const { homes, attrNames, customAttrNames } = this.props;
+    if (!homes.length) {
+      return <h2>LOADING</h2>;
+    }
     return (
       <div>
         <FlipMove style={listStyle}>

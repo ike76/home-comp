@@ -30,7 +30,7 @@ export class AttributeManager extends Component {
           <h1>Attribute Manager</h1>
         </Header>
         {attrNames.map(attrName => (
-          <Fragment>
+          <Fragment key={attrName.pretty}>
             <div>
               <h3>{attrName.pretty}</h3>
             </div>
@@ -50,7 +50,7 @@ export class AttributeManager extends Component {
         </div>
         <div>
           <ButtonRow>
-            {["Price", "Number", "Image"].map(type => (
+            {["Price", "Number", "Image", "Distance"].map(type => (
               <button
                 onClick={() => this.setState({ type })}
                 style={this.state.type === type ? selectedStyle : null}

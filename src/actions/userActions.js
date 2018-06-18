@@ -2,7 +2,7 @@ import { SubmissionError } from "redux-form";
 import axios from "axios";
 
 import { API_BASE_URL } from "../config";
-import { addHome } from "./houseActions";
+import { addHome, updateAllHomes } from "./houseActions";
 
 export const registerUserTHUNK = user => dispatch => {
   return axios
@@ -41,9 +41,9 @@ export const getMyHomesTHUNK = userID => dispatch => {
   axios
     .get(`${API_BASE_URL}/house/admin/${userID}`)
     .then(res => res.data)
-    .then(houses => {
-      console.log("houses from axios", houses);
-      houses.forEach(house => dispatch(addHome(house)));
+    .then(newHomes => {
+      console.log("houses from axios", newHomes);
+      dispatch(updateAllHomes(newHomes));
     });
 };
 

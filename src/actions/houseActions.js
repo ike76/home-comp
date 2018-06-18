@@ -1,7 +1,5 @@
 import axios from "axios";
-import { ADMIN_ID } from "../config";
-
-import { API_BASE_URL } from "../config";
+import { ADMIN_ID, API_BASE_URL } from "../config";
 
 export const ADD_NEW_HOME = "ADD_NEW_HOME";
 export const addHomeTHUNK = houseObj => dispatch => {
@@ -37,6 +35,21 @@ export const editHome = updatedHouse => ({
   updatedHouse
 });
 
+export const removeHomeTHUNK = homeId => dispatch => {
+  axios
+    .delete(`${API_BASE_URL}/house/${homeId}`, { data: { adminId: ADMIN_ID } })
+    .then(res => res.data)
+    .then(newHomes => {
+      console.log("response from axios", newHomes);
+      dispatch(updateAllHomes(newHomes));
+    })
+    .catch(err => console.log(err));
+};
+export const UPDATE_ALL_HOMES = "UPDATE_ALL_HOMES";
+export const updateAllHomes = newHomes => ({
+  type: UPDATE_ALL_HOMES,
+  newHomes
+});
 export const ADD_ATTRIBUTE = "ADD_ATTRIBUTE";
 export const addAttribute = attr => ({
   type: ADD_ATTRIBUTE,

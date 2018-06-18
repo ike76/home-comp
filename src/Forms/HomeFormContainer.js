@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from "react";
 import Autocomplete from "react-google-autocomplete";
-import { addHomeTHUNK, editHomeTHUNK } from "../actions/houseActions";
+import {
+  addHomeTHUNK,
+  editHomeTHUNK,
+  removeHomeTHUNK
+} from "../actions/houseActions";
 import { connect } from "react-redux";
 
 export class HomeFormContainer extends Component {
@@ -38,6 +42,11 @@ export class HomeFormContainer extends Component {
   handleSubmit = () => {
     this.props.home ? this.updateHome() : this.newHome();
   };
+  handleDelete = () => {
+    const homeId = this.props.home._id;
+    console.log("deleting home", homeId);
+    this.props.dispatch(removeHomeTHUNK(homeId));
+  };
   newHome = () => {
     console.log("new house!", this.state);
     this.props.dispatch(addHomeTHUNK(this.state));
@@ -62,6 +71,7 @@ export class HomeFormContainer extends Component {
         <p>lat: {this.state.lat}</p>
         <p>lat: {this.state.lng}</p>
         <button onClick={this.handleSubmit}>GO!</button>
+        <button onClick={this.handleDelete}>DELETE</button>
       </div>
     );
   }
