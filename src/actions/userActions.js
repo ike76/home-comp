@@ -2,33 +2,9 @@ import { SubmissionError } from "redux-form";
 import axios from "axios";
 
 import { API_BASE_URL } from "../config";
+import { addHome } from "./houseActions";
 
-// export const registerUserOLD = user => dispatch => {
-//   return (
-//     fetch(`${API_BASE_URL}/user`, {
-//       method: "POST",
-//       headers: {
-//         "content-type": "application/json"
-//       },
-//       body: JSON.stringify(user)
-//     })
-//       // .then(res => normalizeResponseErrors(res))
-//       .then(res => res.json())
-//       .catch(err => {
-//         const { reason, message, location } = err;
-//         if (reason === "ValidationError") {
-//           // Convert ValidationErrors into SubmissionErrors for Redux Form
-//           return Promise.reject(
-//             new SubmissionError({
-//               [location]: message
-//             })
-//           );
-//         }
-//       })
-//   );
-// };
-
-export const registerUser = user => dispatch => {
+export const registerUserTHUNK = user => dispatch => {
   return axios
     .post(`${API_BASE_URL}/auth/signup`, user)
     .then(res => res.data)
@@ -45,11 +21,34 @@ export const registerUser = user => dispatch => {
     });
 };
 
-export const login = (email, password) => dispatch => {
+export const loginTHUNK = ({ email, password }) => dispatch => {
   return axios
     .post(`${API_BASE_URL}/auth/signin`, { email, password })
     .then(res => res.data)
+    .then(user => dispatch(login(user)))
     .catch(err => {
       console.log("signin error", err);
     });
 };
+
+export const LOGIN_USER = "LOGIN_USER";
+export const login = user => ({
+  type: LOGIN_USER,
+  user
+});
+
+export const getMyHomesTHUNK = userID => dispatch => {
+  axios
+    .get(`${API_BASE_URL}/house/admin/${userID}`)
+    .then(res => res.data)
+    .then(houses => {
+      console.log("houses from axios", houses);
+      houses.forEach(house => dispatch(addHome(house)));
+    });
+};
+
+export const GET_MY_HOMES = "GET_MY_HOMES";
+export const getMyHomes = userID => ({
+  type: GET_MY_HOMES,
+  userID
+});

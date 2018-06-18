@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { changeHomeValue } from "../actions/actions";
 import { monify, commafy } from "../Helpers/monify";
 import { Value, Attribute } from "../UIElements/StyledText";
+import { editHomeTHUNK } from "../actions/houseActions";
 export class Box extends Component {
   state = {
     editing: false
@@ -20,7 +21,14 @@ export class Box extends Component {
     const handleSubmit = e => {
       e.preventDefault();
       const newValue = this.textInput.value;
-      dispatch(changeHomeValue(home._id, slug, newValue));
+      // dispatch(changeHomeValue(home._id, slug, newValue));
+      dispatch(
+        editHomeTHUNK({
+          homeId: home._id,
+          homeKey: "attributes",
+          updateObj: { [slug]: { value: newValue } }
+        })
+      );
       this.textInput.value = "";
       this.setState({ editing: false });
     };
@@ -36,7 +44,9 @@ export class Box extends Component {
           return val;
       }
     };
-    const value = formatValue(home.attributes[slug].value);
+    const value = formatValue(
+      (home.attributes[slug] && home.attributes[slug].value) || 0
+    );
     return (
       <StyledBox className="box">
         {!editing && <Value>{value}</Value>}

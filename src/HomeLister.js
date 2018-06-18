@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import FlipMove from "react-flip-move";
 import { connect } from "react-redux";
 import House from "./House";
-
+import { getMyHomesTHUNK } from "./actions/userActions";
 class HomeLister extends Component {
+  componentDidMount() {
+    this.props.dispatch(getMyHomesTHUNK(this.props.userId));
+  }
   render() {
     const { homes, attrNames, customAttrNames } = this.props;
     return (
@@ -34,7 +37,7 @@ const listStyle = {
 };
 const mapStateToProps = state => ({
   attrNames: state.house.attrNames,
-  customAttrNames: state.house.customAttrNames,
-  homes: state.house.homes
+  homes: state.house.homes,
+  userId: state.user.userId
 });
 export default connect(mapStateToProps)(HomeLister);

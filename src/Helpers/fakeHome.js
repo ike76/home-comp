@@ -25,6 +25,11 @@ const fakeHome = () => ({
       value: faker.random.number(7),
       images: [],
       selectedImageIndex: 0
+    },
+    to_work: {
+      value: 8900,
+      lat: faker.address.latitude(),
+      lng: faker.address.longitude()
     }
   }
 });

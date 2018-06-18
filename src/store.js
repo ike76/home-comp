@@ -2,13 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { houseReducer } from "./reducers/houseReducer";
 import { reducer as formReducer } from "redux-form";
 import { uiReducer } from "./reducers/uiReducer";
-
+import { userReducer } from "./reducers/userReducer";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
   house: houseReducer,
   form: formReducer,
-  ui: uiReducer
+  ui: uiReducer,
+  user: userReducer
 });
 // TODO user, addHome etc.  not "main"
 

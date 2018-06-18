@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import AddressForm from "./AddressForm";
 
 import { FormSection } from "./FormSection";
 import FormStarRow from "./FormStarRow";
@@ -11,7 +10,7 @@ class NewHomeForm extends Component {
     const { attrNames } = this.props;
     return (
       <form onSubmit={this.props.handleSubmit}>
-        <AddressForm />
+        <h3>i'm here now</h3>
         <FormSection>
           {attrNames.map(attr => {
             const fieldOptions = () => {

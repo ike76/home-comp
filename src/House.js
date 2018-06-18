@@ -4,6 +4,7 @@ import AddressBox from "./AddressBox";
 import RoofBackground from "./Images/bwRoof.jpg";
 import "./House.css";
 import ImageBox from "./Boxes/ImageBox";
+import MapBox from "./Boxes/MapBox";
 export default class House extends Component {
   render() {
     const { home, attrNames } = this.props;
@@ -13,6 +14,7 @@ export default class House extends Component {
         <AddressBox
           addy={home.location.address}
           homeId={home._id}
+          home={home}
           roofImage={RoofBackground}
         />
 
@@ -33,6 +35,10 @@ export default class House extends Component {
             case "image":
               return (
                 <ImageBox key={name + i} name={name} home={home} index={i} />
+              );
+            case "map":
+              return (
+                <MapBox key={name + i} name={name} home={home} index={i} />
               );
             default:
               return null;

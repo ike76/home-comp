@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import HomeLister from "../HomeLister";
+import Modal from "../Utilities/Modal";
 import ControlHouse from "../ControlHouse";
-import NewHomeFormContainer from "../Forms/NewHomeFormContainer";
+import HomeFormContainer from "../Forms/HomeFormContainer";
 import RegistrationFormContainer from "../Forms/RegistrationFormContainer";
 import SignInFormContainer from "../Forms/SignInFormContainer";
 import AttributeManager from "../AttributeManager";
+import AddNewHouseButton from "../AddNewHouseButton";
 import "./Layout.css";
 export default () => {
   return (
@@ -31,8 +33,7 @@ export default () => {
           <Route path="/signin" component={SignInFormContainer} />
         </main>
         <section className="sidebar2">
-          <NewHomeFormContainer />
-          <NewHomeFormContainer fake />
+          <AddNewHouseButton />
         </section>
         <footer className="footer">footer</footer>
       </div>

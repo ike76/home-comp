@@ -11,11 +11,12 @@ import {
   length,
   isTrimmed
 } from "./validators/userValidator";
+
 export class SignInForm extends Component {
   render() {
-    const { pristine, validate } = this.props;
+    const { pristine, handleSubmit } = this.props;
     return (
-      <div className="login-form" onSubmit={this.props.handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <Field
           component={Input}
           type="text"
@@ -25,7 +26,7 @@ export class SignInForm extends Component {
         />
         <Field
           component={Input}
-          type="text"
+          type="password"
           name="password"
           validate={[required, nonEmpty]}
           label="Password"
@@ -35,7 +36,7 @@ export class SignInForm extends Component {
             SIGN IN
           </button>
         </ButtonDiv>
-      </div>
+      </form>
     );
   }
 }

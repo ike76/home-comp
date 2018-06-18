@@ -2,16 +2,10 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { openModal } from "./actions/uiActions";
 import Modal from "./Utilities/Modal";
-import Autocomplete from "react-google-autocomplete";
-
+import HomeFormContainer from "./Forms/HomeFormContainer";
 import styled from "styled-components";
 
 class AddressBox extends Component {
-  state = {
-    formatted_address: "",
-    lat: "",
-    lng: ""
-  };
   Roof = styled.div`
     background: lightgrey;
     background-image: url(${this.props.roofImage});
@@ -35,15 +29,9 @@ class AddressBox extends Component {
     font-size: 0.9rem;
     cursor: pointer;
   `;
-  parseAddress = address => {
-    console.log(address);
-    const { formatted_address } = address;
-    const lat = address.geometry.location.lat();
-    const lng = address.geometry.location.lng();
-    this.setState({ formatted_address, lat, lng });
-  };
+
   render() {
-    const { addy, homeId } = this.props;
+    const { addy, homeId, home } = this.props;
     const handleClickRoof = () => {
       console.log(homeId);
       this.props.dispatch(openModal(homeId));
@@ -57,15 +45,7 @@ class AddressBox extends Component {
         </this.Roof>
         {this.props.modalOpen === homeId && (
           <Modal>
-            <h2>Edit Address</h2>
-            <Autocomplete
-              onPlaceSelected={place => this.parseAddress(place)}
-              types={["address"]}
-              style={{ minWidth: "15rem" }}
-            />
-            <h3>{this.state.formatted_address}</h3>
-            <p>lat: {this.state.lat}</p>
-            <p>lat: {this.state.lng}</p>
+            <HomeFormContainer home={home} />
           </Modal>
         )}
       </Fragment>
