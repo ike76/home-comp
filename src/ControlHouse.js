@@ -5,7 +5,6 @@ import AddressBox from "./AddressBox";
 import { sortByCustom } from "./actions/actions";
 import { openModal, closeModal } from "./actions/uiActions";
 import { Link } from "react-router-dom";
-import Button from "./UIElements/Button";
 import AttributeFormContainer from "./Forms/AttributeFormContainer";
 import Modal from "./Utilities/Modal";
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "./Box.css";
 
 const ControlBox = props => {
-  const { sortedBy, attr, click, height, editAttribute } = props;
+  const { sortedBy, attr, click, height } = props;
   const StyledBox = styled.div`
     height: ${height};
   `;

@@ -11,7 +11,7 @@ export class AddNewHouseButton extends Component {
   render() {
     return (
       <Fragment>
-        <button onClick={this.handleClick}>Click Me</button>
+        <button onClick={this.handleClick}>Add New Home</button>
         {this.props.modalOpen === "new" && (
           <Modal>
             <HomeFormContainer />

@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { setImagePublicID } from "../actions/actions";
 import { Attribute } from "../UIElements/StyledText";
 import StarRow from "./StarRow";
 import CloudinaryDB from "./CloudinaryDB";

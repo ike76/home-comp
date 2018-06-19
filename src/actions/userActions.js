@@ -3,43 +3,15 @@ import axios from "axios";
 
 import { API_BASE_URL } from "../config";
 import { addHome, updateAllHomes } from "./houseActions";
+import { authRequest } from "./authActions";
 
-export const registerUserTHUNK = user => dispatch => {
-  return axios
-    .post(`${API_BASE_URL}/auth/signup`, user)
-    .then(res => res.data)
-    .catch(err => {
-      const { reason, message, location } = err;
-      if (reason === "ValidationError") {
-        // Convert ValidationErrors into SubmissionErrors for Redux Form
-        return Promise.reject(
-          new SubmissionError({
-            [location]: message
-          })
-        );
-      }
-    });
-};
-
-export const loginTHUNK = ({ email, password }) => dispatch => {
-  return axios
-    .post(`${API_BASE_URL}/auth/signin`, { email, password })
-    .then(res => res.data)
-    .then(user => dispatch(login(user)))
-    .catch(err => {
-      console.log("signin error", err);
-    });
-};
-
-export const LOGIN_USER = "LOGIN_USER";
-export const login = user => ({
-  type: LOGIN_USER,
-  user
-});
-
-export const getMyHomesTHUNK = userID => dispatch => {
+export const getMyHomesTHUNK = userID => (dispatch, getState) => {
+  const jwt = getState().auth.authToken;
+  console.log("jwt is", jwt);
   axios
-    .get(`${API_BASE_URL}/house/admin/${userID}`)
+    .get(`${API_BASE_URL}/house/getAll`, {
+      headers: { jwtAuth: jwt }
+    })
     .then(res => res.data)
     .then(newHomes => {
       console.log("houses from axios", newHomes);

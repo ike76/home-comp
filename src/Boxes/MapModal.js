@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { compose, withProps, lifecycle } from "recompose";
 import {
   GoogleMap,
-  Marker,
   withGoogleMap,
   withScriptjs,
   DirectionsRenderer
@@ -21,7 +20,7 @@ const MapModal = compose(
   withGoogleMap,
   lifecycle({
     componentDidMount() {
-      // if (this.props.directions) return;
+      if (this.props.directions) return;
       console.log("getting directions from google");
       const DirectionsService = new google.maps.DirectionsService();
       const { origLat, origLng, destLat, destLng } = this.props;
@@ -38,7 +37,7 @@ const MapModal = compose(
               directions: result
             });
           } else {
-            console.error(`error fetching directions ${result}`);
+            console.error(`error fetching directions`, result);
           }
         }
       );

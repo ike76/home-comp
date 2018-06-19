@@ -6,12 +6,10 @@ import {
 } from "../actions/actions";
 import {
   ADD_ATTRIBUTE,
-  DELETE_ATTRIBUTE,
-  EDIT_ATTRIBUTE,
   EDIT_HOME,
-  UPDATE_ALL_HOMES
+  UPDATE_ALL_HOMES,
+  UPDATE_ATTRIBUTES
 } from "../actions/houseActions";
-import { fakeHome } from "../Helpers/fakeHome";
 import uuid from "uuid";
 const homes = [];
 
@@ -40,11 +38,15 @@ const initialState = {
 
 export const houseReducer = (state = initialState, action) => {
   switch (action.type) {
+    case UPDATE_ATTRIBUTES: {
+      const { attrNames } = action;
+      return { ...state, attrNames };
+    }
     case SORT_BY_CUSTOM: {
       const sortedHomes = state.homes.sort((a, b) => {
         const { attr } = action;
-        const aValue = a.attributes[attr].value;
-        const bValue = b.attributes[attr].value;
+        const aValue = a.attributes[attr] ? a.attributes[attr].value : 0;
+        const bValue = b.attributes[attr] ? b.attributes[attr].value : 0;
         const sort = action.ascending ? aValue - bValue : bValue - aValue;
         return sort;
       });
@@ -114,34 +116,7 @@ export const houseReducer = (state = initialState, action) => {
         homes: updatedHomes
       };
     }
-    case EDIT_ATTRIBUTE: {
-      const { attr } = action;
-      console.log("attr", attr);
-      const newAttrNames = state.attrNames.map(attrName => {
-        if (attrName.slug !== attr.slug) {
-          return attr;
-        }
-        return attrName;
-      });
-      const newHomes = state.homes.map(home => {
-        const newAttributes = { ...home.attributes };
-        const newHome = { ...home, attributes: newAttributes };
-      });
-      console.log("newAttrNames", newAttrNames);
-      return { ...state, attrNames: newAttrNames };
-    }
-    case DELETE_ATTRIBUTE: {
-      const { attr } = action;
-      // remove from attrNames
-      const newAttrNames = state.attrNames.filter(
-        attrName => attrName.id !== attr.id
-      );
-      const newHomes = state.homes.map(home => {
-        delete home.attributes[attr.slug];
-        return home;
-      });
-      return { ...state, attrNames: newAttrNames, homes: newHomes };
-    }
+
     case EDIT_HOME: {
       const { updatedHouse } = action;
       const newHomes = state.homes.map(

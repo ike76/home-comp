@@ -1,11 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Autocomplete from "react-google-autocomplete";
+import { parseAddress } from "../Utilities/parseGoogleAddress";
+
 import {
   addHomeTHUNK,
   editHomeTHUNK,
   removeHomeTHUNK
 } from "../actions/houseActions";
 import { connect } from "react-redux";
+import { closeModal } from "../actions/uiActions";
 
 export class HomeFormContainer extends Component {
   state = {
@@ -16,9 +19,12 @@ export class HomeFormContainer extends Component {
     zip: ""
   };
   componentDidMount = () => {
-    this.props.home ? this.setState({ ...this.props.home.location }) : null;
+    if (this.props.home) this.setState({ ...this.props.home.location });
   };
-  parseAddress = googAddyOutput => {
+  handleGoogleOutput = place => {
+    this.setState(parseAddress(place));
+  };
+  parseAddressX = googAddyOutput => {
     console.log(googAddyOutput);
     const { formatted_address } = googAddyOutput;
     const [street_number, route, postal_code] = [
@@ -41,6 +47,7 @@ export class HomeFormContainer extends Component {
   };
   handleSubmit = () => {
     this.props.home ? this.updateHome() : this.newHome();
+    this.props.dispatch(closeModal());
   };
   handleDelete = () => {
     const homeId = this.props.home._id;
@@ -63,7 +70,7 @@ export class HomeFormContainer extends Component {
       <div>
         <h2>{this.props.home ? "Edit" : "New"} Home Address</h2>
         <Autocomplete
-          onPlaceSelected={place => this.parseAddress(place)}
+          onPlaceSelected={place => this.handleGoogleOutput(place)}
           types={["address"]}
           style={{ minWidth: "15rem" }}
         />

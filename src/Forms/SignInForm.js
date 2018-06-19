@@ -4,13 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import styled from "styled-components";
 
 import Input from "./Input";
-import {
-  required,
-  nonEmpty,
-  matches,
-  length,
-  isTrimmed
-} from "./validators/userValidator";
+import { required, nonEmpty, isTrimmed } from "./validators/userValidator";
 
 export class SignInForm extends Component {
   render() {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, reduxForm, focus } from "redux-form";
 import "./forms.css";
-import { registerUserTHUNK, loginTHUNK } from "../actions/userActions";
+import { registerUserTHUNK } from "../actions/authActions";
 // import {login} from '../actions/auth';
 import Input from "./Input";
 import {
@@ -18,13 +18,7 @@ export class RegistrationForm extends React.Component {
   onSubmit(values) {
     const { email, password, firstName, lastName } = values;
     const user = { email, password, firstName, lastName };
-    return this.props
-      .dispatch(registerUserTHUNK(user))
-      .then(newUser => {
-        console.log("user registered", newUser);
-        return this.props.dispatch(loginTHUNK(email, password));
-      })
-      .catch(err => console.log(err));
+    this.props.dispatch(registerUserTHUNK(user));
   }
 
   render() {

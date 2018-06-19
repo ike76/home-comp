@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "./Box.css";
 import { connect } from "react-redux";
-import { changeHomeValue } from "../actions/actions";
 import { monify, commafy } from "../Helpers/monify";
 import { Value, Attribute } from "../UIElements/StyledText";
 import { editHomeTHUNK } from "../actions/houseActions";

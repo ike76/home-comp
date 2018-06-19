@@ -4,13 +4,19 @@ import { connect } from "react-redux";
 import House from "./House";
 import { getMyHomesTHUNK } from "./actions/userActions";
 class HomeLister extends Component {
-  componentDidMount() {
+  getMyHomes = () => {
     this.props.dispatch(getMyHomesTHUNK(this.props.userId));
+  };
+  componentDidMount() {
+    this.props.user ? this.getMyHomes() : console.log("no user yet");
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.user._id !== this.props.user._id) this.getMyHomes();
   }
   render() {
     const { homes, attrNames, customAttrNames } = this.props;
     if (!homes.length) {
-      return <h2>LOADING</h2>;
+      return <i className="fas fa-spinner" />;
     }
     return (
       <div>
@@ -41,6 +47,6 @@ const listStyle = {
 const mapStateToProps = state => ({
   attrNames: state.house.attrNames,
   homes: state.house.homes,
-  userId: state.user.userId
+  user: state.auth.user
 });
 export default connect(mapStateToProps)(HomeLister);

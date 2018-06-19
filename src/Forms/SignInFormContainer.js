@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import SignInForm from "./SignInForm";
 import styled from "styled-components";
-import { loginTHUNK } from "../actions/userActions";
+import { loginTHUNK } from "../actions/authActions";
 
 const FormDiv = styled.div`
   border: 1px solid lightgrey;
@@ -28,6 +28,9 @@ export class SignInFormContainer extends Component {
           <h2>Sign In</h2>
           <SignInForm onSubmit={this.submit} />
         </FormDiv>
+        <div>
+          <p>current user: {this.props.currentUser} </p>
+        </div>
         {/* <FormDiv>
                                   <h2>Sign Up</h2>
                                   <RegistrationFormContainer />
@@ -36,5 +39,7 @@ export class SignInFormContainer extends Component {
     );
   }
 }
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  currentUser: state.auth.user.firstName
+});
 export default connect(mapStateToProps)(SignInFormContainer);

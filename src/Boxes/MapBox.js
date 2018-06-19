@@ -6,12 +6,29 @@ import Modal from "../Utilities/Modal";
 import MapModal from "./MapModal";
 import { editHomeTHUNK } from "../actions/houseActions";
 import { Value, Attribute } from "../UIElements/StyledText";
+import {
+  GoogleMap,
+  withGoogleMap,
+  withScriptjs,
+  DirectionsRenderer
+} from "react-google-maps";
+import { compose, withProps, lifecycle } from "recompose";
 const google = window.google;
+
 export class MapBox extends Component {
   openMap = () => {
     this.props.dispatch(openModal(`map ${this.props.home._id}`));
   };
-  saveDirections = directions => {
+  handleSaveDirections = directions => {
+    console.log(directions);
+    const turns = directions.routes[0].overview_path.length;
+    if (turns < 100) {
+      this.saveDirections(directions, "all");
+    } else {
+      this.saveDirections(directions, "basic");
+    }
+  };
+  saveDirections = (directions, depth) => {
     const directionPath = directions.routes["0"].legs["0"];
     const distanceText = directionPath.distance.text;
     const durationText = directionPath.duration.text;
@@ -19,7 +36,7 @@ export class MapBox extends Component {
     const durationNum = directionPath.duration.value;
     const value = durationNum;
     const newStuff = {
-      directions,
+      directions: depth === "all" ? directions : null,
       distanceText,
       durationText,
       distanceNum,
@@ -34,9 +51,36 @@ export class MapBox extends Component {
       })
     );
   };
-  componentDidUpdate(prevProps) {}
+  componentDidMount() {
+    const { home, name } = this.props;
+    if (
+      !(home.attributes[name.slug] && home.attributes[name.slug].distanceNum)
+    ) {
+      console.log("getting directions from google");
+      const DirectionsService = new google.maps.DirectionsService();
+      const origLat = this.props.home.location.lat;
+      const origLng = this.props.home.location.lng;
+      const destLat = this.props.name.lat;
+      const destLng = this.props.name.lng;
+
+      DirectionsService.route(
+        {
+          origin: new google.maps.LatLng(Number(origLat), Number(origLng)),
+          destination: new google.maps.LatLng(destLat, destLng),
+          travelMode: google.maps.TravelMode.DRIVING
+        },
+        (result, status) => {
+          if (status === google.maps.DirectionsStatus.OK) {
+            this.handleSaveDirections(result);
+          } else {
+            console.error(`error fetching directions`, result);
+          }
+        }
+      );
+    }
+  }
   render() {
-    const { name, home, index, dispatch, heights } = this.props;
+    const { name, home, heights } = this.props;
     const StyledBox = styled.div`
       height: ${heights[name.type]};
     `;
