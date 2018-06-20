@@ -4,6 +4,13 @@ import axios from "axios";
 import { API_BASE_URL } from "../config";
 import { addHome, updateAllHomes } from "./houseActions";
 import { authRequest } from "./authActions";
+import { postProtected, getProtected } from "./serverAPI";
+
+export const getMyStuff = userID => (dispatch, getState) => {
+  getProtected({ path: `/userinfo/${userID}`, getState }).then(myStuff =>
+    console.log(myStuff)
+  );
+};
 
 export const getMyHomesTHUNK = userID => (dispatch, getState) => {
   const jwt = getState().auth.authToken;

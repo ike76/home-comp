@@ -1,5 +1,4 @@
 export const parseAddress = googAddyOutput => {
-  console.log(googAddyOutput);
   const { formatted_address } = googAddyOutput;
   const [street_number, route, postal_code] = [
     "street_number",

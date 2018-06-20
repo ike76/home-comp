@@ -5,7 +5,7 @@
 }
 .login-form {
   display: grid;
-  grid-template-columns: max-content 5px;
+  /* grid-template-columns: max-content 5px; */
   justify-items: end;
   grid-gap: 5px;
   margin: 0.5rem;

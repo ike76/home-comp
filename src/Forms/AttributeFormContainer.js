@@ -5,17 +5,55 @@ import slugify from "slugify";
 import uuid from "uuid";
 import Box from "../Boxes/Box";
 import ImageBox from "../Boxes/ImageBox";
-import MapBox from "../Boxes/MapBox";
 import { addAttribute } from "../actions/houseActions";
 import Button from "../UIElements/Button";
 import Autocomplete from "react-google-autocomplete";
 import { parseAddress } from "../Utilities/parseGoogleAddress";
+import { explanation } from "./boxTypeExplanations";
+import Pointer from "../UIElements/Pointer";
 
 class FormContainer extends Component {
   state = {
-    attrType: "price",
-    attrName: ""
+    attrType: "",
+    attrName: "",
+    address: {},
+    savable: false,
+    submitted: false,
+    nextStep: "attrType"
   };
+
+  pointerPicker = () => {
+    let array = [];
+    if (!this.state.attrType) array.push("attrType");
+    if (!this.state.attrName) array.push("attrName");
+    if (this.state.attrType === "map" && !this.state.address.lat)
+      array.push("map");
+    if (!this.state.submitted) array.push("submit");
+    return array[0];
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.attrType !== this.state.attrType ||
+      prevState.attrName !== this.state.attrName ||
+      prevState.address.lat !== this.state.address.lat ||
+      prevState.submitted !== this.state.submitted
+    )
+      this.setState({ nextStep: this.pointerPicker() });
+  }
+  savable = () => {
+    switch (this.state.attrType) {
+      case "map":
+        return this.state.attrName && this.state.address.lat;
+      case "price":
+      case "number":
+      case "image":
+        return this.state.attrName;
+      default:
+        return false;
+    }
+  };
+
   setAttrType = attrType => {
     this.setState({ attrType });
   };
@@ -23,88 +61,91 @@ class FormContainer extends Component {
     this.setState({ attrName: e.target.value });
   };
   handleGoogleOutput = place => {
-    console.log(parseAddress(place));
+    this.setState({ address: parseAddress(place) });
   };
   submit = () => {
+    const { lat, lng, address } = this.state.address;
     const pretty = this.state.attrName;
     const slug = slugify(pretty, { replacement: "_", lower: true });
     const attrType = this.state.attrType;
     const id = uuid();
-    const attrObject = { pretty, slug, type: attrType, id };
+    let attrObject = { pretty, slug, type: attrType, id };
+    if (this.state.attrType === "map") {
+      attrObject = { ...attrObject, lat, lng, address };
+    }
     this.props.dispatch(addAttribute([attrObject]));
   };
   types = [
     { slug: "price", pretty: "Price" },
     { slug: "number", pretty: "Number" },
-    { slug: "image", pretty: "Image / Rating" },
-    { slug: "map", pretty: "Map / Distance" }
+    { slug: "image", pretty: "Photo" },
+    { slug: "map", pretty: "Map" }
   ];
 
   render() {
-    const boxType = () => {
-      switch (this.state.attrType) {
-        case "price":
-        case "number":
-          return <Box {...boxAttributes} />;
-        case "image":
-          return <ImageBox {...boxAttributes} />;
-        case "map":
-          return (
-            <Fragment>
-              <div>
-                <h3>Distance:</h3>
-                <p>
-                  You can sort houses by their distance (driving) from any
-                  address. For example, Name this Attribute "To Work" and enter
-                  your work address here:
-                </p>
-                <Autocomplete
-                  onPlaceSelected={place => this.handleGoogleOutput(place)}
-                  types={["address"]}
-                  style={{ minWidth: "15rem" }}
-                />
-              </div>
-              <MapBox {...boxAttributes} />
-            </Fragment>
-          );
-        default:
-          return null;
-      }
+    const placeholders = {
+      price: "List Price, HOA Fee, Monthly Payment etc...",
+      number: "Bedrooms, Bathrooms, Floors etc...",
+      image: "Kitchen, Back Yard, Curb Appeal etc...",
+      map: "To Work, To Mall, To Mom's, etc..."
     };
-    const boxAttributes = {
-      home: { attributes: {}, location: {} },
-      slug: "slug",
-      name: { type: this.state.attrType },
-      dispatch: () => {},
-      heights: this.props.heights
-    };
+
     return (
       <NewAttrGrid>
-        <h2> Add New Attribute</h2>
-        <label htmlFor="attrName"> Name:</label>
-        <input
-          id="attrName"
-          onChange={this.updateAttrName}
-          value={this.state.attrName}
-          type="text"
-        />
-        <div>
-          {this.types.map((type, i) => (
-            <Button
-              key={type.slug}
-              text={type.pretty}
-              click={() => this.setState({ attrType: type.slug })}
-              className={this.state.attrType === type.slug ? "selected" : null}
-              selected={type.slug === this.state.attrType}
-            />
-          ))}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h3>{this.state.attrName || "Add New Attribute"}</h3>
+          {this.state.attrType === "map" && <p>{this.state.address.address}</p>}
         </div>
         <div>
-          <h3>{this.state.attrName}</h3>
-
-          {boxType()}
+          <label htmlFor="attrType">1. Pick a Type:</label>
+          <Pointer show={this.state.nextStep === "attrType"}>
+            <ButtonRow>
+              {this.types.map((type, i) => (
+                <Button
+                  key={type.slug}
+                  text={type.pretty}
+                  click={() => this.setState({ attrType: type.slug })}
+                  className={
+                    this.state.attrType === type.slug ? "selected" : null
+                  }
+                  selected={type.slug === this.state.attrType}
+                />
+              ))}
+              <Spacer>|</Spacer>
+              <Pointer show={this.state.nextStep === "submit"}>
+                <Button
+                  text="Save"
+                  click={this.submit}
+                  disabled={!this.savable()}
+                />
+              </Pointer>
+            </ButtonRow>
+          </Pointer>
         </div>
-        <Button text="Save" click={this.submit} />
+        <label htmlFor="attrName">2. Pick a Name:</label>
+        <Pointer show={this.state.nextStep === "attrName"}>
+          <input
+            id="attrName"
+            onChange={this.updateAttrName}
+            value={this.state.attrName}
+            type="text"
+            placeholder={placeholders[this.state.attrType]}
+          />
+        </Pointer>
+        {this.state.attrType === "map" && (
+          <div>
+            <label htmlFor="googAutoComplete">3. Distance to Where?</label>
+            <Pointer show={this.state.nextStep === "map"}>
+              <Autocomplete
+                onPlaceSelected={place => this.handleGoogleOutput(place)}
+                types={["address"]}
+                style={{ width: "100%" }}
+                id="googAutoComplete"
+              />
+            </Pointer>
+          </div>
+        )}
+        <div>{explanation(this.state.attrType)}</div>
       </NewAttrGrid>
     );
   }
@@ -114,7 +155,15 @@ const NewAttrGrid = styled.div`
   grid-gap: 6px;
   padding: 1rem;
 `;
-
+const ButtonRow = styled.div`
+  display: flex;
+  justify-content: center;
+  position: relative;
+`;
+const Spacer = styled.span`
+  color: #e8e8e8;
+  margin: 0 8px;
+`;
 const mapStateToProps = state => ({
   attrNames: state.house.attrNames,
   home: state.house[0],

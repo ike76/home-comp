@@ -27,16 +27,16 @@ export class AttributeManager extends Component {
     const { attrNames } = this.props;
 
     return (
-      <Fragment>
+      <AttributeManagerGrid>
         <InlineDiv>
-          <AttributeGrid>
+          <AttributeListGrid>
             <Header>
               <h1>Attribute Manager</h1>
             </Header>
             {attrNames.map(attrName => (
               <Fragment key={attrName.pretty}>
                 <div>
-                  <h3>{attrName.pretty}</h3>
+                  <h3 style={{ margin: "10px" }}>{attrName.pretty}</h3>
                 </div>
                 <div>
                   <Button
@@ -49,7 +49,7 @@ export class AttributeManager extends Component {
                 </div>
               </Fragment>
             ))}
-          </AttributeGrid>
+          </AttributeListGrid>
         </InlineDiv>
         <InlineDiv>
           <AttributeFormContainer />
@@ -75,12 +75,11 @@ export class AttributeManager extends Component {
           </ButtonRow>
           <button onClick={this.addAttribute}>Add</button>
         </InlineDiv> */}
-      </Fragment>
+      </AttributeManagerGrid>
     );
   }
 }
-const selectedStyle = { background: "grey", color: "white" };
-const AttributeGrid = styled.div`
+const AttributeListGrid = styled.div`
   background: beige;
   padding: 1rem;
   display: grid;
@@ -88,6 +87,10 @@ const AttributeGrid = styled.div`
   grid-gap: 5px;
   justify-items: center;
   align-items: center;
+`;
+const AttributeManagerGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 19rem));
 `;
 const InlineDiv = styled.div`
   display: inline-block;

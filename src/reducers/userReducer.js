@@ -1,6 +1,6 @@
 import { ADMIN_ID } from "../config";
 const initialState = {
-  userId: ADMIN_ID, // sam@sam.com powerpow
+  userId: "",
   firstName: "",
   lastName: "",
   email: "",

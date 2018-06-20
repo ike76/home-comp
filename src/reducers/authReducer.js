@@ -2,12 +2,13 @@ import {
   AUTH_REQUEST,
   SET_AUTH_TOKEN,
   AUTH_SUCCESS,
-  CLEAR_AUTH
+  CLEAR_AUTH,
+  AUTH_ERROR
 } from "../actions/authActions";
 
 const initialState = {
   authToken: null, // authToken !== null does not mean it has been validated
-  user: "",
+  user: null,
   loading: false,
   error: null
 };
@@ -24,6 +25,8 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, loading: false, user };
     case CLEAR_AUTH:
       return { ...initialState };
+    case AUTH_ERROR:
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }

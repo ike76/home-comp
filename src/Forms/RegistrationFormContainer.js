@@ -8,17 +8,13 @@ export function RegistrationFormContainer(props) {
   // If we are logged in (which happens automatically when registration
   // is successful) redirect to the user's dashboard
   if (props.loggedIn) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/compare" />;
   }
-  return (
-    <div className="home">
-      <RegistrationForm />
-    </div>
-  );
+  return <RegistrationForm />;
 }
 
-// const mapStateToProps = state => ({
-//   loggedIn: state.auth.currentUser !== null
-// });
+const mapStateToProps = state => ({
+  loggedIn: state.auth.user
+});
 
-export default connect()(RegistrationFormContainer);
+export default connect(mapStateToProps)(RegistrationFormContainer);

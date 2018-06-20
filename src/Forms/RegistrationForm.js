@@ -4,6 +4,7 @@ import "./forms.css";
 import { registerUserTHUNK } from "../actions/authActions";
 // import {login} from '../actions/auth';
 import Input from "./Input";
+import { SignInUp } from "../UIElements/StyledBoxes";
 import {
   required,
   nonEmpty,
@@ -11,6 +12,7 @@ import {
   length,
   isTrimmed
 } from "./validators/userValidator";
+
 const passwordLength = length({ min: 8, max: 72 });
 const matchesPassword = matches("password");
 
@@ -23,50 +25,53 @@ export class RegistrationForm extends React.Component {
 
   render() {
     return (
-      <form
-        className="login-form"
-        onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
-      >
-        <Field
-          component={Input}
-          type="text"
-          name="firstName"
-          label="First Name"
-        />
-        <Field
-          component={Input}
-          type="text"
-          name="lastName"
-          label="Last Name"
-        />
-        <Field
-          component={Input}
-          type="text"
-          name="email"
-          validate={[required, nonEmpty, isTrimmed]}
-          label="Email"
-        />
-        <Field
-          component={Input}
-          type="password"
-          name="password"
-          validate={[required, passwordLength, isTrimmed]}
-          label="Password"
-        />
-        <Field
-          component={Input}
-          type="password"
-          name="passwordConfirm"
-          validate={[required, nonEmpty, matchesPassword]}
-          label="Confirm Password"
-        />
-        <button
-          type="submit"
-          disabled={this.props.pristine || this.props.submitting}
+      <SignInUp>
+        <h2>Sign Up</h2>
+        <form
+          className="login-form"
+          onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
         >
-          Register
-        </button>
-      </form>
+          <Field
+            component={Input}
+            type="text"
+            name="firstName"
+            label="First Name"
+          />
+          <Field
+            component={Input}
+            type="text"
+            name="lastName"
+            label="Last Name"
+          />
+          <Field
+            component={Input}
+            type="text"
+            name="email"
+            validate={[required, nonEmpty, isTrimmed]}
+            label="Email"
+          />
+          <Field
+            component={Input}
+            type="password"
+            name="password"
+            validate={[required, passwordLength, isTrimmed]}
+            label="Password"
+          />
+          <Field
+            component={Input}
+            type="password"
+            name="passwordConfirm"
+            validate={[required, nonEmpty, matchesPassword]}
+            label="Confirm Password"
+          />
+          <button
+            type="submit"
+            disabled={this.props.pristine || this.props.submitting}
+          >
+            Register
+          </button>
+        </form>
+      </SignInUp>
     );
   }
 }

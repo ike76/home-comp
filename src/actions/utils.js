@@ -4,6 +4,7 @@
 // containing the status text.  If there is no error then we continue with
 // the promise chain.
 export const normalizeResponseErrors = res => {
+  console.log("res is", res);
   if (!res.statusText === "OK") {
     console.log("problemzz", res);
     if (

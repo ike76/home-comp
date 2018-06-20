@@ -13,7 +13,7 @@ import {
 import uuid from "uuid";
 const homes = [];
 
-const attrNames = JSON.parse(localStorage.getItem("myAttrs")) || [
+const attrNames = [
   { slug: "price", pretty: "Price", type: "price", id: uuid() },
   { slug: "square_ft", pretty: "Square Ft", type: "number", id: uuid() },
   { slug: "bedrooms", pretty: "Bedrooms", type: "number", id: uuid() },
@@ -21,6 +21,7 @@ const attrNames = JSON.parse(localStorage.getItem("myAttrs")) || [
     slug: "to_work",
     pretty: "To Work",
     type: "map",
+    address: "1234 Something Street",
     lat: 36.155165,
     lng: -86.782559,
     id: uuid()

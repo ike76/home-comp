@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import HomeLister from "../HomeLister";
 import ControlHouse from "../ControlHouse";
 import RegistrationFormContainer from "../Forms/RegistrationFormContainer";
@@ -42,10 +42,12 @@ class Layout extends Component {
             <Route path="/compare" component={ControlHouse} />
           </section>
           <main className="main">
-            <Route path="/compare" component={HomeLister} />
-            <Route path="/attributes" component={AttributeManager} />
-            <Route path="/signup" component={RegistrationFormContainer} />
-            <Route path="/signin" component={SignInFormContainer} />
+            <Switch>
+              <Route path="/compare" component={HomeLister} />
+              <Route path="/attributes" component={AttributeManager} />
+              <Route path="/signup" component={RegistrationFormContainer} />
+              <Route path="/" component={SignInFormContainer} />
+            </Switch>
           </main>
           <section className="sidebar2">
             <AddNewHouseButton />

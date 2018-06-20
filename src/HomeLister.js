@@ -3,6 +3,8 @@ import FlipMove from "react-flip-move";
 import { connect } from "react-redux";
 import House from "./House";
 import { getMyHomesTHUNK } from "./actions/userActions";
+import requiresLogin from "./HOC/RequiresLogin";
+
 class HomeLister extends Component {
   getMyHomes = () => {
     this.props.dispatch(getMyHomesTHUNK(this.props.userId));
@@ -39,7 +41,7 @@ class HomeLister extends Component {
 const listStyle = {
   display: "flex",
   flexDirection: "row",
-  border: "5px solid black",
+  // border: "5px solid black",
   overflow: "scroll",
   justifyContent: "safe",
   padding: "1.5rem"
@@ -49,4 +51,4 @@ const mapStateToProps = state => ({
   homes: state.house.homes,
   user: state.auth.user
 });
-export default connect(mapStateToProps)(HomeLister);
+export default requiresLogin()(connect(mapStateToProps)(HomeLister));

@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import SignInForm from "./SignInForm";
 import styled from "styled-components";
 import { loginTHUNK } from "../actions/authActions";
-
+import { SignInUp } from "../UIElements/StyledBoxes";
+import ErrorMessage from "../UIElements/ErrorMessage";
+import Button from "../UIElements/Button";
 const FormDiv = styled.div`
   border: 1px solid lightgrey;
   border-radius: 1rem;
@@ -12,34 +14,26 @@ const FormDiv = styled.div`
   text-align: center;
   margin: 0.5rem;
 `;
-const SignInUp = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
 
 export class SignInFormContainer extends Component {
   submit = values => {
     this.props.dispatch(loginTHUNK(values));
   };
+
   render() {
     return (
       <SignInUp>
-        <FormDiv>
-          <h2>Sign In</h2>
-          <SignInForm onSubmit={this.submit} />
-        </FormDiv>
-        <div>
-          <p>current user: {this.props.currentUser} </p>
-        </div>
-        {/* <FormDiv>
-                                  <h2>Sign Up</h2>
-                                  <RegistrationFormContainer />
-                                </FormDiv> */}
+        <h2>Sign In</h2>
+
+        <ErrorMessage />
+
+        <SignInForm onSubmit={this.submit} />
       </SignInUp>
     );
   }
 }
 const mapStateToProps = state => ({
-  currentUser: state.auth.user.firstName
+  currentUser: state.auth.user,
+  errorMessage: state.auth.error
 });
 export default connect(mapStateToProps)(SignInFormContainer);

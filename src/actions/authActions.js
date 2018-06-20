@@ -3,9 +3,7 @@ import axios from "axios";
 
 import { SubmissionError } from "redux-form";
 
-import { API_BASE_URL } from "../config";
 import { saveAuthToken, clearAuthToken } from "../localStorage";
-import { normalizeResponseErrors } from "./utils";
 import { post, postProtected } from "./serverAPI";
 
 export const refreshAuthToken = () => (dispatch, getState) => {
@@ -22,7 +20,6 @@ export const refreshAuthToken = () => (dispatch, getState) => {
 export const registerUserTHUNK = user => dispatch => {
   return post({ sendObj: user, path: "/auth/signup" })
     .then(_user => {
-      console.log("user from register action", _user);
       dispatch(loginTHUNK({ email: user.email, password: user.password }));
     })
     .catch(err => {
@@ -40,23 +37,19 @@ export const registerUserTHUNK = user => dispatch => {
 
 export const loginTHUNK = ({ email, password }) => dispatch => {
   dispatch(authRequest());
-  console.log("logging in", email, password);
-  return axios
-    .post(`${API_BASE_URL}/auth/signin`, { email, password })
-    .then(res => normalizeResponseErrors(res))
-    .then(res => res.data)
+  return post({ path: "/auth/signin", sendObj: { email, password } })
     .then(({ authToken }) => {
       storeAuthInfo(authToken, dispatch);
     })
     .catch(err => {
-      console.log("signin error", err);
-      const { code } = err;
+      console.error("signin error", err);
+      const code = err.response.status;
       const message =
         code === 401
           ? "Incorrect username or password"
           : "Unable to Login, please try again";
-      dispatch(authError(err));
-      return Promise.reject(new SubmissionError({ _error: message }));
+      dispatch(authError(message));
+      // return Promise.reject(new SubmissionError({ _error: message }));
     });
 };
 
@@ -101,7 +94,6 @@ export const authError = error => ({
 
 const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
-  console.log("decoded Token", decodedToken);
   dispatch(setAuthToken(authToken));
   dispatch(authSuccess(decodedToken.sub));
   saveAuthToken(authToken);
