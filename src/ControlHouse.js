@@ -34,11 +34,9 @@ class ControlHouse extends Component {
   render() {
     const { attrNames, sortedBy, heights } = this.props;
     return (
-      <div
-        className="house"
-        style={{ padding: "1.5rem 10px", border: "5px solid white" }}
-      >
-        <AddressBox addy="SORT BY:" />
+      <div style={{ padding: "1.5rem 0", textAlign: "center" }}>
+        {/* <AddressBox addy="SORT BY:" /> */}
+        <div style={{ height: this.props.heights.roof }}> </div>
         {attrNames.map((attr, i) => {
           return (
             <ControlBox
@@ -51,12 +49,9 @@ class ControlHouse extends Component {
           );
         })}
 
-        <Link to="/attributes">Manage Attributes</Link>
-        {this.props.modalOpen === "attributeForm" && (
-          <Modal close={this.closeModal}>
-            <AttributeFormContainer attr={this.state.editingAttribute} />
-          </Modal>
-        )}
+        <Link to="/attributes">
+          <button>EDIT</button>
+        </Link>
       </div>
     );
   }

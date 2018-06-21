@@ -9,5 +9,5 @@ export const SignInUp = styled.div`
   //   width: 14rem;
   text-align: center;
   margin: 0.5rem;
-  width: max-content;
+  // width: max-content;
 `;

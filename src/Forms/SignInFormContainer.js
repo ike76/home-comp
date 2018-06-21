@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import SignInForm from "./SignInForm";
 import styled from "styled-components";
 import { loginTHUNK } from "../actions/authActions";
@@ -21,6 +22,7 @@ export class SignInFormContainer extends Component {
   };
 
   render() {
+    if (this.props.currentUser) return <Redirect to="/compare" />;
     return (
       <SignInUp>
         <h2>Sign In</h2>

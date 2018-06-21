@@ -11,7 +11,12 @@ export class SignInForm extends Component {
   render() {
     const { pristine, handleSubmit } = this.props;
     return (
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form
+        className="login-form"
+        onSubmit={handleSubmit}
+        // autoComplete="off"
+        // autoFill="off"
+      >
         <Field
           component={Input}
           hintText="Email"
@@ -20,6 +25,7 @@ export class SignInForm extends Component {
           validate={[required, nonEmpty, isTrimmed]}
           label="Email"
           error={false}
+          // autoComplete="off"
         />
         <Field
           component={Input}

@@ -74,6 +74,14 @@ class FormContainer extends Component {
       attrObject = { ...attrObject, lat, lng, address };
     }
     this.props.dispatch(addAttribute([attrObject]));
+    this.setState({
+      attrType: "",
+      attrName: "",
+      address: {},
+      savable: false,
+      submitted: false,
+      nextStep: "attrType"
+    });
   };
   types = [
     { slug: "price", pretty: "Price" },

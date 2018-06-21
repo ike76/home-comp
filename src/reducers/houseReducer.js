@@ -30,7 +30,13 @@ const attrNames = [
 ];
 
 const initialState = {
-  heights: { number: "2.5rem", price: "2.5rem", image: "5rem", map: "4rem" },
+  heights: {
+    number: "2.5rem",
+    price: "2.5rem",
+    image: "5rem",
+    map: "4rem",
+    roof: "2rem"
+  },
   displayMessage: "wuzzup",
   attrNames,
   sortedBy: { attr: "price", ascending: true },

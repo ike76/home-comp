@@ -48,11 +48,16 @@ export class Box extends Component {
     );
     return (
       <StyledBox className="box">
-        {!editing && <Value>{value}</Value>}
         <Attribute>{name.pretty}</Attribute>
+        {!editing && <Value>{value}</Value>}
         {editing && (
           <form onSubmit={handleSubmit} className="number-form">
-            <input type="text" ref={x => (this.textInput = x)} />
+            <input
+              style={{ width: "3rem", margin: "2px" }}
+              type="text"
+              ref={x => (this.textInput = x)}
+              autoFocus
+            />
             <button type="submit">SAVE</button>
           </form>
         )}
@@ -62,6 +67,10 @@ export class Box extends Component {
   }
 }
 
+const StyledInput = styled.input`
+  width: 3rem;
+  margin: 2px;
+`;
 // const Value = styled.div`
 //   text-align: center;
 // `;

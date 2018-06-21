@@ -11,7 +11,8 @@ export const refreshAuthToken = () => (dispatch, getState) => {
   postProtected({ path: "/auth/refresh", getState })
     .then(({ authToken }) => storeAuthInfo(authToken, dispatch))
     .catch(err => {
-      dispatch(authError(err));
+      console.log("refresh auth error", err);
+      // dispatch(authError(err));
       dispatch(clearAuth());
       clearAuthToken();
     });

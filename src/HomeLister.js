@@ -44,7 +44,7 @@ const listStyle = {
   // border: "5px solid black",
   overflow: "scroll",
   justifyContent: "safe",
-  padding: "1.5rem"
+  padding: "1.5rem 5px"
 };
 const mapStateToProps = state => ({
   attrNames: state.house.attrNames,

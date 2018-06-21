@@ -19,14 +19,14 @@ class AddressBox extends Component {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: 2.5rem;
+    height: ${this.props.heights.roof};
   `;
   RoofAddress = styled.div`
     color: white;
     background: #00000082;
     display: inline;
     padding: 3px;
-    font-size: 0.9rem;
+    font-size: 12px;
     cursor: pointer;
   `;
 
@@ -54,6 +54,7 @@ class AddressBox extends Component {
 }
 
 const mapStateToProps = state => ({
-  modalOpen: state.ui.modalOpen
+  modalOpen: state.ui.modalOpen,
+  heights: state.house.heights
 });
 export default connect(mapStateToProps)(AddressBox);
