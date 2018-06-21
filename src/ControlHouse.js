@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ControlBox from "./Boxes/ControlBox";
 import AddressBox from "./AddressBox";
-import { sortByCustom } from "./actions/actions";
+import { sortByCustom } from "./actions/houseActions";
 import { openModal, closeModal } from "./actions/uiActions";
 import { Link } from "react-router-dom";
 import Button from "./UIElements/Button";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { sortByCustom } from "./actions/actions";
+import { sortByCustom } from "./actions/houseActions";
 class SortButtons extends Component {
   componentDidMount() {
     console.log(this.props);

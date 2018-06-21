@@ -1,10 +1,5 @@
-import { SubmissionError } from "redux-form";
-import axios from "axios";
-
-import { API_BASE_URL } from "../config";
-import { addHome, updateAllHomes, updateAttributes } from "./houseActions";
-import { authRequest } from "./authActions";
-import { postProtected, getProtected } from "./serverAPI";
+import { updateAllHomes, updateAttributes } from "./houseActions";
+import { getProtected } from "./serverAPI";
 
 export const getMyHomesTHUNK = userID => (dispatch, getState) => {
   getProtected({ path: "/house/getAll", getState }).then(newHomes => {

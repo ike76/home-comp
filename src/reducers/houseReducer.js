@@ -1,10 +1,7 @@
 import {
   SORT_BY_CUSTOM,
-  CHANGE_HOME_VALUE,
   ADD_NEW_HOME,
-  SET_IMAGE_PUBLIC_ID
-} from "../actions/actions";
-import {
+  SET_IMAGE_PUBLIC_ID,
   ADD_ATTRIBUTE,
   EDIT_HOME,
   UPDATE_ALL_HOMES,
@@ -62,25 +59,6 @@ export const houseReducer = (state = initialState, action) => {
         homes: [...sortedHomes],
         sortedBy: { attr: action.attr, ascending: action.ascending }
       };
-    }
-
-    case CHANGE_HOME_VALUE: {
-      const { homeId, attr, newValue } = action;
-      const homeIndex = state.homes.findIndex(h => h._id === homeId);
-      const home = state.homes.find(h => h._id === homeId);
-      const newHome = {
-        ...home,
-        attributes: {
-          ...home.attributes,
-          [attr]: {
-            ...home.attributes[attr],
-            value: newValue
-          }
-        }
-      };
-      const newHomes = [...state.homes];
-      newHomes[homeIndex] = newHome;
-      return { ...state, homes: newHomes };
     }
 
     case SET_IMAGE_PUBLIC_ID: {

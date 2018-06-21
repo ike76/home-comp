@@ -14,13 +14,14 @@ export class Box extends Component {
   };
   render() {
     const { home, slug, name, dispatch, heights } = this.props;
+    const { editing } = this.state;
+
     const StyledBox = styled.div`
       height: ${heights[name.type]};
     `;
     const handleSubmit = e => {
       e.preventDefault();
       const newValue = this.textInput.value;
-      // dispatch(changeHomeValue(home._id, slug, newValue));
       dispatch(
         editHomeTHUNK({
           homeId: home._id,
@@ -31,8 +32,7 @@ export class Box extends Component {
       this.textInput.value = "";
       this.setState({ editing: false });
     };
-    const { editing } = this.state;
-    const formatValue = val => {
+    const formatValue = (val, name) => {
       switch (name.type) {
         case "price":
           return monify(val);
@@ -44,7 +44,8 @@ export class Box extends Component {
       }
     };
     const value = formatValue(
-      (home.attributes[slug] && home.attributes[slug].value) || 0
+      (home.attributes[slug] && home.attributes[slug].value) || 0,
+      name
     );
     return (
       <StyledBox className="box">
@@ -71,13 +72,6 @@ const StyledInput = styled.input`
   width: 3rem;
   margin: 2px;
 `;
-// const Value = styled.div`
-//   text-align: center;
-// `;
-// const Attribute = styled.div`
-//   color: lightgrey;
-//   font-size: 0.8rem;
-//   text-align: center;
-// `;
+
 const mapStateToProps = state => ({ heights: state.house.heights });
 export default connect(mapStateToProps)(Box);

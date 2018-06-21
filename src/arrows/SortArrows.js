@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "../actions/actions";
+import { sortByCustom } from "../actions/houseActions";
 import "./SortArrows.css";
 import Arrow from "./Arrow";
 const SortArrows = props => {
   const handleUpClick = () => {
-    props.dispatch(actions.sortByCustom(props.name, true));
+    props.dispatch(sortByCustom(props.name, true));
   };
   const handleDownClick = () => {
-    props.dispatch(actions.sortByCustom(props.name, false));
+    props.dispatch(sortByCustom(props.name, false));
   };
   const enabled =
     props.homes.filter(h => h[props.name]).length === props.homes.length;

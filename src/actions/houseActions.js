@@ -1,7 +1,27 @@
 import axios from "axios";
 import { API_BASE_URL } from "../config";
 
+export const SORT_BY_CUSTOM = "SORT_BY_CUSTOM";
+export const sortByCustom = (attr, ascending) => ({
+  type: SORT_BY_CUSTOM,
+  attr,
+  ascending
+});
+
+export const SET_IMAGE_PUBLIC_ID = "SET_IMAGE_PUBLIC_ID";
+export const setImagePublicID = ({ homeId, attr, publicId }) => ({
+  type: SET_IMAGE_PUBLIC_ID,
+  homeId,
+  attr,
+  publicId
+});
+
 export const ADD_NEW_HOME = "ADD_NEW_HOME";
+export const addHome = house => ({
+  type: ADD_NEW_HOME,
+  house
+});
+
 export const addHomeTHUNK = houseObj => (dispatch, getState) => {
   const jwtAuth = getState().auth.authToken;
   axios
@@ -18,10 +38,6 @@ export const addHomeTHUNK = houseObj => (dispatch, getState) => {
       dispatch(addHome(house));
     });
 };
-export const addHome = house => ({
-  type: ADD_NEW_HOME,
-  house
-});
 
 export const editHomeTHUNK = ({ homeId, homeKey, updateObj }) => (
   dispatch,

@@ -4,9 +4,7 @@ import "./Stars.css";
 
 const Star = props => {
   const { filled, changeRating } = props;
-  // const handleClick = () => {
-  //   props.dispatch(changeHomeValue(homeId, name, rating));
-  // };
+
   return (
     <div>
       <i
