@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import FlipMove from "react-flip-move";
 import { connect } from "react-redux";
 import House from "./House";
-import { getMyHomesTHUNK } from "./actions/userActions";
+import { getMyHomesTHUNK, getMyAttributes } from "./actions/userActions";
 import requiresLogin from "./HOC/RequiresLogin";
 
 class HomeLister extends Component {
-  getMyHomes = () => {
+  getMyStuff = () => {
+    this.props.dispatch(getMyAttributes());
     this.props.dispatch(getMyHomesTHUNK(this.props.userId));
   };
   componentDidMount() {
-    this.props.user ? this.getMyHomes() : console.log("no user yet");
+    this.props.user ? this.getMyStuff() : console.log("no user yet");
   }
   componentDidUpdate(prevProps) {
     if (prevProps.user._id !== this.props.user._id) this.getMyHomes();

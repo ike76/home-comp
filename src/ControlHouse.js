@@ -5,6 +5,7 @@ import AddressBox from "./AddressBox";
 import { sortByCustom } from "./actions/actions";
 import { openModal, closeModal } from "./actions/uiActions";
 import { Link } from "react-router-dom";
+import Button from "./UIElements/Button";
 import AttributeFormContainer from "./Forms/AttributeFormContainer";
 import Modal from "./Utilities/Modal";
 
@@ -36,7 +37,11 @@ class ControlHouse extends Component {
     return (
       <div style={{ padding: "1.5rem 0", textAlign: "center" }}>
         {/* <AddressBox addy="SORT BY:" /> */}
-        <div style={{ height: this.props.heights.roof }}> </div>
+        <div style={{ height: this.props.heights.roof }}>
+          <Link to="/attributes">
+            <Button text="EDIT Attributes" />
+          </Link>
+        </div>
         {attrNames.map((attr, i) => {
           return (
             <ControlBox
@@ -48,10 +53,6 @@ class ControlHouse extends Component {
             />
           );
         })}
-
-        <Link to="/attributes">
-          <button>EDIT</button>
-        </Link>
       </div>
     );
   }

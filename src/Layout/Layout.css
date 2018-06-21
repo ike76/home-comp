@@ -4,7 +4,7 @@
 .layout {
   display: grid;
   grid-template-columns: max-content minmax(400px, 750px) 5rem;
-  grid-template-rows: auto 1fr 5rem;
+  grid-template-rows: auto 1fr;
 }
 
 .header {
@@ -39,4 +39,5 @@
 .main {
   /* display: flex;
   justify-content: center; */
+  height: 100vh;
 }

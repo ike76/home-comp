@@ -1,4 +1,5 @@
 import { ADMIN_ID } from "../config";
+import { SET_ATTRIBUTES } from "../actions/userActions";
 const initialState = {
   userId: "",
   firstName: "",

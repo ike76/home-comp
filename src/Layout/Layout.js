@@ -52,7 +52,6 @@ class Layout extends Component {
           <section className="sidebar2">
             <AddNewHouseButton />
           </section>
-          <footer className="footer">footer</footer>
         </div>
       </Router>
     );

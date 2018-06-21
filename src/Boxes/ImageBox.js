@@ -95,7 +95,10 @@ class ImageBox extends Component {
         </StyledBox>
         {this.props.modalOpen === `image ${this.props.home._id}` && (
           <Modal close={this.closeModal}>
-            <CloudinaryDB setImagePublicID={this.setImagePublicID} />
+            <CloudinaryDB
+              setImagePublicID={this.setImagePublicID}
+              closeModal={this.closeModal}
+            />
           </Modal>
         )}
       </Fragment>

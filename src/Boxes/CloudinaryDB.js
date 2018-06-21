@@ -7,26 +7,23 @@ const CLOUDINARY_UPLOAD_PRESET = "homecomp";
 const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/homecomp/upload";
 
 export default class ContactForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      uploadedFileCloudinaryUrl: "",
-      cloudPublicId: "",
-      images: [
-        "homecomp/uuhtruwznqfxuftmom32",
-        "homecomp/ksahe7evkjegxtfvqqmc",
-        "homecomp/b7ct8bpakfdybvqwzbxt"
-      ],
-      selectedImageIndex: 0
-    };
-  }
+  state = {
+    uploadedFileCloudinaryUrl: "",
+    cloudPublicId: "",
+    images: [
+      "homecomp/uuhtruwznqfxuftmom32",
+      "homecomp/ksahe7evkjegxtfvqqmc",
+      "homecomp/b7ct8bpakfdybvqwzbxt"
+    ],
+    selectedImageIndex: 0
+  };
   onImageDrop(files) {
     this.setState({ uploadedFile: files[0] });
     this.handleImageUpload(files[[0]]);
   }
   onClickSave = () => {
     this.props.setImagePublicID(this.state.images[0]);
+    this.props.closeModal();
   };
   handleImageUpload(file) {
     let upload = request
