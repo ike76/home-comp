@@ -4,7 +4,7 @@ import "./Box.css";
 import { connect } from "react-redux";
 import { monify, commafy } from "../Helpers/monify";
 import { Value, Attribute } from "../UIElements/StyledText";
-import { editHomeTHUNK } from "../actions/houseActions";
+import { editHome } from "../actions/houseActions";
 export class Box extends Component {
   state = {
     editing: false
@@ -23,7 +23,7 @@ export class Box extends Component {
       e.preventDefault();
       const newValue = this.textInput.value;
       dispatch(
-        editHomeTHUNK({
+        editHome({
           homeId: home._id,
           homeKey: "attributes",
           updateObj: { [slug]: { value: newValue } }
@@ -62,7 +62,10 @@ export class Box extends Component {
             <button type="submit">SAVE</button>
           </form>
         )}
-        <i className="far fa-edit box-edit" onClick={this.toggleEditing} />
+        <i
+          className="far fa-edit box-edit editToggleButton"
+          onClick={this.toggleEditing}
+        />
       </StyledBox>
     );
   }

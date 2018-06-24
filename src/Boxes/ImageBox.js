@@ -7,7 +7,7 @@ import StarRow from "./StarRow";
 import CloudinaryDB from "./CloudinaryDB";
 import Modal from "../Utilities/Modal";
 import { openModal, closeModal } from "../actions/uiActions";
-import { editHomeTHUNK } from "../actions/houseActions";
+import { editHome } from "../actions/houseActions";
 import "./Box.css";
 
 class ImageBox extends Component {
@@ -30,7 +30,7 @@ class ImageBox extends Component {
     const homeId = this.props.home._id;
     const homeKey = "attributes";
     const editObj = { homeId, homeKey, updateObj };
-    this.props.dispatch(editHomeTHUNK(editObj));
+    this.props.dispatch(editHome(editObj));
   };
   setImagePublicID = publicId => {
     this.handleChange({ imagePublicId: publicId });

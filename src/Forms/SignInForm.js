@@ -1,22 +1,28 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
 import styled from "styled-components";
+
+import { required, nonEmpty, isTrimmed } from "./validators/userValidator";
 import Button from "../UIElements/Button";
 import Input from "./Input";
-import { required, nonEmpty, isTrimmed } from "./validators/userValidator";
-import { Link } from "react-router-dom";
+
+const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const SeparationText = styled.p`
+  margin: 0.5rem;
+  color: lightgrey;
+  font-size: 10px;
+`;
 
 export class SignInForm extends Component {
   render() {
     const { pristine, handleSubmit } = this.props;
     return (
-      <form
-        className="login-form"
-        onSubmit={handleSubmit}
-        // autoComplete="off"
-        // autoFill="off"
-      >
+      <form className="login-form" onSubmit={handleSubmit}>
         <Field
           component={Input}
           hintText="Email"
@@ -25,7 +31,6 @@ export class SignInForm extends Component {
           validate={[required, nonEmpty, isTrimmed]}
           label="Email"
           error={false}
-          // autoComplete="off"
         />
         <Field
           component={Input}
@@ -45,16 +50,6 @@ export class SignInForm extends Component {
     );
   }
 }
-
-const ButtonDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const SeparationText = styled.p`
-  margin: 0.5rem;
-  color: lightgrey;
-  font-size: 10px;
-`;
 
 const mapStateToProps = state => ({
   attrNames: state.house.attrNames

@@ -1,11 +1,13 @@
 import {
-  SORT_BY_CUSTOM,
-  ADD_NEW_HOME,
-  SET_IMAGE_PUBLIC_ID,
-  ADD_ATTRIBUTE,
-  EDIT_HOME,
+  SORT_HOMES,
+  ADD_HOME_SUCCESS,
   UPDATE_ALL_HOMES,
-  UPDATE_ATTRIBUTES
+  UPDATE_ATTRIBUTES,
+  EDIT_HOME_SUCCESS,
+  RESET_STORE,
+  HOMES_REQUEST,
+  HOMES_SUCCESS,
+  HOMES_ERROR
 } from "../actions/houseActions";
 import uuid from "uuid";
 const homes = [];
@@ -32,12 +34,12 @@ const initialState = {
     price: "2.5rem",
     image: "5rem",
     map: "4rem",
-    roof: "2rem"
+    roof: "2.5rem"
   },
-  displayMessage: "wuzzup",
   attrNames,
   sortedBy: { attr: "price", ascending: true },
-  homes
+  homes,
+  loading: false
 };
 
 export const houseReducer = (state = initialState, action) => {
@@ -46,7 +48,7 @@ export const houseReducer = (state = initialState, action) => {
       const { attrNames } = action;
       return { ...state, attrNames };
     }
-    case SORT_BY_CUSTOM: {
+    case SORT_HOMES: {
       const sortedHomes = state.homes.sort((a, b) => {
         const { attr } = action;
         const aValue = a.attributes[attr] ? a.attributes[attr].value : 0;
@@ -60,49 +62,18 @@ export const houseReducer = (state = initialState, action) => {
         sortedBy: { attr: action.attr, ascending: action.ascending }
       };
     }
-
-    case SET_IMAGE_PUBLIC_ID: {
-      const { homeId, attr, publicId } = action;
-      const homeIndex = state.homes.findIndex(home => home._id === homeId);
-      const home = state.homes[homeIndex];
-      const newHome = {
-        ...home,
-        attributes: {
-          ...home.attributes,
-          [attr]: { ...home.attributes[attr], imagePublicId: publicId }
-        }
-      };
-      const newHomes = [...state.homes];
-      newHomes[homeIndex] = newHome;
-      localStorage.setItem("myHomes", JSON.stringify(newHomes));
-      return { ...state, homes: newHomes };
+    case HOMES_REQUEST: {
+      return { ...state, loading: true };
     }
-    case ADD_NEW_HOME: {
+    case HOMES_SUCCESS: {
+      const { homes } = action;
+      return { ...state, homes, loading: false };
+    }
+    case ADD_HOME_SUCCESS: {
       return { ...state, homes: [...state.homes, action.house] };
     }
 
-    case ADD_ATTRIBUTE: {
-      if (state.attrNames.find(attr => attr.slug === action.attr.slug)) {
-        console.log("that attribute already exists");
-        return state;
-      }
-      const updatedHomes = state.homes.map(home => ({
-        ...home,
-        attributes: { ...home.attributes, [action.attr.slug]: { value: 0 } }
-      }));
-      localStorage.setItem(
-        "myAttrs",
-        JSON.stringify([...state.attrNames, action.attr])
-      );
-      localStorage.setItem("myHomes", JSON.stringify(updatedHomes));
-      return {
-        ...state,
-        attrNames: [...state.attrNames, action.attr],
-        homes: updatedHomes
-      };
-    }
-
-    case EDIT_HOME: {
+    case EDIT_HOME_SUCCESS: {
       const { updatedHouse } = action;
       const newHomes = state.homes.map(
         oldHome => (oldHome._id === updatedHouse._id ? updatedHouse : oldHome)
@@ -111,8 +82,11 @@ export const houseReducer = (state = initialState, action) => {
       return { ...state, homes: [...newHomes] };
     }
     case UPDATE_ALL_HOMES: {
-      const { newHomes } = action;
-      return { ...state, homes: newHomes };
+      const { homes } = action;
+      return { ...state, homes };
+    }
+    case RESET_STORE: {
+      return { ...state, homes: [], attrNames: [] };
     }
     default:
       return state;

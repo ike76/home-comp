@@ -1,131 +1,97 @@
-import axios from "axios";
-import { API_BASE_URL } from "../config";
+import { postProtected, deleteProtected, getProtected } from "./serverAPI";
 
-export const SORT_BY_CUSTOM = "SORT_BY_CUSTOM";
-export const sortByCustom = (attr, ascending) => ({
-  type: SORT_BY_CUSTOM,
+export const SORT_HOMES = "SORT_HOMES";
+export const sortHomes = (attr, ascending) => ({
+  type: SORT_HOMES,
   attr,
   ascending
 });
 
-export const SET_IMAGE_PUBLIC_ID = "SET_IMAGE_PUBLIC_ID";
-export const setImagePublicID = ({ homeId, attr, publicId }) => ({
-  type: SET_IMAGE_PUBLIC_ID,
-  homeId,
-  attr,
-  publicId
+export const getMyHomes = () => dispatch => {
+  dispatch(homesRequest());
+  getProtected("/house/getAll")
+    .then(newHomes => {
+      dispatch(homesSuccess(newHomes));
+      // dispatch(updateAllHomes(newHomes));
+    })
+    .catch(err => console.log("get my homes error", err));
+};
+
+export const HOMES_REQUEST = "HOMES_REQUEST";
+export const homesRequest = () => ({
+  type: HOMES_REQUEST
+});
+export const HOMES_SUCCESS = "HOMES_SUCCESS";
+export const homesSuccess = homes => ({
+  type: HOMES_SUCCESS,
+  homes
+});
+export const HOMES_ERROR = "HOMES_ERROR";
+export const homesError = error => ({
+  type: HOMES_ERROR,
+  error
 });
 
-export const ADD_NEW_HOME = "ADD_NEW_HOME";
-export const addHome = house => ({
-  type: ADD_NEW_HOME,
+export const addHome = houseObj => dispatch => {
+  postProtected("/house", { location: houseObj }).then(house => {
+    dispatch(addHome_SUCCESS(house));
+  });
+};
+export const ADD_HOME_SUCCESS = "ADD_HOME_SUCCESS";
+export const addHome_SUCCESS = house => ({
+  type: ADD_HOME_SUCCESS,
   house
 });
 
-export const addHomeTHUNK = houseObj => (dispatch, getState) => {
-  const jwtAuth = getState().auth.authToken;
-  axios
-    .post(
-      `${API_BASE_URL}/house`,
-      {
-        location: houseObj
-      },
-      { headers: { jwtAuth } }
-    )
-    .then(response => response.data)
-    .then(house => {
-      console.log("axios house response", house);
-      dispatch(addHome(house));
-    });
+export const editHome = ({ homeId, homeKey, updateObj }) => dispatch => {
+  postProtected(`/house/${homeId}`, { homeKey, updateObj }).then(
+    updatedHouse => {
+      dispatch(editHome_SUCCESS(updatedHouse));
+    }
+  );
 };
-
-export const editHomeTHUNK = ({ homeId, homeKey, updateObj }) => (
-  dispatch,
-  getState
-) => {
-  // dispatch start request
-  const jwtAuth = getState().auth.authToken;
-  axios
-    .post(
-      `${API_BASE_URL}/house/${homeId}`,
-      { homeKey, updateObj },
-      { headers: { jwtAuth } }
-    )
-    .then(res => res.data)
-    .then(updatedHouse => {
-      console.log("updatedHouse from axios", updatedHouse);
-      dispatch(editHome(updatedHouse));
-    });
-};
-export const EDIT_HOME = "EDIT_HOME";
-export const editHome = updatedHouse => ({
-  type: EDIT_HOME,
+export const EDIT_HOME_SUCCESS = "EDIT_HOME_SUCCESS";
+export const editHome_SUCCESS = updatedHouse => ({
+  type: EDIT_HOME_SUCCESS,
   updatedHouse
 });
 
-export const removeHomeTHUNK = homeId => (dispatch, getState) => {
-  const jwtAuth = getState().auth.authToken;
-
-  axios
-    .delete(`${API_BASE_URL}/house/${homeId}`, { headers: { jwtAuth } })
-    .then(res => res.data)
-    .then(newHomes => {
-      console.log("response from axios", newHomes);
-      dispatch(updateAllHomes(newHomes));
+export const removeHome = homeId => dispatch => {
+  deleteProtected(`/house/${homeId}`)
+    .then(remainingHomes => {
+      dispatch(updateAllHomes(remainingHomes));
     })
     .catch(err => console.log(err));
 };
+
 export const UPDATE_ALL_HOMES = "UPDATE_ALL_HOMES";
-export const updateAllHomes = newHomes => ({
+export const updateAllHomes = homes => ({
   type: UPDATE_ALL_HOMES,
-  newHomes
+  homes
 });
 
-export const addAttribute = attrArray => (dispatch, getState) => {
-  console.log("adding attributes");
-  const jwtAuth = getState().auth.authToken;
-  axios
-    .post(
-      `${API_BASE_URL}/user/attributes`,
-      { newAttributes: attrArray },
-      { headers: { jwtAuth } }
-    )
-    .then(res => res.data)
-    .then(({ homeAttributes }) => {
-      console.log("new homeAttributes", homeAttributes);
+export const addAttribute = newAttributes => dispatch => {
+  postProtected(`/user/attributes`, { newAttributes }).then(
+    ({ homeAttributes }) => {
       dispatch(updateAttributes(homeAttributes));
-    });
+    }
+  );
 };
-
 export const UPDATE_ATTRIBUTES = "UPDATE_ATTRIBUTES";
 export const updateAttributes = attrNames => ({
   type: UPDATE_ATTRIBUTES,
   attrNames
 });
-export const ADD_ATTRIBUTE = "ADD_ATTRIBUTE";
-// export const addAttribute = attr => ({
-//   type: ADD_ATTRIBUTE,
-//   attr
-// });
 
-export const EDIT_ATTRIBUTE = "EDIT_ATTRIBUTE";
-export const editAttribute = attr => ({
-  type: EDIT_ATTRIBUTE,
-  attr
+export const RESET_STORE = "RESET_STORE";
+export const resetStore = () => ({
+  type: RESET_STORE
 });
-export const deleteAttribute = attrId => (dispatch, getState) => {
-  const jwtAuth = getState().auth.authToken;
-  axios
-    .post(
-      `${API_BASE_URL}/user/deleteAttribute/${attrId}`,
-      {},
-      {
-        headers: { jwtAuth }
-      }
-    )
-    .then(res => res.data)
-    .then(({ homeAttributes }) => {
-      console.log(" after delete", homeAttributes);
+
+export const deleteAttribute = attrId => dispatch => {
+  postProtected(`/user/deleteAttribute/${attrId}`, {}).then(
+    ({ homeAttributes }) => {
       dispatch(updateAttributes(homeAttributes));
-    });
+    }
+  );
 };

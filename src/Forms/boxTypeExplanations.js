@@ -1,6 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
+const Heading = styled.h3`
+  margin: 4px 0;
+`;
+const P = styled.p`
+  font-size: 12px;
+  color: #585858;
+  margin: 0;
+`;
+
+const P2 = styled.p`
+  font-size: 11px;
+  color: #9e9e9e;
+  margin: 0;
+`;
+
 export const explanation = attrType => {
   switch (attrType) {
     case "price":
@@ -42,18 +57,3 @@ export const explanation = attrType => {
       return null;
   }
 };
-
-const Heading = styled.h3`
-  margin: 4px 0;
-`;
-const P = styled.p`
-  font-size: 12px;
-  color: #585858;
-  margin: 0;
-`;
-
-const P2 = styled.p`
-  font-size: 11px;
-  color: #9e9e9e;
-  margin: 0;
-`;

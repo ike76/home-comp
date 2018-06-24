@@ -1,29 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Star from "./Star";
-export default class StarRow extends Component {
-  state = {
-    rating: 5
-  };
-  render() {
-    const { home, name, changeRating } = this.props;
-    const rating = home.attributes[name] && home.attributes[name].value;
-    return (
-      <StarDiv>
-        {[1, 1, 1, 1, 1, 1, 1].map((x, i) => (
-          <Star
-            key={i}
-            filled={i <= rating - 1}
-            rating={i + 1}
-            homeId={home._id}
-            name={name}
-            changeRating={() => changeRating(i + 1)}
-          />
-        ))}
-      </StarDiv>
-    );
-  }
-}
 
 const StarDiv = styled.div`
   display: flex;
@@ -31,3 +8,23 @@ const StarDiv = styled.div`
   justify-content: space-between;
   font-size: small;
 `;
+const StarRow = props => {
+  const { home, name, changeRating } = props;
+  const rating = home.attributes[name] && home.attributes[name].value;
+  return (
+    <StarDiv>
+      {[1, 1, 1, 1, 1, 1, 1].map((x, i) => (
+        <Star
+          key={i}
+          filled={i <= rating - 1}
+          rating={i + 1}
+          homeId={home._id}
+          name={name}
+          changeRating={() => changeRating(i + 1)}
+        />
+      ))}
+    </StarDiv>
+  );
+};
+
+export default StarRow;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { sortByCustom } from "./actions/houseActions";
+import { sortHomes } from "./actions/houseActions";
 class SortButtons extends Component {
   componentDidMount() {
     console.log(this.props);
@@ -13,10 +13,10 @@ class SortButtons extends Component {
       const ascButtonSelected = attrSelected && sortedBy.ascending;
       const descButtonSelected = attrSelected && !sortedBy.ascending;
       const handleSortAsc = () => {
-        dispatch(sortByCustom(attr.slug, true));
+        dispatch(sortHomes(attr.slug, true));
       };
       const handleSortDesc = () => {
-        dispatch(sortByCustom(attr.slug, false));
+        dispatch(sortHomes(attr.slug, false));
       };
       return (
         <ButtonDivContainer key={attr + i}>

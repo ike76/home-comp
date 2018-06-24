@@ -32,7 +32,6 @@ const MapModal = compose(
         },
         (result, status) => {
           if (status === google.maps.DirectionsStatus.OK) {
-            console.log("this is", this);
             this.setState({
               directions: result
             });

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { openModal } from "../actions/uiActions";
 import Modal from "../Utilities/Modal";
 import MapModal from "./MapModal";
-import { editHomeTHUNK } from "../actions/houseActions";
+import { editHome } from "../actions/houseActions";
 import { Value, Attribute } from "../UIElements/StyledText";
 import {
   GoogleMap,
@@ -44,7 +44,7 @@ export class MapBox extends Component {
       value
     };
     this.props.dispatch(
-      editHomeTHUNK({
+      editHome({
         homeId: this.props.home._id,
         homeKey: "attributes",
         updateObj: { [this.props.name.slug]: { ...newStuff } }

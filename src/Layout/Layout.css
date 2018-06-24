@@ -1,14 +1,15 @@
 * {
   /* border: 1px green dotted; */
 }
+
 .layout {
   display: grid;
-  grid-template-columns: max-content minmax(400px, 750px) 5rem;
+  grid-template-columns: max-content minmax(400px, 750px);
   grid-template-rows: auto 1fr;
 }
 
 .header {
-  background: lightblue;
+  background: #add8e68f;
   padding: 0.5rem;
   grid-area: 1 / 1 / 1 / -1;
   display: flex;
@@ -19,14 +20,16 @@
   margin: 0;
 }
 .sidebar {
-  background: #fdfdfd;
+  background: #fdfdfdd6;
+  box-shadow: 3px 0px 6px 0px #0000001c;
 }
 .sidebar2 {
   background: lightgrey;
 }
 .footer {
-  background: lightgreen;
-  grid-area: -2 / 1 / -1 / -1;
+  background: grey;
+  grid-area: -1 / 1 / -1 / -1;
+  position: relative;
 }
 .links {
   display: flex;
@@ -39,5 +42,5 @@
 .main {
   /* display: flex;
   justify-content: center; */
-  height: 100vh;
+  /* height: 100vh; */
 }

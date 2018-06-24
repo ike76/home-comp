@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { closeModal } from "../actions/uiActions";
-import { CloseButton } from "../UIElements";
+import CloseButton from "../UIElements/CloseButton";
 import Portal from "./Portal";
 
 const Card = styled.div`

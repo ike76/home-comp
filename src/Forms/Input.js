@@ -15,16 +15,10 @@ export default class Input extends React.Component {
       error = this.props.meta.error;
     }
 
-    // let warning;
-    // if (this.props.meta.touched && this.props.meta.warning) {
-    //   warning = this.props.meta.warning;
-    // }
-
     return (
       <Fragment>
         <div className="form-input">
           <label htmlFor={this.props.input.name}>{this.props.label}</label>
-
           <input
             {...this.props.input}
             id={this.props.input.name}
@@ -44,17 +38,6 @@ export default class Input extends React.Component {
               </ReactTooltip>
             </i>
           ) : null}
-          {/* {warning ? (
-            <i
-              class="fas fa-exclamation-circle warning"
-              data-tip
-              data-for="warning"
-            >
-              <ReactTooltip id="warning" type="warning">
-                <span>{warning}</span>
-              </ReactTooltip>
-            </i>
-          ) : null} */}
         </div>
       </Fragment>
     );

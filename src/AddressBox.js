@@ -5,23 +5,23 @@ import Modal from "./Utilities/Modal";
 import HomeFormContainer from "./Forms/HomeFormContainer";
 import styled from "styled-components";
 
-class AddressBox extends Component {
-  Roof = styled.div`
+const AddressBox = props => {
+  const { addy, homeId, home, dispatch, modalOpen, heights, roofImage } = props;
+  const Roof = styled.div`
     background: lightgrey;
-    background-image: url(${this.props.roofImage});
+    background-image: url(${roofImage});
     background-size: 200px 70px;
     -webkit-clip-path: polygon(7% 0, 93% 0, 100% 100%, 0% 100%);
     clip-path: polygon(7% 0, 93% 0, 100% 100%, 0% 100%);
     margin: -4px -10px;
     text-align: center;
     padding: 0 1rem;
-    grid-area: 1 / ${this.props.colNumber} / 2 / ${this.props.colNumber};
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: ${this.props.heights.roof};
+    height: ${heights.roof};
   `;
-  RoofAddress = styled.div`
+  const RoofAddress = styled.div`
     color: white;
     background: #00000082;
     display: inline;
@@ -30,28 +30,24 @@ class AddressBox extends Component {
     cursor: pointer;
   `;
 
-  render() {
-    const { addy, homeId, home } = this.props;
-    const handleClickRoof = () => {
-      console.log(homeId);
-      this.props.dispatch(openModal(homeId));
-    };
-    return (
-      <Fragment>
-        <this.Roof>
-          <a href="#" onClick={handleClickRoof}>
-            <this.RoofAddress>{addy}</this.RoofAddress>
-          </a>
-        </this.Roof>
-        {this.props.modalOpen === homeId && (
-          <Modal>
-            <HomeFormContainer home={home} />
-          </Modal>
-        )}
-      </Fragment>
-    );
-  }
-}
+  const handleClickRoof = () => {
+    dispatch(openModal(homeId));
+  };
+  return (
+    <Fragment>
+      <Roof>
+        <a href="#" onClick={handleClickRoof}>
+          <RoofAddress>{addy}</RoofAddress>
+        </a>
+      </Roof>
+      {modalOpen === homeId && (
+        <Modal>
+          <HomeFormContainer home={home} />
+        </Modal>
+      )}
+    </Fragment>
+  );
+};
 
 const mapStateToProps = state => ({
   modalOpen: state.ui.modalOpen,

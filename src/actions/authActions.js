@@ -3,30 +3,29 @@ import axios from "axios";
 
 import { SubmissionError } from "redux-form";
 
-import { saveAuthToken, clearAuthToken } from "../localStorage";
+import { saveAuthToken, clearAuthToken } from "./localStorage";
 import { post, postProtected } from "./serverAPI";
+import { resetStore, updateAttributes, getMyHomes } from "./houseActions";
 
 export const refreshAuthToken = () => (dispatch, getState) => {
   dispatch(authRequest());
-  postProtected({ path: "/auth/refresh", getState })
+  postProtected("/auth/refresh")
     .then(({ authToken }) => storeAuthInfo(authToken, dispatch))
     .catch(err => {
       console.log("refresh auth error", err);
-      // dispatch(authError(err));
       dispatch(clearAuth());
       clearAuthToken();
     });
 };
 
-export const registerUserTHUNK = user => dispatch => {
-  return post({ sendObj: user, path: "/auth/signup" })
+export const registerUser = user => dispatch => {
+  return post("/auth/signup", user)
     .then(_user => {
       dispatch(loginTHUNK({ email: user.email, password: user.password }));
     })
     .catch(err => {
       const { reason, message, location } = err;
       if (reason === "ValidationError") {
-        // Convert ValidationErrors into SubmissionErrors for Redux Form
         return Promise.reject(
           new SubmissionError({
             [location]: message
@@ -38,8 +37,9 @@ export const registerUserTHUNK = user => dispatch => {
 
 export const loginTHUNK = ({ email, password }) => dispatch => {
   dispatch(authRequest());
-  return post({ path: "/auth/signin", sendObj: { email, password } })
+  return post("/auth/signin", { email, password })
     .then(({ authToken }) => {
+      console.log("auth token from login", authToken);
       storeAuthInfo(authToken, dispatch);
     })
     .catch(err => {
@@ -50,7 +50,6 @@ export const loginTHUNK = ({ email, password }) => dispatch => {
           ? "Incorrect username or password"
           : "Unable to Login, please try again";
       dispatch(authError(message));
-      // return Promise.reject(new SubmissionError({ _error: message }));
     });
 };
 
@@ -69,6 +68,7 @@ export const setAuthToken = authToken => ({
 export const logOut = () => dispatch => {
   clearAuthToken(); // remove from local Storage
   dispatch(clearAuth()); // remove from store
+  dispatch(resetStore());
 };
 
 export const CLEAR_AUTH = "CLEAR_AUTH";
@@ -95,7 +95,10 @@ export const authError = error => ({
 
 const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
+  const user = decodedToken.sub;
   dispatch(setAuthToken(authToken));
-  dispatch(authSuccess(decodedToken.sub));
   saveAuthToken(authToken);
+  dispatch(updateAttributes(user.homeAttributes));
+  dispatch(authSuccess(decodedToken.sub));
+  dispatch(getMyHomes());
 };

@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import slugify from "slugify";
 import uuid from "uuid";
-import Box from "../Boxes/Box";
-import ImageBox from "../Boxes/ImageBox";
 import { addAttribute } from "../actions/houseActions";
 import Button from "../UIElements/Button";
 import Autocomplete from "react-google-autocomplete";
@@ -63,17 +61,7 @@ class FormContainer extends Component {
   handleGoogleOutput = place => {
     this.setState({ address: parseAddress(place) });
   };
-  submit = () => {
-    const { lat, lng, address } = this.state.address;
-    const pretty = this.state.attrName;
-    const slug = slugify(pretty, { replacement: "_", lower: true });
-    const attrType = this.state.attrType;
-    const id = uuid();
-    let attrObject = { pretty, slug, type: attrType, id };
-    if (this.state.attrType === "map") {
-      attrObject = { ...attrObject, lat, lng, address };
-    }
-    this.props.dispatch(addAttribute([attrObject]));
+  resetOptions = () => {
     this.setState({
       attrType: "",
       attrName: "",
@@ -83,6 +71,20 @@ class FormContainer extends Component {
       nextStep: "attrType"
     });
   };
+  submit = () => {
+    const attrType = this.state.attrType;
+    const pretty = this.state.attrName;
+    const slug = slugify(pretty, { replacement: "_", lower: true });
+    const id = uuid();
+    let attrObject = { pretty, slug, type: attrType, id };
+    if (this.state.attrType === "map") {
+      const { lat, lng, address } = this.state.address;
+      attrObject = { ...attrObject, lat, lng, address };
+    }
+    this.props.dispatch(addAttribute([attrObject]));
+    this.resetOptions();
+  };
+
   types = [
     { slug: "price", pretty: "Price" },
     { slug: "number", pretty: "Number" },

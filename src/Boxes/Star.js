@@ -4,13 +4,10 @@ import "./Stars.css";
 
 const Star = props => {
   const { filled, changeRating } = props;
-
+  const className = filled ? "fas filled fa-star" : "far fa-star";
   return (
     <div>
-      <i
-        className={`${filled ? "fas filled" : "far "} fa-star`}
-        onClick={changeRating}
-      />
+      <i className={className} onClick={changeRating} />
     </div>
   );
 };

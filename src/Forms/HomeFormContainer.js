@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import Autocomplete from "react-google-autocomplete";
 import { parseAddress } from "../Utilities/parseGoogleAddress";
 
-import {
-  addHomeTHUNK,
-  editHomeTHUNK,
-  removeHomeTHUNK
-} from "../actions/houseActions";
+import { addHome, editHome, removeHome } from "../actions/houseActions";
 import { connect } from "react-redux";
 import { closeModal } from "../actions/uiActions";
 
@@ -52,18 +48,18 @@ export class HomeFormContainer extends Component {
   handleDelete = () => {
     const homeId = this.props.home._id;
     console.log("deleting home", homeId);
-    this.props.dispatch(removeHomeTHUNK(homeId));
+    this.props.dispatch(removeHome(homeId));
   };
   newHome = () => {
     console.log("new house!", this.state);
-    this.props.dispatch(addHomeTHUNK(this.state));
+    this.props.dispatch(addHome(this.state));
   };
   updateHome = () => {
     console.log("edit house!", this.state);
     const homeId = this.props.home._id;
     const homeKey = "location";
     const updateObj = this.state;
-    this.props.dispatch(editHomeTHUNK({ homeId, homeKey, updateObj }));
+    this.props.dispatch(editHome({ homeId, homeKey, updateObj }));
   };
   render() {
     return (

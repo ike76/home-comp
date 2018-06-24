@@ -5,7 +5,7 @@ const Value = styled.div`
   font-size: 0.8rem;
 `;
 const Attribute = styled.div`
-  color: lightgrey;
+  color: #777777;
   font-size: 0.7rem;
   text-align: center;
   margin: 0 3px;

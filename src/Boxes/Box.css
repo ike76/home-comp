@@ -1,4 +1,4 @@
-.fa-edit.box-edit {
+.editToggleButton {
   color: #b1b1b1;
   position: absolute;
   top: 2px;
@@ -26,6 +26,7 @@
   display: grid;
   justify-content: center;
   min-width: 7rem;
+  background: #ffffffcc;
 }
 .controlBox {
   display: grid;

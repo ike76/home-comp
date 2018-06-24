@@ -10,12 +10,36 @@ import AttributeManager from "../AttributeManager";
 import AddNewHouseButton from "../AddNewHouseButton";
 import { logOut } from "../actions/authActions";
 import "./Layout.css";
+import BackgroundImage from "../Images/paper.png";
+import BackgroundGrass from "../Images/grass-sky-background.jpg";
 
 const StyleLinks = styled.div`
   font-size: small;
 `;
 const Dot = styled.span`
   color: #ffffff75;
+`;
+const Background = styled.div`
+  background-image: url(${BackgroundImage});
+  width: "100vw";
+  height: "100vh";
+  position: "fixed";
+  top: 0;
+  left: 0;
+  z-index: -10;
+  opacity: 0.7;
+`;
+const BGGrassDiv = styled.div`
+  background-image: url(${BackgroundGrass});
+  height: 100vh;
+  position: absolute;
+  bottom: 0;
+  z-index: -2;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  opacity: 0.5;
 `;
 
 class Layout extends Component {
@@ -25,7 +49,9 @@ class Layout extends Component {
       <Router>
         <div className="layout">
           <header className="header">
-            <h3>HomeComp</h3>
+            <Link to="/">
+              <h3>HomeComp</h3>
+            </Link>
             <StyleLinks className="links">
               {this.props.user ? ( // signed in links
                 <Fragment>
@@ -60,9 +86,12 @@ class Layout extends Component {
               <Route path="/signup" component={RegistrationFormContainer} />
               <Route path="/" component={SignInFormContainer} />
             </Switch>
+            <Background />
           </main>
-          <section className="sidebar2">
-            <AddNewHouseButton />
+
+          <section className="footer">
+            <BGGrassDiv />
+            <h2>footer</h2>
           </section>
         </div>
       </Router>

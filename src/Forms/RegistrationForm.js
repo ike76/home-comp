@@ -1,8 +1,7 @@
 import React from "react";
 import { Field, reduxForm, focus } from "redux-form";
-import "./forms.css";
-import { registerUserTHUNK } from "../actions/authActions";
-// import {login} from '../actions/auth';
+
+import { registerUser } from "../actions/authActions";
 import Input from "./Input";
 import { SignInUp } from "../UIElements/StyledBoxes";
 import {
@@ -13,6 +12,9 @@ import {
   isTrimmed
 } from "./validators/userValidator";
 
+import Button from "../UIElements/Button";
+import "./forms.css";
+
 const passwordLength = length({ min: 8, max: 72 });
 const matchesPassword = matches("password");
 
@@ -20,7 +22,7 @@ export class RegistrationForm extends React.Component {
   onSubmit(values) {
     const { email, password, firstName, lastName } = values;
     const user = { email, password, firstName, lastName };
-    this.props.dispatch(registerUserTHUNK(user));
+    this.props.dispatch(registerUser(user));
   }
 
   render() {
@@ -64,12 +66,11 @@ export class RegistrationForm extends React.Component {
             validate={[required, nonEmpty, matchesPassword]}
             label="Confirm Password"
           />
-          <button
+          <Button
             type="submit"
             disabled={this.props.pristine || this.props.submitting}
-          >
-            Register
-          </button>
+            text="Register"
+          />
         </form>
       </SignInUp>
     );

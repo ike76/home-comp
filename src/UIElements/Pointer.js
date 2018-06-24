@@ -16,7 +16,7 @@ export default props => {
   return (
     <PointerDiv>
       <Pointer>
-        <i class="far fa-hand-point-right blink_me" />
+        <i className="far fa-hand-point-right blink_me" />
       </Pointer>
       {props.children}
     </PointerDiv>

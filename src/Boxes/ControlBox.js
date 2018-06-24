@@ -14,9 +14,8 @@ const ControlBox = props => {
   const selected = attr.slug === sortedBy.attr;
   const direction = sortedBy.ascending ? "up" : "down";
   const icon = selected ? (
-    <i className={`fas selected fa-arrow-circle-${direction}`} />
+    <i className={`selected fas fa-arrow-circle-${direction}`} />
   ) : (
-    //
     <i className="unselected fas fa-sort" />
   );
   return (
