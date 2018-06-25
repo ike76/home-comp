@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import styled from "styled-components";
 
 import SignInForm from "./SignInForm";
 import ErrorMessage from "../UIElements/ErrorMessage";

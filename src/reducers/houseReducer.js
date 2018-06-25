@@ -6,8 +6,7 @@ import {
   EDIT_HOME_SUCCESS,
   RESET_STORE,
   HOMES_REQUEST,
-  HOMES_SUCCESS,
-  HOMES_ERROR
+  HOMES_SUCCESS
 } from "../actions/houseActions";
 import uuid from "uuid";
 const homes = [];

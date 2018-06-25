@@ -7,7 +7,6 @@ import ControlHouse from "../ControlHouse";
 import RegistrationFormContainer from "../Forms/RegistrationFormContainer";
 import SignInFormContainer from "../Forms/SignInFormContainer";
 import AttributeManager from "../AttributeManager";
-import AddNewHouseButton from "../AddNewHouseButton";
 import { logOut } from "../actions/authActions";
 import "./Layout.css";
 import BackgroundImage from "../Images/paper.png";

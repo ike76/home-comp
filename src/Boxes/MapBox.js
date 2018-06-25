@@ -6,13 +6,7 @@ import Modal from "../Utilities/Modal";
 import MapModal from "./MapModal";
 import { editHome } from "../actions/houseActions";
 import { Value, Attribute } from "../UIElements/StyledText";
-import {
-  GoogleMap,
-  withGoogleMap,
-  withScriptjs,
-  DirectionsRenderer
-} from "react-google-maps";
-import { compose, withProps, lifecycle } from "recompose";
+
 const google = window.google;
 
 export class MapBox extends Component {

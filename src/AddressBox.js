@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { openModal } from "./actions/uiActions";
 import Modal from "./Utilities/Modal";
@@ -36,7 +36,7 @@ const AddressBox = props => {
   return (
     <Fragment>
       <Roof>
-        <a href="#" onClick={handleClickRoof}>
+        <a onClick={handleClickRoof}>
           <RoofAddress>{addy}</RoofAddress>
         </a>
       </Roof>

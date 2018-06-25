@@ -71,10 +71,5 @@ export class Box extends Component {
   }
 }
 
-const StyledInput = styled.input`
-  width: 3rem;
-  margin: 2px;
-`;
-
 const mapStateToProps = state => ({ heights: state.house.heights });
 export default connect(mapStateToProps)(Box);

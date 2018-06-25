@@ -1,5 +1,4 @@
 import jwtDecode from "jwt-decode";
-import axios from "axios";
 
 import { SubmissionError } from "redux-form";
 
