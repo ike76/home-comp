@@ -35,6 +35,7 @@ export class MapBox extends Component {
     const distanceNum = directionPath.distance.value;
     const durationNum = directionPath.duration.value;
     const value = durationNum;
+
     const newStuff = {
       directions: depth === "all" ? directions : null,
       distanceText,
@@ -51,12 +52,13 @@ export class MapBox extends Component {
       })
     );
   };
+
   componentDidMount() {
     const { home, name } = this.props;
     if (
       !(home.attributes[name.slug] && home.attributes[name.slug].distanceNum)
     ) {
-      console.log("getting directions from google");
+      console.log("getting directions from google in MapBox");
       const DirectionsService = new google.maps.DirectionsService();
       const origLat = this.props.home.location.lat;
       const origLng = this.props.home.location.lng;

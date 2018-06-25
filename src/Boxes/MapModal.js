@@ -21,7 +21,7 @@ const MapModal = compose(
   lifecycle({
     componentDidMount() {
       if (this.props.directions) return;
-      console.log("getting directions from google");
+      console.log("getting directions from google in MapModal");
       const DirectionsService = new google.maps.DirectionsService();
       const { origLat, origLng, destLat, destLng } = this.props;
       DirectionsService.route(
@@ -40,17 +40,6 @@ const MapModal = compose(
           }
         }
       );
-    }
-  }),
-  lifecycle({
-    componentDidUpdate(prevProps) {
-      const prevPolyline =
-        prevProps.directions &&
-        prevProps.directions.routes[0].overview_polyline;
-      const nowPolyLine = this.props.directions.routes[0].overview_polyline;
-      if (prevPolyline !== nowPolyLine) {
-        this.props.saveDirections(this.props.directions);
-      }
     }
   })
 )(props => (
