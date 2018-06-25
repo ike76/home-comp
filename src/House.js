@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Box from "./Boxes/Box";
 import AddressBox from "./AddressBox";
-import RoofBackground from "./Images/bwRoof.jpg";
+import RoofBackground from "./Images/bwRoof-small.jpg";
 import ImageBox from "./Boxes/ImageBox";
 import MapBox from "./Boxes/MapBox";
 import bricks from "./Images/brick-wall.jpg";

@@ -95,3 +95,9 @@ export const deleteAttribute = attrId => dispatch => {
     }
   );
 };
+
+export const moveAttribute = (i, delta) => dispatch => {
+  postProtected("/user/moveAttribute", { i, delta })
+    .then(attributes => dispatch(updateAttributes(attributes)))
+    .catch(err => console.log(err));
+};

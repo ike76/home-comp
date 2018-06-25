@@ -1,5 +1,6 @@
 * {
   /* border: 1px green dotted; */
+  box-sizing: border-box;
 }
 
 .layout {

@@ -11,7 +11,7 @@ import AddNewHouseButton from "../AddNewHouseButton";
 import { logOut } from "../actions/authActions";
 import "./Layout.css";
 import BackgroundImage from "../Images/paper.png";
-import BackgroundGrass from "../Images/grass-sky-background.jpg";
+import BackgroundGrass from "../Images/sky-and-grass-background-4.jpg";
 
 const StyleLinks = styled.div`
   font-size: small;
@@ -30,6 +30,7 @@ const Background = styled.div`
   opacity: 0.7;
 `;
 const BGGrassDiv = styled.div`
+  background: blue;
   background-image: url(${BackgroundGrass});
   height: 100vh;
   position: absolute;

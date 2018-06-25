@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "array-move": "^1.0.0",
     "axios": "^0.18.0",
     "blueimp-file-upload": "^9.21.0",
     "cloudinary": "^1.11.0",
