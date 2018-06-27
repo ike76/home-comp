@@ -50,12 +50,6 @@ export const loginTHUNK = ({ email, password }) => dispatch => {
     });
 };
 
-// export const LOGIN_USER = "LOGIN_USER";
-// export const login = user => ({
-//   type: LOGIN_USER,
-//   user
-// });
-
 export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN";
 export const setAuthToken = authToken => ({
   type: SET_AUTH_TOKEN,
