@@ -19,8 +19,10 @@ export const refreshAuthToken = () => (dispatch, getState) => {
 
 export const registerUser = user => dispatch => {
   return post("/auth/signup", user)
-    .then(_user => {
+    .then(response => {
+      dispatch("yo");
       dispatch(loginTHUNK({ email: user.email, password: user.password }));
+      return response; // for test
     })
     .catch(err => {
       const { reason, message, location } = err;
@@ -37,13 +39,9 @@ export const registerUser = user => dispatch => {
 export const loginTHUNK = ({ email, password }) => dispatch => {
   dispatch(authRequest());
   return post("/auth/signin", { email, password })
-    .then(({ authToken }) => {
-      console.log("auth token from login", authToken);
-      storeAuthInfo(authToken, dispatch);
-    })
+    .then(({ authToken }) => storeAuthInfo(authToken, dispatch))
     .catch(err => {
-      console.error("signin error", err);
-      const code = err.response.status;
+      const code = err.response && err.response.status;
       const message =
         code === 401
           ? "Incorrect username or password"
@@ -52,11 +50,11 @@ export const loginTHUNK = ({ email, password }) => dispatch => {
     });
 };
 
-export const LOGIN_USER = "LOGIN_USER";
-export const login = user => ({
-  type: LOGIN_USER,
-  user
-});
+// export const LOGIN_USER = "LOGIN_USER";
+// export const login = user => ({
+//   type: LOGIN_USER,
+//   user
+// });
 
 export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN";
 export const setAuthToken = authToken => ({
