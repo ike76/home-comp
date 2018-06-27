@@ -13,7 +13,7 @@ const logger = createLogger({
   collapsed: true,
   diff: true
 });
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   house: houseReducer,
   form: formReducer,
   ui: uiReducer,

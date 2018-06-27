@@ -7,7 +7,8 @@ export const getProtected = path => {
   return axios
     .get(`${API_BASE_URL}${path}`, { headers: { jwtAuth } })
     .then(res => normalizeResponseErrors(res))
-    .then(res => res.data);
+    .then(res => res.data)
+    .catch(err => console.log("getProtected error", err));
 };
 
 export const postProtected = (path, sendObj) => {

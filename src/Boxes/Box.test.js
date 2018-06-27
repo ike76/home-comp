@@ -24,6 +24,5 @@ describe("Box", () => {
   });
   it("should dislay the attribute name", () => {
     const wrapper = mount(<Box {...fakeProps} />);
-    console.log(wrapper.contains(<Attribute />));
   });
 });

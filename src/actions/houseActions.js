@@ -33,9 +33,11 @@ export const homesError = error => ({
 });
 
 export const addHome = houseObj => dispatch => {
-  postProtected("/house", { location: houseObj }).then(house => {
-    dispatch(addHome_SUCCESS(house));
-  });
+  postProtected("/house", { location: houseObj })
+    .then(house => {
+      dispatch(addHome_SUCCESS(house));
+    })
+    .catch(err => console.log("addHome action error", err));
 };
 export const ADD_HOME_SUCCESS = "ADD_HOME_SUCCESS";
 export const addHome_SUCCESS = house => ({

@@ -20,27 +20,6 @@ export class HomeFormContainer extends Component {
   handleGoogleOutput = place => {
     this.setState(parseAddress(place));
   };
-  parseAddressX = googAddyOutput => {
-    console.log(googAddyOutput);
-    const { formatted_address } = googAddyOutput;
-    const [street_number, route, postal_code] = [
-      "street_number",
-      "route",
-      "postal_code"
-    ].map(part => {
-      try {
-        return googAddyOutput.address_components.find(comp =>
-          comp.types.find(type => type === part)
-        ).short_name;
-      } catch (e) {
-        return "";
-      }
-    });
-    const address = `${street_number} ${route}`;
-    const lat = googAddyOutput.geometry.location.lat();
-    const lng = googAddyOutput.geometry.location.lng();
-    this.setState({ formatted_address, address, lat, lng, zip: postal_code });
-  };
   handleSubmit = () => {
     this.props.home ? this.updateHome() : this.newHome();
     this.props.dispatch(closeModal());
@@ -51,11 +30,9 @@ export class HomeFormContainer extends Component {
     this.props.dispatch(removeHome(homeId));
   };
   newHome = () => {
-    console.log("new house!", this.state);
     this.props.dispatch(addHome(this.state));
   };
   updateHome = () => {
-    console.log("edit house!", this.state);
     const homeId = this.props.home._id;
     const homeKey = "location";
     const updateObj = this.state;
@@ -70,11 +47,15 @@ export class HomeFormContainer extends Component {
           types={["address"]}
           style={{ minWidth: "15rem" }}
         />
-        <h3>{this.state.formatted_address}</h3>
-        <p>lat: {this.state.lat}</p>
-        <p>lat: {this.state.lng}</p>
-        <button onClick={this.handleSubmit}>GO!</button>
-        <button onClick={this.handleDelete}>DELETE</button>
+        {this.state.formatted_address && (
+          <h3 data-test="display-address">{this.state.formatted_address}</h3>
+        )}
+        <button onClick={this.handleSubmit} data-test="submit-button">
+          SAVE
+        </button>
+        <button onClick={this.handleDelete} data-test="delete-button">
+          DELETE
+        </button>
       </div>
     );
   }
