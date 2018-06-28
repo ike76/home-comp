@@ -7,19 +7,21 @@ import {
   clearAuth,
   authSuccess,
   setAuthToken,
+  getMyHomes,
   AUTH_SUCCESS,
   AUTH_REQUEST,
   CLEAR_AUTH,
   SET_AUTH_TOKEN
 } from "./authActions";
+import jwt_decode from "jwt-decode";
+import { updateAttributes } from "./houseActions";
 
 const setupMox = () => {
   moxios.wait(() => {
     let request = moxios.requests.mostRecent();
     const reqUrl = request.config.url;
     const user = request.config.data;
-    const authToken = "fakeAuthToken12345";
-    console.log("mox called", reqUrl, user);
+    const authToken = process.env.REACT_APP_TEST_JWT_TOKEN;
     request.respondWith({
       status: 200,
       response: { reqUrl, user, authToken }
@@ -52,9 +54,12 @@ describe("loginTHUNK", () => {
     moxios.uninstall(axios);
   });
   it("should dispatch authRequest", () => {
-    const mockDispatch = jest.fn();
-    return loginTHUNK(user)(mockDispatch).then(response => {
-      expect(mockDispatch).toBeCalledWith(authRequest());
+    const dispatch = jest.fn();
+    return loginTHUNK(user)(dispatch).then(authToken => {
+      const newUser = jwt_decode(authToken).sub;
+      expect(dispatch).toBeCalledWith(authRequest());
+      expect(dispatch).toBeCalledWith(updateAttributes(newUser.homeAttributes));
+      expect(dispatch).toBeCalledWith(authSuccess(newUser));
     });
   });
 });

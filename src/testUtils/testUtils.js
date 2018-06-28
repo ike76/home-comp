@@ -9,3 +9,7 @@ export const storeFactory = initialState => {
   );
   return createStoreWithMiddleWare(rootReducer, initialState);
 };
+
+export const findByTestAttr = (wrapper, testAttr) => {
+  return wrapper.find(`[data-test='${testAttr}']`);
+};

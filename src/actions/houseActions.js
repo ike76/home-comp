@@ -9,10 +9,10 @@ export const sortHomes = (attr, ascending) => ({
 
 export const getMyHomes = () => dispatch => {
   dispatch(homesRequest());
-  getProtected("/house/getAll")
+  return getProtected("/house/getAll")
     .then(newHomes => {
       dispatch(homesSuccess(newHomes));
-      // dispatch(updateAllHomes(newHomes));
+      return newHomes;
     })
     .catch(err => console.log("get my homes error", err));
 };
@@ -25,11 +25,6 @@ export const HOMES_SUCCESS = "HOMES_SUCCESS";
 export const homesSuccess = homes => ({
   type: HOMES_SUCCESS,
   homes
-});
-export const HOMES_ERROR = "HOMES_ERROR";
-export const homesError = error => ({
-  type: HOMES_ERROR,
-  error
 });
 
 export const addHome = houseObj => dispatch => {

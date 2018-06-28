@@ -19,8 +19,8 @@ export class Box extends Component {
     const StyledBox = styled.div`
       height: ${heights[name.type]};
     `;
-    const handleSubmit = e => {
-      e.preventDefault();
+    const handleSubmit = () => {
+      // e.preventDefault();
       const newValue = this.textInput.value;
       dispatch(
         editHome({
@@ -52,12 +52,17 @@ export class Box extends Component {
         <Attribute>{name.pretty}</Attribute>
         {!editing && <Value>{value}</Value>}
         {editing && (
-          <form onSubmit={handleSubmit} className="number-form">
+          <form
+            onSubmit={handleSubmit}
+            className="number-form"
+            data-test="number-form"
+          >
             <input
               style={{ width: "3rem", margin: "2px" }}
               type="text"
               ref={x => (this.textInput = x)}
               autoFocus
+              data-test="box-input"
             />
             <button type="submit">SAVE</button>
           </form>

@@ -39,7 +39,10 @@ export const registerUser = user => dispatch => {
 export const loginTHUNK = ({ email, password }) => dispatch => {
   dispatch(authRequest());
   return post("/auth/signin", { email, password })
-    .then(({ authToken }) => storeAuthInfo(authToken, dispatch))
+    .then(({ authToken }) => {
+      storeAuthInfo(authToken, dispatch);
+      return authToken;
+    })
     .catch(err => {
       const code = err.response && err.response.status;
       const message =
@@ -90,6 +93,6 @@ const storeAuthInfo = (authToken, dispatch) => {
   dispatch(setAuthToken(authToken));
   saveAuthToken(authToken);
   dispatch(updateAttributes(user.homeAttributes));
-  dispatch(authSuccess(decodedToken.sub));
+  dispatch(authSuccess(user));
   dispatch(getMyHomes());
 };
