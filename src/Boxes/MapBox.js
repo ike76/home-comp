@@ -6,7 +6,7 @@ import Modal from "../Utilities/Modal";
 import MapModal from "./MapModal";
 import { editHome } from "../actions/houseActions";
 import { Value, Attribute } from "../UIElements/StyledText";
-
+import FlexRow from "../UIElements/FlexRow";
 const google = window.google;
 
 export class MapBox extends Component {
@@ -79,10 +79,6 @@ export class MapBox extends Component {
     const { name, home, heights } = this.props;
     const StyledBox = styled.div`
       height: ${heights[name.type]};
-    `;
-    const FlexRow = styled.div`
-      display: flex;
-      justify-content: space-between;
     `;
 
     return (

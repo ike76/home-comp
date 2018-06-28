@@ -6,6 +6,9 @@ import {
   withScriptjs,
   DirectionsRenderer
 } from "react-google-maps";
+import { Value, Attribute } from "../UIElements/StyledText";
+import FlexRow from "../UIElements/FlexRow";
+
 const google = window.google;
 
 const MapModal = compose(
@@ -49,14 +52,22 @@ const MapModal = compose(
       defaultCenter={new google.maps.LatLng(41.85073, -87.65126)}
     >
       {props.directions && <DirectionsRenderer directions={props.directions} />}
-      <p>
-        <strong>Distance: </strong>
-        {props.directions && props.directions.routes[0].legs[0].distance.text}
-      </p>
-      <p>
-        <strong>Travel Time: </strong>
-        {props.directions && props.directions.routes[0].legs[0].duration.text}
-      </p>
+      <FlexRow>
+        <p>
+          <Attribute>Distance: </Attribute>
+          <Value>
+            {props.directions &&
+              props.directions.routes[0].legs[0].distance.text}
+          </Value>
+        </p>
+        <p>
+          <Attribute>Travel Time: </Attribute>
+          <Value>
+            {props.directions &&
+              props.directions.routes[0].legs[0].duration.text}
+          </Value>
+        </p>
+      </FlexRow>
     </GoogleMap>
   </Fragment>
 ));
