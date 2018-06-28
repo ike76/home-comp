@@ -39,7 +39,6 @@ describe("<MapBox/>", () => {
   it("shows travel time", () => {
     const wrapper = setup();
     const travelText = findByTestAttr(wrapper, "travel-time-text");
-    console.log(travelText.debug());
     expect(travelText.text()).toContain("1234 minutes");
   });
   test("button opens modal", () => {

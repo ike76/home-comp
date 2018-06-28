@@ -10,7 +10,7 @@ import { parseAddress } from "../Utilities/parseGoogleAddress";
 import { explanation } from "./boxTypeExplanations";
 import Pointer from "../UIElements/Pointer";
 
-class FormContainer extends Component {
+export class AttributeForm extends Component {
   state = {
     attrType: "",
     attrName: "",
@@ -179,4 +179,4 @@ const mapStateToProps = state => ({
   home: state.house[0],
   heights: state.house.heights
 });
-export default connect(mapStateToProps)(FormContainer);
+export default connect(mapStateToProps)(AttributeForm);

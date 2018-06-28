@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { deleteAttribute, moveAttribute } from "./actions/houseActions";
-import AttributeFormContainer from "./Forms/AttributeFormContainer";
+import AttributeForm from "./Forms/AttributeForm";
 import FlipMove from "react-flip-move";
 
 import Button from "./UIElements/Button";
@@ -48,7 +48,7 @@ export const AttributeManager = props => {
         </AttributeListGrid>
       </InlineDiv>
       <InlineDiv>
-        <AttributeFormContainer />
+        <AttributeForm />
       </InlineDiv>
     </AttributeManagerGrid>
   );

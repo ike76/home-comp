@@ -49,22 +49,26 @@ const MapModal = compose(
   <Fragment>
     <GoogleMap
       defaultZoom={9}
-      defaultCenter={new google.maps.LatLng(41.85073, -87.65126)}
+      defaultCenter={new google.maps.LatLng(props.origLat, props.origLng)}
     >
       {props.directions && <DirectionsRenderer directions={props.directions} />}
       <FlexRow>
         <p>
           <Attribute>Distance: </Attribute>
           <Value>
-            {props.directions &&
-              props.directions.routes[0].legs[0].distance.text}
+            <span data-test="distance-display">
+              {props.directions &&
+                props.directions.routes[0].legs[0].distance.text}
+            </span>
           </Value>
         </p>
         <p>
           <Attribute>Travel Time: </Attribute>
           <Value>
-            {props.directions &&
-              props.directions.routes[0].legs[0].duration.text}
+            <span data-test="travel-time-display">
+              {props.directions &&
+                props.directions.routes[0].legs[0].duration.text}
+            </span>
           </Value>
         </p>
       </FlexRow>

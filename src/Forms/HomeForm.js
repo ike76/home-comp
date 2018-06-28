@@ -6,7 +6,7 @@ import { addHome, editHome, removeHome } from "../actions/houseActions";
 import { connect } from "react-redux";
 import { closeModal } from "../actions/uiActions";
 
-export class HomeFormContainer extends Component {
+export class HomeForm extends Component {
   state = {
     formatted_address: "",
     address: "",
@@ -61,4 +61,4 @@ export class HomeFormContainer extends Component {
   }
 }
 
-export default connect()(HomeFormContainer);
+export default connect()(HomeForm);

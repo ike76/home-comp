@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { openModal } from "./actions/uiActions";
 import styled from "styled-components";
 import Modal from "./Utilities/Modal";
-import HomeFormContainer from "./Forms/HomeFormContainer";
+import HomeForm from "./Forms/HomeForm";
 
 export const AddNewHouseButton = props => {
   const { modalOpen, dispatch } = props;
@@ -24,7 +24,7 @@ export const AddNewHouseButton = props => {
       <StyledButton onClick={handleClick}>Add New Home</StyledButton>
       {modalOpen === "new" && (
         <Modal>
-          <HomeFormContainer />
+          <HomeForm />
         </Modal>
       )}
     </Fragment>

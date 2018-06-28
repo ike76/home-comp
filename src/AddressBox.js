@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { openModal } from "./actions/uiActions";
 import Modal from "./Utilities/Modal";
-import HomeFormContainer from "./Forms/HomeFormContainer";
+import HomeForm from "./Forms/HomeForm";
 import styled from "styled-components";
 
 const AddressBox = props => {
@@ -42,7 +42,7 @@ const AddressBox = props => {
       </Roof>
       {modalOpen === homeId && (
         <Modal>
-          <HomeFormContainer home={home} />
+          <HomeForm home={home} />
         </Modal>
       )}
     </Fragment>

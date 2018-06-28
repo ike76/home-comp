@@ -21,6 +21,7 @@ const StarRow = props => {
           homeId={home._id}
           name={name}
           changeRating={() => changeRating(i + 1)}
+          data-test="star"
         />
       ))}
     </StarDiv>
