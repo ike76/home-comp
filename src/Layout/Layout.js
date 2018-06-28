@@ -84,7 +84,8 @@ class Layout extends Component {
               <Route path="/compare" component={HomeLister} />
               <Route path="/attributes" component={AttributeManager} />
               <Route path="/signup" component={RegistrationFormContainer} />
-              <Route path="/" component={SignInFormContainer} />
+              <Route exact path="/" component={SignInFormContainer} />
+              <Route component={() => <div>no match</div>} />
             </Switch>
             <Background />
           </main>
