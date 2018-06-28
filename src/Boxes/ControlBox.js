@@ -14,13 +14,19 @@ const ControlBox = props => {
   const selected = attr.slug === sortedBy.attr;
   const direction = sortedBy.ascending ? "up" : "down";
   const icon = selected ? (
-    <i className={`selected fas fa-arrow-circle-${direction}`} />
+    <i
+      className={`selected fas fa-arrow-circle-${direction}`}
+      data-test="sort-arrow"
+    />
   ) : (
-    <i className="unselected fas fa-sort" />
+    <i className="unselected fas fa-sort" data-test="sort-arrow" />
   );
   return (
     <StyledBox className="controlBox">
-      <NameSpan className={selected ? "selected" : "unselected"}>
+      <NameSpan
+        data-test="name-display"
+        className={selected ? "selected" : "unselected"}
+      >
         {`${attr.pretty}:`}
       </NameSpan>
       {
