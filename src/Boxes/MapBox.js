@@ -88,18 +88,24 @@ export class MapBox extends Component {
             <FlexRow>
               <Attribute>dist:</Attribute>
               <Value>
-                {home.attributes[name.slug] &&
-                  home.attributes[name.slug].distanceText}
+                <span data-test="distance-text">
+                  {home.attributes[name.slug] &&
+                    home.attributes[name.slug].distanceText}
+                </span>
               </Value>
             </FlexRow>
             <FlexRow>
               <Attribute>time:</Attribute>
               <Value>
-                {home.attributes[name.slug] &&
-                  home.attributes[name.slug].durationText}
+                <span data-test="travel-time-text">
+                  {home.attributes[name.slug] &&
+                    home.attributes[name.slug].durationText}
+                </span>
               </Value>
             </FlexRow>
-            <button onClick={this.openMap}>Map</button>
+            <button onClick={this.openMap} data-test="open-modal-button">
+              Map
+            </button>
           </div>
         </StyledBox>
         {this.props.modalOpen === `map ${home._id}` && (

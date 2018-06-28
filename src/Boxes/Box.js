@@ -49,7 +49,7 @@ export class Box extends Component {
     );
     return (
       <StyledBox className="box">
-        <Attribute>{name.pretty}</Attribute>
+        <Attribute data-test="attr-name">{name.pretty}</Attribute>
         {!editing && <Value>{value}</Value>}
         {editing && (
           <form

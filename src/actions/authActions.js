@@ -20,7 +20,6 @@ export const refreshAuthToken = () => (dispatch, getState) => {
 export const registerUser = user => dispatch => {
   return post("/auth/signup", user)
     .then(response => {
-      console.log(response);
       dispatch(loginTHUNK({ email: user.email, password: user.password }));
       return response; // for test
     })
