@@ -32,7 +32,6 @@ describe("serverAPI", () => {
   test("getProtected works", () => {
     const url = "/get/protected";
     return getProtected(url).then(({ reqUrl }) => {
-      console.log("requrl", reqUrl);
       expect(reqUrl).toContain(url);
     });
   });

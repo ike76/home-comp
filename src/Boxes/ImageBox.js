@@ -10,7 +10,7 @@ import { openModal, closeModal } from "../actions/uiActions";
 import { editHome } from "../actions/houseActions";
 import "./Box.css";
 
-class ImageBox extends Component {
+export class ImageBox extends Component {
   state = {
     selectedFile: null,
     showModal: false,
@@ -60,7 +60,9 @@ class ImageBox extends Component {
       <Fragment>
         <StyledBox className="box ">
           {!imagePublicId && (
-            <button onClick={this.openModal}>ADD IMAGE</button>
+            <button onClick={this.openModal} data-test="add-image-button">
+              ADD IMAGE
+            </button>
           )}
           <StarRow
             home={home}
@@ -71,7 +73,7 @@ class ImageBox extends Component {
           <Attribute style={{ zIndex: "5" }}>{name.pretty}</Attribute>
         </StyledBox>
         {this.props.modalOpen === `image ${this.props.home._id}` && (
-          <Modal close={this.closeModal}>
+          <Modal close={this.closeModal} data-test="modal">
             <CloudinaryDB
               setImagePublicID={this.setImagePublicID}
               closeModal={this.closeModal}
