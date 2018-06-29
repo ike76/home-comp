@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ControlBox from "./Boxes/ControlBox";
 import { sortHomes } from "./actions/houseActions";
 import { Link } from "react-router-dom";
-import Button from "./UIElements/Button";
+import Button from "@material-ui/core/Button";
 
 const ControlHouse = props => {
   const { attrNames, sortedBy, heights, dispatch } = props;
@@ -17,7 +17,9 @@ const ControlHouse = props => {
     <div style={{ padding: "1.1rem 0 0", textAlign: "center" }}>
       <div style={{ height: heights.roof }}>
         <Link to="/attributes">
-          <Button text="EDIT Attributes" />
+          <Button variant="contained" color="primary">
+            Edit Attributes
+          </Button>
         </Link>
       </div>
       {attrNames.map((attr, i) => {

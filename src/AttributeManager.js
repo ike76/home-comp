@@ -4,9 +4,12 @@ import styled from "styled-components";
 import { deleteAttribute, moveAttribute } from "./actions/houseActions";
 import AttributeForm from "./Forms/AttributeForm";
 import FlipMove from "react-flip-move";
-
-import Button from "./UIElements/Button";
-
+import Typography from "@material-ui/core/Typography";
+import { Button } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
 export const AttributeManager = props => {
   const { attrNames, dispatch } = props;
 
@@ -23,23 +26,31 @@ export const AttributeManager = props => {
       <InlineDiv>
         <AttributeListGrid>
           <Header>
-            <h1>Attribute Manager</h1>
+            <Typography variant="title" gutterBottom>
+              Attribute Manager
+            </Typography>
           </Header>
           <FlipMove>
             {attrNames.map((attrName, i) => (
               <Row key={attrName.pretty}>
                 <div>
-                  <h3 style={{ margin: "10px" }}>{attrName.pretty}</h3>
+                  <Typography variant="button">{attrName.pretty}</Typography>
                 </div>
-                <i
-                  className="far fa-arrow-alt-circle-up"
-                  onClick={() => handleClick(i, -1)}
-                />
-                <i
-                  className="far fa-arrow-alt-circle-down"
-                  onClick={() => handleClick(i, 1)}
-                />
+                <IconButton size="small" onClick={() => handleClick(i, -1)}>
+                  <ArrowUpward />
+                </IconButton>
+                <IconButton size="small" onClick={() => handleClick(i, 1)}>
+                  <ArrowDownward />
+                </IconButton>
                 <div>
+                  <IconButton
+                    variant="outlined"
+                    aria-label="Delete"
+                    color="secondary"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+
                   <Button text="Delete" click={() => handleDelete(attrName)} />
                 </div>
               </Row>

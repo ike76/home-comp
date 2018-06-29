@@ -29,14 +29,14 @@
 }
 .controlBox {
   display: grid;
-  grid-template-columns: 1fr 2rem;
+  grid-template-columns: 1fr;
   justify-content: center;
 }
 .controlBox i.selected {
   color: red;
 }
 .controlBox i.unselected {
-  color: lightgray;
+  color: #d3d3d380;
 }
 .controlButton {
   font-size: 1.5rem;

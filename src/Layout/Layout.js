@@ -11,7 +11,7 @@ import { logOut } from "../actions/authActions";
 import "./Layout.css";
 import BackgroundImage from "../Images/paper.png";
 import BackgroundGrass from "../Images/sky-and-grass-background-4.jpg";
-
+import HeaderMUI from "./HeaderMUI";
 const StyleLinks = styled.div`
   font-size: small;
 `;
@@ -43,13 +43,18 @@ const BGGrassDiv = styled.div`
 `;
 
 class Layout extends Component {
-  componentDidMount() {}
+  logout = () => {
+    this.props.dispatch(logOut());
+  };
   render() {
+    const { user } = this.props;
     return (
       <Router>
         <div className="layout">
           <header className="header">
-            <Link to="/">
+            <HeaderMUI user={user} logOut={this.logout} />
+
+            {/* <Link to="/">
               <h3>HomeComp</h3>
             </Link>
             <StyleLinks className="links">
@@ -74,7 +79,7 @@ class Layout extends Component {
                   <Link to="/signin">Sign In</Link>
                 </Fragment>
               )}
-            </StyleLinks>
+            </StyleLinks> */}
           </header>
           <section className="sidebar">
             <Route path="/compare" component={ControlHouse} />

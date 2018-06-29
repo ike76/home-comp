@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 import "./Box.css";
 
 const ControlBox = props => {
@@ -11,31 +13,57 @@ const ControlBox = props => {
     font-size: 10px;
     max-width: 4rem;
   `;
+  const Icon = styled.i`
+    position: absolute;
+    right: -10px;
+    font-size: 1.5rem;
+  `;
   const selected = attr.slug === sortedBy.attr;
   const direction = sortedBy.ascending ? "up" : "down";
   const icon = selected ? (
-    <i
+    <Icon
       className={`selected fas fa-arrow-circle-${direction}`}
       data-test="sort-arrow"
     />
   ) : (
-    <i className="unselected fas fa-sort" data-test="sort-arrow" />
+    <Icon className="unselected fas fa-circle" data-test="sort-arrow" />
   );
+  const { classes } = props;
   return (
     <StyledBox className="controlBox">
-      <NameSpan
+      <Button
+        variant="outlined"
+        color={selected ? "primary" : "default"}
+        size="small"
+        className={classes.button}
+        onClick={click}
+      >
+        {attr.pretty}
+      </Button>
+      {icon}
+      {/* <NameSpan
         data-test="name-display"
         className={selected ? "selected" : "unselected"}
-      >
+        >
         {`${attr.pretty}:`}
-      </NameSpan>
-      {
-        <div onClick={click} className="controlButton">
+        </NameSpan>
+        {
+          <div onClick={click} className="controlButton">
           {icon}
-        </div>
-      }
+          </div>
+        } */}
     </StyledBox>
   );
 };
 
-export default ControlBox;
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+    display: "flex",
+    justifyContent: "flex-end"
+  },
+  selected: {
+    backgroundColor: "rgba(63, 81, 181, 0.08)"
+  }
+});
+export default withStyles(styles)(ControlBox);
