@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { deleteAttribute, moveAttribute } from "./actions/houseActions";
-import AttributeForm from "./Forms/AttributeForm";
+import AttributeForm2 from "./Forms/AttributeForm2";
 import FlipMove from "react-flip-move";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
@@ -47,11 +47,10 @@ export const AttributeManager = props => {
                     variant="outlined"
                     aria-label="Delete"
                     color="secondary"
+                    onClick={() => handleDelete(attrName)}
                   >
                     <DeleteIcon />
                   </IconButton>
-
-                  <Button text="Delete" click={() => handleDelete(attrName)} />
                 </div>
               </Row>
             ))}
@@ -59,7 +58,7 @@ export const AttributeManager = props => {
         </AttributeListGrid>
       </InlineDiv>
       <InlineDiv>
-        <AttributeForm />
+        <AttributeForm2 />
       </InlineDiv>
     </AttributeManagerGrid>
   );

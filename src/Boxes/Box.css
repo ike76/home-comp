@@ -21,11 +21,12 @@
   display: flex;
 }
 .box {
-  border: 2px black solid;
+  border: 1px brown solid;
   display: grid;
   justify-content: center;
   min-width: 7rem;
   background: #ffffffcc;
+  border-radius: 3px;
 }
 .controlBox {
   display: grid;

@@ -8,9 +8,10 @@ import { loginTHUNK } from "../actions/authActions";
 import { SignInUp } from "../UIElements/StyledBoxes";
 
 export class SignInFormContainer extends Component {
-  submit = values => {
-    this.props.dispatch(loginTHUNK(values));
-  };
+  // submit = values => {
+  //   console.log("values", values);
+  //   this.props.dispatch(loginTHUNK(values));
+  // };
 
   render() {
     if (this.props.currentUser) return <Redirect to="/compare" />;
@@ -20,7 +21,7 @@ export class SignInFormContainer extends Component {
 
         <ErrorMessage />
 
-        <SignInForm onSubmit={this.submit} />
+        <SignInForm />
       </SignInUp>
     );
   }

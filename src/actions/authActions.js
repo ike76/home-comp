@@ -39,6 +39,7 @@ export const loginTHUNK = ({ email, password }) => dispatch => {
   dispatch(authRequest());
   return post("/auth/signin", { email, password })
     .then(({ authToken }) => {
+      // debugger;
       storeAuthInfo(authToken, dispatch);
       return authToken;
     })
@@ -87,6 +88,7 @@ export const authError = error => ({
 });
 
 const storeAuthInfo = (authToken, dispatch) => {
+  console.log("storeAuth", authToken);
   const decodedToken = jwtDecode(authToken);
   const user = decodedToken.sub;
   dispatch(setAuthToken(authToken));

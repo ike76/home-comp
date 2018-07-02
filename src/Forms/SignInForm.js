@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import styled from "styled-components";
-
-import { required, nonEmpty, isTrimmed } from "./validators/userValidator";
-import Button from "../UIElements/Button";
-import Input from "./Input";
+import { withStyles } from "@material-ui/core/styles";
+import { loginTHUNK } from "../actions/authActions";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 const ButtonDiv = styled.div`
   display: flex;
@@ -17,13 +17,67 @@ const SeparationText = styled.p`
   color: lightgrey;
   font-size: 10px;
 `;
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
+  menu: {
+    width: 200
+  }
+});
 
 export class SignInForm extends Component {
+  state = {
+    email: "",
+    password: ""
+  };
+  handleChange = name => event => {
+    console.log("nameevent", name, event.target.value);
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+  handleFormSubmit = e => {
+    e.preventDefault();
+    console.log("formsumbuy");
+    const { email, password } = this.state;
+    this.props.dispatch(loginTHUNK({ email, password }));
+  };
+
   render() {
-    const { pristine, handleSubmit } = this.props;
+    const { pristine, handleSubmit, classes } = this.props;
     return (
-      <form className="login-form" onSubmit={handleSubmit}>
-        <Field
+      <form
+        className={classes.container}
+        noValidate
+        autoComplete="off"
+        onSubmit={this.handleFormSubmit}
+      >
+        <TextField
+          id="email"
+          label="Email"
+          className={classes.textField}
+          value={this.state.email2}
+          onChange={this.handleChange("email")}
+          margin="normal"
+        />
+        <TextField
+          id="passwordn
+          "
+          label="Password"
+          type="password"
+          className={classes.textField}
+          value={this.state.password2}
+          onChange={this.handleChange("password")}
+          margin="normal"
+        />
+        {/* <Field
           component={Input}
           hintText="Email"
           type="email"
@@ -38,14 +92,10 @@ export class SignInForm extends Component {
           name="password"
           validate={[required, nonEmpty]}
           label="Password"
-        />
-        <ButtonDiv>
-          <Button text="SIGN IN" type="submit" disabled={pristine} />
-          <SeparationText>- or -</SeparationText>
-          <Link to="/signup">
-            <Button text="SIGN UP" />
-          </Link>
-        </ButtonDiv>
+        /> */}
+        <Button variant="outlined" className={classes.button} type="submit">
+          Sign In
+        </Button>
       </form>
     );
   }
@@ -55,5 +105,5 @@ const mapStateToProps = state => ({
   attrNames: state.house.attrNames
 });
 SignInForm = connect(mapStateToProps)(SignInForm);
-
-export default reduxForm({ form: "signin" })(SignInForm);
+export default withStyles(styles)(SignInForm);
+// export default withStyles(styles)(reduxForm({ form: "signin" })(SignInForm));

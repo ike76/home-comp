@@ -20,6 +20,7 @@ export const postProtected = (path, sendObj) => {
 };
 
 export const post = (path, sendObj) => {
+  console.log("post called");
   return axios
     .post(`${REACT_APP_API_URL}${path}`, sendObj)
     .then(res => normalizeResponseErrors(res))
