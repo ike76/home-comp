@@ -4,13 +4,14 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import "./Box.css";
 
-const ControlBox = props => {
+export const ControlBox = props => {
   const { sortedBy, attr, click, height } = props;
   const StyledBox = styled.div`
     height: ${height};
   `;
   const NameSpan = styled.span`
     font-size: 10px;
+    max-width: 4rem;
     max-width: 4rem;
   `;
   const Icon = styled.i`
@@ -30,7 +31,7 @@ const ControlBox = props => {
   );
   const { classes } = props;
   return (
-    <StyledBox className="controlBox">
+    <StyledBox className="controlBox" data-test="display-button">
       <Button
         variant="outlined"
         color={selected ? "primary" : "default"}

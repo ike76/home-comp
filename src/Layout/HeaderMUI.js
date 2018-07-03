@@ -57,6 +57,12 @@ const CompStyle = styled.span`
   `};
 `;
 
+const MagicDiv = styled.div`
+  ${media.handheld`
+    display: none;
+  `};
+`;
+
 export class Header extends Component {
   render() {
     const { user, classes, logOut } = this.props;
@@ -77,7 +83,9 @@ export class Header extends Component {
           </Link>
           {user ? (
             <Fragment>
-              <Button color="inherit">{user.email}</Button>
+              <MagicDiv>
+                <Button color="inherit">{user.email}</Button>
+              </MagicDiv>
               <Button color="inherit" onClick={logOut}>
                 Sign Out
               </Button>

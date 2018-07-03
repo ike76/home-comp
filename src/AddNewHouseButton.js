@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { openModal } from "./actions/uiActions";
+import Button from "@material-ui/core/Button";
+
 import styled from "styled-components";
 import Modal from "./Utilities/Modal";
 import HomeForm from "./Forms/HomeForm";
@@ -21,7 +23,7 @@ export const AddNewHouseButton = props => {
   `;
   return (
     <Fragment>
-      <StyledButton onClick={handleClick}>Add New Home</StyledButton>
+      <Button onClick={handleClick}>Add New Home</Button>
       {modalOpen === "new" && (
         <Modal>
           <HomeForm />

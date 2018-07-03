@@ -45,8 +45,10 @@ export class SignInForm extends Component {
   };
   handleFormSubmit = e => {
     e.preventDefault();
+    console.log("this is", this);
     console.log("formsumbuy");
     const { email, password } = this.state;
+    // this.props.handleSubmit(values => console.log("values", values));
     this.props.dispatch(loginTHUNK({ email, password }));
   };
 
@@ -58,12 +60,13 @@ export class SignInForm extends Component {
         noValidate
         autoComplete="off"
         onSubmit={this.handleFormSubmit}
+        // onSubmit={props.handleSubmit}
       >
         <TextField
           id="email"
           label="Email"
           className={classes.textField}
-          value={this.state.email2}
+          value={this.state.email}
           onChange={this.handleChange("email")}
           margin="normal"
         />
@@ -73,26 +76,11 @@ export class SignInForm extends Component {
           label="Password"
           type="password"
           className={classes.textField}
-          value={this.state.password2}
+          value={this.state.password}
           onChange={this.handleChange("password")}
           margin="normal"
         />
-        {/* <Field
-          component={Input}
-          hintText="Email"
-          type="email"
-          name="email"
-          validate={[required, nonEmpty, isTrimmed]}
-          label="Email"
-          error={false}
-        />
-        <Field
-          component={Input}
-          type="password"
-          name="password"
-          validate={[required, nonEmpty]}
-          label="Password"
-        /> */}
+
         <Button variant="outlined" className={classes.button} type="submit">
           Sign In
         </Button>

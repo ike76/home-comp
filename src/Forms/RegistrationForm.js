@@ -1,18 +1,11 @@
 import React from "react";
-import { Field, reduxForm, focus } from "redux-form";
+import { reduxForm, focus } from "redux-form";
+import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-
 import { registerUser } from "../actions/authActions";
-import Input from "./Input";
-import { SignInUp } from "../UIElements/StyledBoxes";
-import {
-  required,
-  nonEmpty,
-  matches,
-  length,
-  isTrimmed
-} from "./validators/userValidator";
+import { matches, length, isTrimmed } from "./validators/userValidator";
+import { media } from "../Utilities/style-utils";
 
 // import Button from "../UIElements/Button";
 import "./forms.css";
@@ -21,7 +14,19 @@ import { withStyles } from "@material-ui/core";
 const passwordLength = length({ min: 8, max: 72 });
 const matchesPassword = matches("password");
 
+const RegistrationGrid = styled.form`
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-gap: 1rem;
+  justify-content: center;
+  justify-items: center;
+  ${media.handheld`
+    grid-template-columns: max-content;
+  `};
+`;
+
 const styles = theme => ({
+  root: { flexGrow: 1, margin: "0 auto" },
   container: {
     display: "flex",
     flexDirection: "column"
@@ -38,7 +43,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200,
-    gridArea: "1/1/1/-1"
+    gridColumn: "1/-1"
   }
 });
 
@@ -63,18 +68,18 @@ export class RegistrationForm extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <SignInUp>
-        <h2>Sign Up</h2>
-        <form
-          className="login-form"
+      <div>
+        <RegistrationGrid
           onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
           autoComplete="off"
+          data-test="login-form"
         >
+          <h2 style={{ gridColumn: "1/-1" }}>Sign Up</h2>
           <TextField
             id="email"
             label="Email"
-            type="email"
             className={classes.textField2Rows}
+            type="email"
             value={this.state.email}
             onChange={this.handleChange("email")}
             margin="normal"
@@ -118,14 +123,18 @@ export class RegistrationForm extends React.Component {
             onChange={this.handleChange("passwordConfirm")}
             margin="normal"
           />
-          <Button variant="outlined" color="primary" type="submit">
-            Sign Up
-          </Button>
-        </form>
-      </SignInUp>
+          <div style={{ gridColumn: "1/-1" }}>
+            <Button variant="outlined" color="primary" type="submit">
+              Sign Up
+            </Button>
+          </div>
+        </RegistrationGrid>
+      </div>
     );
   }
 }
+
+export const RegFormWithStyles = withStyles(styles)(RegistrationForm);
 
 export default withStyles(styles)(
   reduxForm({

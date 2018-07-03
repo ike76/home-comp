@@ -5,7 +5,7 @@
 }
 .login-form {
   display: grid;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: repeat(auto-fit, max-content);
 }
 
 .warning,

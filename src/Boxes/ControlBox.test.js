@@ -1,13 +1,14 @@
 import React from "react";
 import { shallow } from "enzyme";
-import ControlBox from "./ControlBox";
+import { ControlBox } from "./ControlBox";
 import { findByTestAttr } from "../testUtils/testUtils";
 const getWrapper = specialProps => {
   const defaultProps = {
     sortedBy: "x",
     attr: "x",
     click: jest.fn(),
-    height: "x"
+    height: "x",
+    classes: {}
   };
   const props = { ...defaultProps, ...specialProps };
   const wrapper = shallow(<ControlBox {...props} />);
@@ -22,8 +23,8 @@ describe("Control Box", () => {
     const wrapper = getWrapper({
       attr: { pretty: "Backyard", slug: "backyard" }
     });
-    const display = wrapper.find(`[data-test='name-display']`);
-    expect(display.html()).toContain("Backyard");
+    const button = findByTestAttr(wrapper, "display-button");
+    expect(button.html()).toContain("Backyard");
   });
   it("shows up arrow when selected and sorted asc", () => {
     const wrapper = getWrapper({

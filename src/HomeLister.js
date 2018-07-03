@@ -4,7 +4,6 @@ import FlipMove from "react-flip-move";
 import styled from "styled-components";
 import House from "./House";
 import { getMyHomes } from "./actions/houseActions";
-import requiresLogin from "./HOC/RequiresLogin";
 import Spinner from "./UIElements/Spinner";
 import AddNewHouseButton from "./AddNewHouseButton";
 import ControlHouse from "./ControlHouse";
@@ -70,4 +69,4 @@ const mapStateToProps = state => ({
   user: state.auth.user,
   loading: state.house.loading
 });
-export default requiresLogin()(connect(mapStateToProps)(HomeLister));
+export default connect(mapStateToProps)(HomeLister);
