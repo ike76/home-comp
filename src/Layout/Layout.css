@@ -5,7 +5,6 @@
 
 .layout {
   display: grid;
-  grid-template-columns: max-content minmax(400px, 750px);
   grid-template-rows: auto 1fr;
 }
 
@@ -22,6 +21,8 @@
 .sidebar {
   background: #fdfdfdd6;
   box-shadow: 3px 0px 6px 0px #0000001c;
+  text-align: center;
+  padding: 1.3rem 3px;
 }
 .sidebar2 {
   background: lightgrey;

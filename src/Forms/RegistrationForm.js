@@ -33,6 +33,12 @@ const styles = theme => ({
   },
   menu: {
     width: 200
+  },
+  textField2Rows: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+    gridArea: "1/1/1/-1"
   }
 });
 
@@ -68,7 +74,7 @@ export class RegistrationForm extends React.Component {
             id="email"
             label="Email"
             type="email"
-            className={classes.textField}
+            className={classes.textField2Rows}
             value={this.state.email}
             onChange={this.handleChange("email")}
             margin="normal"
@@ -112,44 +118,9 @@ export class RegistrationForm extends React.Component {
             onChange={this.handleChange("passwordConfirm")}
             margin="normal"
           />
-          {/* <Field
-            component={Input}
-            type="text"
-            name="firstName"
-            label="First Name"
-          />
-          <Field
-            component={Input}
-            type="text"
-            name="lastName"
-            label="Last Name"
-          />
-          <Field
-            component={Input}
-            type="text"
-            name="email"
-            validate={[required, nonEmpty, isTrimmed]}
-            label="Email"
-          />
-          <Field
-            component={Input}
-            type="password"
-            name="password"
-            validate={[required, passwordLength, isTrimmed]}
-            label="Password"
-          />
-          <Field
-            component={Input}
-            type="password"
-            name="passwordConfirm"
-            validate={[required, nonEmpty, matchesPassword]}
-            label="Confirm Password"
-          />
-          <Button
-            type="submit"
-            disabled={this.props.pristine || this.props.submitting}
-            text="Register"
-          /> */}
+          <Button variant="outlined" color="primary" type="submit">
+            Sign Up
+          </Button>
         </form>
       </SignInUp>
     );

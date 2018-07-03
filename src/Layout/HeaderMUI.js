@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import { media } from "../Utilities/style-utils";
 
 const styles = {
   root: {
@@ -25,6 +26,9 @@ const styles = {
   },
   white: {
     color: "white"
+  },
+  toolbar: {
+    minHeight: "0"
   }
 };
 
@@ -33,12 +37,24 @@ const HomeStyle = styled.span`
   font-weight: 500;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.35417em;
+  ${media.handheld`
+    font-size: 1rem;
+  `};
+  ${media.tablet`
+    font-size: 1.2rem
+  `};
 `;
 const CompStyle = styled.span`
   font-size: 1.5rem;
   font-weight: 100;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.35417em;
+  ${media.handheld`
+    font-size: 1rem;
+  `};
+  ${media.tablet`
+    font-size: 1.2rem
+  `};
 `;
 
 export class Header extends Component {
@@ -46,7 +62,7 @@ export class Header extends Component {
     const { user, classes, logOut } = this.props;
     return (
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <Link
             to="/"
             style={{ textDecoration: "none" }}
@@ -67,7 +83,14 @@ export class Header extends Component {
               </Button>
             </Fragment>
           ) : (
-            <Button color="inherit">Sign In</Button>
+            <Fragment>
+              <Link to="/signin">
+                <Button className={classes.white}>Sign In</Button>
+              </Link>
+              <Link to="/signup">
+                <Button className={classes.white}>Sign Up</Button>
+              </Link>
+            </Fragment>
           )}
         </Toolbar>
       </AppBar>

@@ -23,43 +23,39 @@ export const AttributeManager = props => {
 
   return (
     <AttributeManagerGrid>
-      <InlineDiv>
-        <AttributeListGrid>
-          <Header>
-            <Typography variant="title" gutterBottom>
-              Attribute Manager
-            </Typography>
-          </Header>
-          <FlipMove>
-            {attrNames.map((attrName, i) => (
-              <Row key={attrName.pretty}>
-                <div>
-                  <Typography variant="button">{attrName.pretty}</Typography>
-                </div>
-                <IconButton size="small" onClick={() => handleClick(i, -1)}>
-                  <ArrowUpward />
+      <AttributeListGrid>
+        <Header>
+          <Typography variant="title" gutterBottom>
+            Attribute Manager
+          </Typography>
+        </Header>
+        <FlipMove>
+          {attrNames.map((attrName, i) => (
+            <Row key={attrName.pretty}>
+              <div>
+                <Typography variant="button">{attrName.pretty}</Typography>
+              </div>
+              <IconButton size="small" onClick={() => handleClick(i, -1)}>
+                <ArrowUpward />
+              </IconButton>
+              <IconButton size="small" onClick={() => handleClick(i, 1)}>
+                <ArrowDownward />
+              </IconButton>
+              <div>
+                <IconButton
+                  variant="outlined"
+                  aria-label="Delete"
+                  color="secondary"
+                  onClick={() => handleDelete(attrName)}
+                >
+                  <DeleteIcon />
                 </IconButton>
-                <IconButton size="small" onClick={() => handleClick(i, 1)}>
-                  <ArrowDownward />
-                </IconButton>
-                <div>
-                  <IconButton
-                    variant="outlined"
-                    aria-label="Delete"
-                    color="secondary"
-                    onClick={() => handleDelete(attrName)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </div>
-              </Row>
-            ))}
-          </FlipMove>
-        </AttributeListGrid>
-      </InlineDiv>
-      <InlineDiv>
-        <AttributeForm2 />
-      </InlineDiv>
+              </div>
+            </Row>
+          ))}
+        </FlipMove>
+      </AttributeListGrid>
+      <AttributeForm2 />
     </AttributeManagerGrid>
   );
 };
@@ -80,12 +76,14 @@ const Row = styled.div`
   align-items: center;
 `;
 const AttributeManagerGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(17rem, 19rem));
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  // display: grid;
+  // grid-template-columns: 1fr max-content max-content 1fr;
+  // grid-gap: 1rem;
 `;
-const InlineDiv = styled.div`
-  display: inline-block;
-`;
+
 const Header = styled.div`
   grid-column: 1 / -1;
 `;

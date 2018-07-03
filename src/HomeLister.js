@@ -7,6 +7,7 @@ import { getMyHomes } from "./actions/houseActions";
 import requiresLogin from "./HOC/RequiresLogin";
 import Spinner from "./UIElements/Spinner";
 import AddNewHouseButton from "./AddNewHouseButton";
+import ControlHouse from "./ControlHouse";
 class HomeLister extends Component {
   getMyStuff = () => {
     this.props.dispatch(getMyHomes());
@@ -20,24 +21,32 @@ class HomeLister extends Component {
       return <Spinner />;
     }
     return (
-      <HouseDiv>
-        <FlipMove style={listStyle}>
-          {homes.map((home, i) => (
-            <div key={home._id}>
-              <House
-                home={home}
-                attrNames={attrNames}
-                // customAttrNames={customAttrNames}
-                index={i}
-              />
-            </div>
-          ))}
-          <AddNewHouseButton />
-        </FlipMove>
-      </HouseDiv>
+      <HomeListerGrid>
+        <ControlHouse />
+        <HouseDiv>
+          <FlipMove style={listStyle}>
+            {homes.map((home, i) => (
+              <div key={home._id}>
+                <House
+                  home={home}
+                  attrNames={attrNames}
+                  // customAttrNames={customAttrNames}
+                  index={i}
+                />
+              </div>
+            ))}
+            <AddNewHouseButton />
+          </FlipMove>
+        </HouseDiv>
+      </HomeListerGrid>
     );
   }
 }
+
+const HomeListerGrid = styled.section`
+  display: grid;
+  grid-template-columns: max-content 1fr;
+`;
 
 const HouseDiv = styled.div`
   position: relative;

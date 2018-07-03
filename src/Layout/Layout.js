@@ -54,51 +54,20 @@ class Layout extends Component {
         <div className="layout">
           <header className="header">
             <HeaderMUI user={user} logOut={this.logout} />
-
-            {/* <Link to="/">
-              <h3>HomeComp</h3>
-            </Link>
-            <StyleLinks className="links">
-              {this.props.user ? ( // signed in links
-                <Fragment>
-                  <Link to="/compare">Compare</Link>
-                  <Dot>｜</Dot>
-                  <span href="">{this.props.user.email}</span>
-                  <Dot>｜</Dot>
-                  <Link
-                    to="/signout"
-                    onClick={() => this.props.dispatch(logOut())}
-                  >
-                    Sign Out
-                  </Link>
-                </Fragment>
-              ) : (
-                // signed out links
-                <Fragment>
-                  <Link to="/signup">Sign Up</Link>
-                  <Dot>｜</Dot>
-                  <Link to="/signin">Sign In</Link>
-                </Fragment>
-              )}
-            </StyleLinks> */}
           </header>
-          <section className="sidebar">
-            <Route path="/compare" component={ControlHouse} />
-          </section>
+
           <main className="main">
             <Switch>
               <Route path="/compare" component={HomeLister} />
               <Route path="/attributes" component={AttributeManager} />
               <Route path="/signup" component={RegistrationFormContainer} />
+              <Route exact path="/signin" component={SignInFormContainer} />
               <Route exact path="/" component={SignInFormContainer} />
               <Route component={() => <div>no match</div>} />
             </Switch>
           </main>
-          <Background />
 
-          <section className="footer">
-            <h2>footer</h2>
-          </section>
+          <section className="footer" />
         </div>
       </Router>
     );

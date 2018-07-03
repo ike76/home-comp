@@ -15,7 +15,7 @@ const ControlBox = props => {
   `;
   const Icon = styled.i`
     position: absolute;
-    right: -10px;
+    right: -20px;
     font-size: 1.5rem;
   `;
   const selected = attr.slug === sortedBy.attr;
@@ -58,9 +58,10 @@ const ControlBox = props => {
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: "2px",
     display: "flex",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    padding: "3px"
   },
   selected: {
     backgroundColor: "rgba(63, 81, 181, 0.08)"

@@ -14,25 +14,27 @@ const ControlHouse = props => {
   };
 
   return (
-    <div style={{ padding: "1.1rem 0 0", textAlign: "center" }}>
+    <div className="sidebar">
       <div style={{ height: heights.roof }}>
         <Link to="/attributes">
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" size="small">
             Edit Attributes
           </Button>
         </Link>
       </div>
-      {attrNames.map((attr, i) => {
-        return (
-          <ControlBox
-            key={attr + i}
-            attr={attr}
-            click={() => handleClick(attr)}
-            sortedBy={sortedBy}
-            height={heights[attr.type]}
-          />
-        );
-      })}
+      <div>
+        {attrNames.map((attr, i) => {
+          return (
+            <ControlBox
+              key={attr + i}
+              attr={attr}
+              click={() => handleClick(attr)}
+              sortedBy={sortedBy}
+              height={heights[attr.type]}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
