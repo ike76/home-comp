@@ -3,12 +3,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
-
+import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import priceStrip from "./Images/pricestrip.jpg";
 import sizeStrip from "./Images/sizeStrip.jpg";
 import kitchenStrip from "./Images/kitchenStrip.jpg";
 import distanceStrip from "./Images/distanceStrip.jpg";
-
+import compHouses from "./Images/compHouses.png";
+import { withStyles } from "@material-ui/core";
 const HomeDiv = styled.div`
   margin: 1rem auto;
   padding: 2rem;
@@ -26,6 +29,11 @@ const CompStyle = styled.span`
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.35417em;
 `;
+const CenterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
 
 const Pstyle = styled.p`
   font-family: "Roboto", "Helvetica", sans-serif;
@@ -38,58 +46,110 @@ const LiStyle = styled.li`
 `;
 const ImgStyle = styled.img`
   max-width: 90%;
+  margin-bottom: 1.5rem;
 `;
 
-export default () => {
+const styles = {
+  card: {
+    width: "80%",
+    padding: "1rem",
+    margin: ".5rem"
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)"
+  }
+};
+
+const HomePage = props => {
+  const { classes } = props;
+  const bull = <span className={classes.bullet}>•</span>;
   return (
     <HomeDiv>
-      <HomeStyle>HOME</HomeStyle>
-      <CompStyle>COMP</CompStyle>
-      <Pstyle>House Hunting can be overwhelming</Pstyle>
-      <Pstyle>Each house has its own unique array of pros and cons</Pstyle>
-      <Pstyle>
-        Comparing prices is easy, but other considerations are often more
-        important;
-      </Pstyle>
-      <ul>
-        <LiStyle>how far is it from work?</LiStyle>
-        <LiStyle>does it have a garage?</LiStyle>
-        <LiStyle>is the yard big enough for the dog?</LiStyle>
-        <LiStyle>how nice is the kitchen?</LiStyle>
-      </ul>
-      <Pstyle>
-        HOMECOMP helps you organize your new home candidates by making 'apples
-        to apples' comparisons.
-      </Pstyle>
+      <Typography variant="headline" gutterBottom>
+        House Hunting can be overwhelming
+      </Typography>
+      <Typography gutterBottom>
+        Each house has its own unique array of pros and cons
+      </Typography>
+      <Typography>
+        Comparing "prices" or "number of bedrooms" is easy, but after seeing a
+        few houses, it can be hard to remember (and even harder to
+        <em> compare</em>) the other less-obvious attributes.
+      </Typography>
+
+      <div style={{ width: "100%", textAlign: "center" }}>
+        <img
+          src={compHouses}
+          alt=""
+          style={{ maxWidth: "85%", maxHeight: "300px" }}
+        />
+      </div>
+      <CenterDiv>
+        <Card className={classes.card}>
+          <CenterDiv>
+            <HomeStyle>HOME</HomeStyle>
+            <CompStyle>COMP</CompStyle>
+          </CenterDiv>
+          <Typography variant="body1" color="textSecondary">
+            {bull} helps you organize your new home candidates by making 'apples
+            to apples' comparisons. <br />
+            {bull} sorts your home candidates by any attribute <br />
+            {bull} helps clarify your decision-making process.
+          </Typography>
+        </Card>
+      </CenterDiv>
+
       <hr />
-      <h3>Sort your top candidates:</h3>
-      <Pstyle>...by price:</Pstyle>
+      <Typography gutterBottom>Sort by price:</Typography>
       <ImgStyle src={priceStrip} alt="sort houses by price" />
-      <Pstyle>...or size:</Pstyle>
+      <Typography gutterBottom>Sort by size:</Typography>
       <ImgStyle src={sizeStrip} alt="sort houses by size" />
-      <Pstyle>
-        ...or sort by distance to any address (work? family members?)
-      </Pstyle>
+      <Typography gutterBottom>
+        Sort by <em>driving time</em> to any address (work? school? family
+        members?)
+      </Typography>
       <ImgStyle src={distanceStrip} alt="sort houses by price" />
-      <Pstyle>...or sort by non-numerical attributes, such as </Pstyle>
-      <Pstyle>
-        'How nice is the kitchen?' (give each house its own rating)
-      </Pstyle>
+      <Typography gutterBottom>
+        You can even sort by non-numerical qualities, such as{" "}
+        <em>"Kitchen quality" </em>
+        or <em>"Neighborhood vibe"</em> (rate each house on a 7-star scale)
+      </Typography>
       <ImgStyle src={kitchenStrip} alt="sort houses by price" />
-      <Pstyle>
-        This allows you to think through your own unique priorities and
-        trade-offs to make a more informed decision
-      </Pstyle>
-      <Link to="/signin">
-        <Button variant="outlined" color="primary">
-          Sign IN
-        </Button>
-      </Link>
-      <Link to="/signup">
-        <Button variant="outlined" color="primary">
-          Sign UP
-        </Button>
-      </Link>
+      <hr />
+      <CenterDiv>
+        <Card className={classes.card}>
+          <div style={{ width: "100%", textAlign: "center" }}>
+            <HomeStyle>HOME</HomeStyle>
+            <CompStyle>COMP</CompStyle>
+          </div>
+          <Typography gutterBottom color="textSecondary">
+            {bull} allows you to think through your own unique priorities and
+            trade-offs to make a more informed decision.
+          </Typography>
+        </Card>
+      </CenterDiv>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center"
+        }}
+      >
+        <Link to="/signin">
+          <Button variant="outlined" color="primary" style={{ margin: "4px" }}>
+            Sign IN
+          </Button>
+        </Link>
+        <Link to="/signup">
+          <Button variant="outlined" color="primary" style={{ margin: "4px" }}>
+            Sign UP
+          </Button>
+        </Link>
+      </div>
     </HomeDiv>
   );
 };
+
+export default withStyles(styles)(HomePage);

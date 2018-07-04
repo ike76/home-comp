@@ -70,7 +70,7 @@ export class Header extends Component {
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Link
-            to="/"
+            to={user ? "/compare" : "/"}
             style={{ textDecoration: "none" }}
             className={classes.flex}
           >
