@@ -17,4 +17,4 @@ view your favorite homes and sort by:
 etc etc.  
 sort your candidates by whatever attributes matter to you.
 
-live site at: homecomp.netlify.com
+live site at: [homecomp.netlify.com](https://homecomp.netlify.com "HOMECOMP")
