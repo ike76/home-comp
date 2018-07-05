@@ -55,10 +55,11 @@ export class ImageBox extends Component {
       background-image: linear-gradient(#0000, #00000000 40%, #000000b3 90%),
         url(${image});
       background-size: cover;
+      cursor: pointer;
     `;
     return (
       <Fragment>
-        <StyledBox className="box ">
+        <StyledBox className="box" onClick={this.openModal}>
           {!imagePublicId && (
             <button onClick={this.openModal} data-test="add-image-button">
               ADD IMAGE
@@ -75,6 +76,7 @@ export class ImageBox extends Component {
         {this.props.modalOpen === `image ${this.props.home._id}` && (
           <Modal close={this.closeModal} data-test="modal">
             <CloudinaryDB
+              imagePublicId={imagePublicId}
               setImagePublicID={this.setImagePublicID}
               closeModal={this.closeModal}
             />
