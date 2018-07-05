@@ -35,9 +35,11 @@
 }
 .controlBox i.selected {
   color: red;
+  z-index: 2;
 }
 .controlBox i.unselected {
   color: #d3d3d380;
+  z-index: 2;
 }
 .controlButton {
   font-size: 1.5rem;

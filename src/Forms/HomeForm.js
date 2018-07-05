@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import Autocomplete from "react-google-autocomplete";
-import { parseAddress } from "../Utilities/parseGoogleAddress";
-
-import { addHome, editHome, removeHome } from "../actions/houseActions";
 import { connect } from "react-redux";
+import Autocomplete from "react-google-autocomplete";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { addHome, editHome, removeHome } from "../actions/houseActions";
 import { closeModal } from "../actions/uiActions";
+import HomeFormMap from "../HomeFormMap";
+import { parseAddress } from "../Utilities/parseGoogleAddress";
 
 export class HomeForm extends Component {
   state = {
@@ -39,23 +41,54 @@ export class HomeForm extends Component {
     this.props.dispatch(editHome({ homeId, homeKey, updateObj }));
   };
   render() {
+    const { lat, lng } = this.state;
     return (
       <div>
-        <h2>{this.props.home ? "Edit" : "New"} Home Address</h2>
+        <HomeFormMap
+          isMarkerShown
+          lat={lat}
+          lng={lng}
+          address={this.state.address}
+        />
+        <Typography variant="subheading" style={{ marginTop: ".5rem" }}>
+          {this.props.home ? "Edit" : "New"} Home Address
+        </Typography>
         <Autocomplete
           onPlaceSelected={place => this.handleGoogleOutput(place)}
           types={["address"]}
           style={{ minWidth: "15rem" }}
         />
-        {this.state.formatted_address && (
-          <h3 data-test="display-address">{this.state.formatted_address}</h3>
+        {this.state.address && (
+          <Typography variant="body2" data-test="display-address">
+            {this.state.address}
+          </Typography>
         )}
-        <button onClick={this.handleSubmit} data-test="submit-button">
-          SAVE
-        </button>
-        <button onClick={this.handleDelete} data-test="delete-button">
-          DELETE
-        </button>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between"
+          }}
+        >
+          <Button
+            variant="outlined"
+            onClick={this.handleSubmit}
+            data-test="submit-button"
+            color="primary"
+            size="small"
+          >
+            SAVE
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={this.handleDelete}
+            data-test="delete-button"
+            color="secondary"
+            size="small"
+          >
+            DELETE
+          </Button>
+        </div>
       </div>
     );
   }

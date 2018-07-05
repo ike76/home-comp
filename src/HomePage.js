@@ -66,12 +66,13 @@ const HomePage = props => {
         Each house has its own unique array of pros and cons
       </Typography>
       <Typography>
-        Comparing "prices" or "number of bedrooms" is easy, but after seeing a
-        few houses, it can be hard to remember (and even harder to
+        Comparing <em>"prices"</em> or <em>"number of bedrooms"</em> is easy,
+        but after seeing a few houses, it can be hard to remember (and even
+        harder to
         <em> compare</em>) the other less-obvious attributes.
       </Typography>
 
-      <div style={{ width: "100%", textAlign: "center" }}>
+      <div style={{ width: "100%", textAlign: "center", marginTop: "2rem" }}>
         <img
           src={compHouses}
           alt=""
