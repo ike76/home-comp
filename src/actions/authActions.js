@@ -88,7 +88,6 @@ export const authError = error => ({
 });
 
 const storeAuthInfo = (authToken, dispatch) => {
-  console.log("storeAuth", authToken);
   const decodedToken = jwtDecode(authToken);
   const user = decodedToken.sub;
   dispatch(setAuthToken(authToken));

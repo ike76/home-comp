@@ -1,22 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import { loginTHUNK } from "../actions/authActions";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
-const ButtonDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const SeparationText = styled.p`
-  margin: 0.5rem;
-  color: lightgrey;
-  font-size: 10px;
-`;
 const styles = theme => ({
   container: {
     display: "flex",
@@ -38,22 +26,18 @@ export class SignInForm extends Component {
     password: ""
   };
   handleChange = name => event => {
-    console.log("nameevent", name, event.target.value);
     this.setState({
       [name]: event.target.value
     });
   };
   handleFormSubmit = e => {
     e.preventDefault();
-    console.log("this is", this);
-    console.log("formsumbuy");
     const { email, password } = this.state;
-    // this.props.handleSubmit(values => console.log("values", values));
     this.props.dispatch(loginTHUNK({ email, password }));
   };
 
   render() {
-    const { pristine, handleSubmit, classes } = this.props;
+    const { classes } = this.props;
     return (
       <form
         className={classes.container}
@@ -94,4 +78,3 @@ const mapStateToProps = state => ({
 });
 SignInForm = connect(mapStateToProps)(SignInForm);
 export default withStyles(styles)(SignInForm);
-// export default withStyles(styles)(reduxForm({ form: "signin" })(SignInForm));

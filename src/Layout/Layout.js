@@ -1,14 +1,12 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import styled from "styled-components";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomeLister from "../HomeLister";
 import RegistrationFormContainer from "../Forms/RegistrationFormContainer";
 import SignInFormContainer from "../Forms/SignInFormContainer";
 import AttributeManager from "../AttributeManager";
 import { logOut } from "../actions/authActions";
 import "./Layout.css";
-import cityScene from "../Images/cityscene.jpg";
 import HeaderMUI from "./HeaderMUI";
 import HomePage from "../HomePage";
 

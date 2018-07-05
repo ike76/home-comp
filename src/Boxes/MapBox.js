@@ -52,28 +52,39 @@ export class MapBox extends Component {
     if (
       !(home.attributes[name.slug] && home.attributes[name.slug].distanceNum)
     ) {
-      console.log("getting directions from google in MapBox");
-      const DirectionsService = new google.maps.DirectionsService();
-      const origLat = this.props.home.location.lat;
-      const origLng = this.props.home.location.lng;
-      const destLat = this.props.name.lat;
-      const destLng = this.props.name.lng;
-
-      DirectionsService.route(
-        {
-          origin: new google.maps.LatLng(Number(origLat), Number(origLng)),
-          destination: new google.maps.LatLng(destLat, destLng),
-          travelMode: google.maps.TravelMode.DRIVING
-        },
-        (result, status) => {
-          if (status === google.maps.DirectionsStatus.OK) {
-            this.handleSaveDirections(result);
-          } else {
-            console.error(`error fetching directions`, result);
-          }
-        }
-      );
+      this.updateDirections();
     }
+  }
+  componentDidUpdate(prevProps) {
+    const thisUpdatedHome = this.props.allHomes.find(
+      home => home._id === this.props.home._id
+    );
+    const thisPreviousHome = prevProps.home;
+    if (thisUpdatedHome.location.address === thisPreviousHome.location.address)
+      console.log("address same");
+  }
+  updateDirections() {
+    console.log("getting directions from google in MapBox");
+    const DirectionsService = new google.maps.DirectionsService();
+    const origLat = this.props.home.location.lat;
+    const origLng = this.props.home.location.lng;
+    const destLat = this.props.name.lat;
+    const destLng = this.props.name.lng;
+
+    DirectionsService.route(
+      {
+        origin: new google.maps.LatLng(Number(origLat), Number(origLng)),
+        destination: new google.maps.LatLng(destLat, destLng),
+        travelMode: google.maps.TravelMode.DRIVING
+      },
+      (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          this.handleSaveDirections(result);
+        } else {
+          console.error(`error fetching directions`, result);
+        }
+      }
+    );
   }
   render() {
     const { name, home, heights } = this.props;
@@ -130,7 +141,8 @@ export class MapBox extends Component {
 
 const mapStateToProps = state => ({
   heights: state.house.heights,
-  modalOpen: state.ui.modalOpen
+  modalOpen: state.ui.modalOpen,
+  allHomes: state.house.homes
 });
 
 export default connect(mapStateToProps)(MapBox);

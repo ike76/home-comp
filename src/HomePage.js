@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import priceStrip from "./Images/pricestrip.jpg";
 import sizeStrip from "./Images/sizeStrip.jpg";
 import kitchenStrip from "./Images/kitchenStrip.jpg";
@@ -35,15 +34,6 @@ const CenterDiv = styled.div`
   width: 100%;
 `;
 
-const Pstyle = styled.p`
-  font-family: "Roboto", "Helvetica", sans-serif;
-  font-weight: 100;
-  // margin: 0 3px;
-`;
-const LiStyle = styled.li`
-  font-family: "Roboto", "Helvetica", sans-serif;
-  font-weight: 100;
-`;
 const ImgStyle = styled.img`
   max-width: 90%;
   margin-bottom: 1.5rem;
@@ -53,7 +43,8 @@ const styles = {
   card: {
     width: "80%",
     padding: "1rem",
-    margin: ".5rem"
+    margin: ".5rem",
+    textAlign: "center"
   },
   bullet: {
     display: "inline-block",
@@ -67,9 +58,10 @@ const HomePage = props => {
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <HomeDiv>
-      <Typography variant="headline" gutterBottom>
+      <Typography variant="display1" gutterBottom>
         House Hunting can be overwhelming
       </Typography>
+
       <Typography gutterBottom>
         Each house has its own unique array of pros and cons
       </Typography>
@@ -93,8 +85,8 @@ const HomePage = props => {
             <CompStyle>COMP</CompStyle>
           </CenterDiv>
           <Typography variant="body1" color="textSecondary">
-            {bull} helps you organize your new home candidates by making 'apples
-            to apples' comparisons. <br />
+            {bull} helps you organize your favorite homes by making 'apples to
+            apples' comparisons. <br />
             {bull} sorts your home candidates by any attribute <br />
             {bull} helps clarify your decision-making process.
           </Typography>
@@ -114,7 +106,8 @@ const HomePage = props => {
       <Typography gutterBottom>
         You can even sort by non-numerical qualities, such as{" "}
         <em>"Kitchen quality" </em>
-        or <em>"Neighborhood vibe"</em> (rate each house on a 7-star scale)
+        or <em>"Neighborhood vibe"</em>
+        <br /> (Upload a photo and rate each house on a 7-star scale)
       </Typography>
       <ImgStyle src={kitchenStrip} alt="sort houses by price" />
       <hr />
@@ -125,8 +118,8 @@ const HomePage = props => {
             <CompStyle>COMP</CompStyle>
           </div>
           <Typography gutterBottom color="textSecondary">
-            {bull} allows you to think through your own unique priorities and
-            trade-offs to make a more informed decision.
+            {bull} allows you to think through your own priorities <br />
+            {bull} helps you make a more informed decision.
           </Typography>
         </Card>
       </CenterDiv>

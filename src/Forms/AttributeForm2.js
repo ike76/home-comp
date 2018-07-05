@@ -6,6 +6,7 @@ import uuid from "uuid";
 import { addAttribute } from "../actions/houseActions";
 // import Button from "../UIElements/Button";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 import Autocomplete from "react-google-autocomplete";
 import { parseAddress } from "../Utilities/parseGoogleAddress";
@@ -105,11 +106,15 @@ export class AttributeForm extends Component {
     return (
       <NewAttrGrid>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <h3>{this.state.attrName || "Add New Attribute"}</h3>
+          <Typography variant="title">
+            {this.state.attrName || "Add New Attribute"}
+          </Typography>
           {this.state.attrType === "map" && <p>{this.state.address.address}</p>}
         </div>
         <div>
-          <label htmlFor="attrType">1. Pick a Type:</label>
+          <label htmlFor="attrType">
+            <Typography variant="body2">1. Pick a Type:</Typography>
+          </label>
           <Pointer show={this.state.nextStep === "attrType"}>
             <ButtonRow>
               {this.types.map((type, i) => {
@@ -139,7 +144,9 @@ export class AttributeForm extends Component {
           </Pointer>
         </div>
         <div>{explanation(this.state.attrType)}</div>
-        <label htmlFor="attrName">2. Pick a Name:</label>
+        <label htmlFor="attrName">
+          <Typography variant="body2">2. Pick a Name:</Typography>
+        </label>
         <Pointer show={this.state.nextStep === "attrName"}>
           <input
             id="attrName"
@@ -151,7 +158,9 @@ export class AttributeForm extends Component {
         </Pointer>
         {this.state.attrType === "map" && (
           <div>
-            <label htmlFor="googAutoComplete">3. Distance to Where?</label>
+            <label htmlFor="googAutoComplete">
+              <Typography variant="body2">3. Distance to Where?</Typography>
+            </label>
             <Pointer show={this.state.nextStep === "map"}>
               <Autocomplete
                 onPlaceSelected={place => this.handleGoogleOutput(place)}
@@ -180,16 +189,14 @@ const NewAttrGrid = styled.div`
   display: grid;
   grid-gap: 6px;
   padding: 1rem;
+  width: 20rem;
 `;
 const ButtonRow = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
 `;
-const Spacer = styled.span`
-  color: #e8e8e8;
-  margin: 0 8px;
-`;
+
 const mapStateToProps = state => ({
   attrNames: state.house.attrNames,
   home: state.house[0],

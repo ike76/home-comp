@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { deleteAttribute, moveAttribute } from "./actions/houseActions";
 import AttributeForm2 from "./Forms/AttributeForm2";
@@ -22,41 +23,48 @@ export const AttributeManager = props => {
   };
 
   return (
-    <AttributeManagerGrid>
-      <AttributeListGrid>
-        <Header>
-          <Typography variant="title" gutterBottom>
-            Attribute Manager
-          </Typography>
-        </Header>
-        <FlipMove>
-          {attrNames.map((attrName, i) => (
-            <Row key={attrName.pretty}>
-              <div>
-                <Typography variant="button">{attrName.pretty}</Typography>
-              </div>
-              <IconButton size="small" onClick={() => handleClick(i, -1)}>
-                <ArrowUpward />
-              </IconButton>
-              <IconButton size="small" onClick={() => handleClick(i, 1)}>
-                <ArrowDownward />
-              </IconButton>
-              <div>
-                <IconButton
-                  variant="outlined"
-                  aria-label="Delete"
-                  color="secondary"
-                  onClick={() => handleDelete(attrName)}
-                >
-                  <DeleteIcon />
+    <div>
+      <Header>
+        <Typography variant="display1" gutterBottom>
+          Attribute Manager
+        </Typography>
+        <Link to="/compare" style={{ textDecoration: "none" }}>
+          <Button variant="contained" color="primary" size="small">
+            <i class="material-icons">arrow_back</i> Back To List
+          </Button>
+        </Link>
+      </Header>
+      <AttributeManagerGrid>
+        <AttributeListGrid>
+          <FlipMove>
+            {attrNames.map((attrName, i) => (
+              <Row key={attrName.pretty}>
+                <div>
+                  <Typography variant="button">{attrName.pretty}</Typography>
+                </div>
+                <IconButton size="small" onClick={() => handleClick(i, -1)}>
+                  <ArrowUpward />
                 </IconButton>
-              </div>
-            </Row>
-          ))}
-        </FlipMove>
-      </AttributeListGrid>
-      <AttributeForm2 />
-    </AttributeManagerGrid>
+                <IconButton size="small" onClick={() => handleClick(i, 1)}>
+                  <ArrowDownward />
+                </IconButton>
+                <div>
+                  <IconButton
+                    variant="outlined"
+                    aria-label="Delete"
+                    color="secondary"
+                    onClick={() => handleDelete(attrName)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </div>
+              </Row>
+            ))}
+          </FlipMove>
+        </AttributeListGrid>
+        <AttributeForm2 />
+      </AttributeManagerGrid>
+    </div>
   );
 };
 const AttributeListGrid = styled.div`
@@ -64,7 +72,7 @@ const AttributeListGrid = styled.div`
   padding: 1rem;
   display: grid;
   // grid-template-columns: repeat(4, max-content);
-  grid-gap: 5px;
+  // grid-gap: 5px;
   justify-items: center;
   align-items: center;
 `;
@@ -85,7 +93,8 @@ const AttributeManagerGrid = styled.div`
 `;
 
 const Header = styled.div`
-  grid-column: 1 / -1;
+  text-align: center;
+  margin: 1rem;
 `;
 
 const mapStateToProps = state => ({

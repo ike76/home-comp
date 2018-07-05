@@ -3,16 +3,13 @@ import { reduxForm, focus } from "redux-form";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import { registerUser } from "../actions/authActions";
-import { matches, length, isTrimmed } from "./validators/userValidator";
 import { media } from "../Utilities/style-utils";
 
 // import Button from "../UIElements/Button";
 import "./forms.css";
 import { withStyles } from "@material-ui/core";
-
-const passwordLength = length({ min: 8, max: 72 });
-const matchesPassword = matches("password");
 
 const RegistrationGrid = styled.form`
   display: grid;
@@ -74,13 +71,14 @@ export class RegistrationForm extends React.Component {
           autoComplete="off"
           data-test="login-form"
         >
-          <h2 style={{ gridColumn: "1/-1" }}>Sign Up</h2>
+          <div style={{ gridColumn: "1/-1" }}>
+            <Typography variant="display1">Sign Up</Typography>
+          </div>
           <TextField
             id="email"
             label="Email"
             className={classes.textField2Rows}
             type="email"
-            value={this.state.email}
             onChange={this.handleChange("email")}
             margin="normal"
             value={this.state.email}
@@ -90,7 +88,6 @@ export class RegistrationForm extends React.Component {
             label="First Name"
             type="text"
             className={classes.textField}
-            value={this.state.email}
             onChange={this.handleChange("firstName")}
             margin="normal"
             value={this.state.firstName}
@@ -100,7 +97,6 @@ export class RegistrationForm extends React.Component {
             label="Last Name"
             type="text"
             className={classes.textField}
-            value={this.state.email}
             onChange={this.handleChange("lastName")}
             margin="normal"
             value={this.state.lastName}

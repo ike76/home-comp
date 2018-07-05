@@ -9,11 +9,7 @@ export const ControlBox = props => {
   const StyledBox = styled.div`
     height: ${height};
   `;
-  const NameSpan = styled.span`
-    font-size: 10px;
-    max-width: 4rem;
-    max-width: 4rem;
-  `;
+
   const Icon = styled.i`
     position: absolute;
     right: -20px;

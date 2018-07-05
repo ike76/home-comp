@@ -53,7 +53,7 @@ const MapModal = compose(
     >
       {props.directions && <DirectionsRenderer directions={props.directions} />}
       <FlexRow>
-        <p>
+        <div>
           <Attribute>Distance: </Attribute>
           <Value>
             <span data-test="distance-display">
@@ -61,8 +61,8 @@ const MapModal = compose(
                 props.directions.routes[0].legs[0].distance.text}
             </span>
           </Value>
-        </p>
-        <p>
+        </div>
+        <div>
           <Attribute>Travel Time: </Attribute>
           <Value>
             <span data-test="travel-time-display">
@@ -70,7 +70,7 @@ const MapModal = compose(
                 props.directions.routes[0].legs[0].duration.text}
             </span>
           </Value>
-        </p>
+        </div>
       </FlexRow>
     </GoogleMap>
   </Fragment>
