@@ -59,7 +59,11 @@ class Layout extends Component {
 
           <FooterSection className="footer">
             <GrassDiv />
-            <a href="https://github.com/ike76/home-comp" target="_blank">
+            <a
+              href="https://github.com/ike76/home-comp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 width="30px"
                 height="30px"
