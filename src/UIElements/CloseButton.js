@@ -11,6 +11,8 @@ const CloseButton = styled.i`
   font-size: 2rem;
   color: grey;
   transition: 0.5s;
+  z-index: 1000;
+  background: white;
   &:hover {
     color: red;
   }

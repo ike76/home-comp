@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
+
 import { withStyles } from "@material-ui/core/styles";
 import "./Box.css";
 
@@ -28,15 +30,21 @@ export const ControlBox = props => {
   const { classes } = props;
   return (
     <StyledBox className="controlBox" data-test="display-button">
-      <Button
-        variant="outlined"
-        color={selected ? "primary" : "default"}
-        size="small"
-        className={classes.button}
-        onClick={click}
+      <Tooltip
+        id={`tooltip-attr.slug`}
+        title={`sort by ${attr.pretty}`}
+        placement="right"
       >
-        {attr.pretty}
-      </Button>
+        <Button
+          variant="outlined"
+          color={selected ? "primary" : "default"}
+          size="small"
+          className={classes.button}
+          onClick={click}
+        >
+          {attr.pretty}
+        </Button>
+      </Tooltip>
       {icon}
       {/* <NameSpan
         data-test="name-display"
