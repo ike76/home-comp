@@ -4,9 +4,7 @@ import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import FormControl from "@material-ui/core/FormControl";
 import ErrorMessage from "../UIElements/ErrorMessage";
 
 import { registerUser } from "../actions/authActions";
@@ -80,7 +78,7 @@ export class RegistrationForm extends React.Component {
       this.setState({ passwordsOK: true });
     }
   };
-  onSubmit(values) {
+  onSubmit() {
     const { email, password, firstName, lastName } = this.state;
     const user = { email, password, firstName, lastName };
     this.props.dispatch(registerUser(user));
@@ -92,7 +90,7 @@ export class RegistrationForm extends React.Component {
         <ErrorMessage />
         <ValidatorForm
           ref="form"
-          onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
+          onSubmit={this.onSubmit}
           data-test="login-form"
           autoComplete="off"
         >
@@ -142,7 +140,6 @@ export class RegistrationForm extends React.Component {
               value={this.state.password}
               onChange={this.handleChange("password")}
               margin="normal"
-              id="password"
               validators={["required"]}
               errorMessages={["this field is required"]}
             />

@@ -13,11 +13,4 @@ describe("registration form", () => {
     const handleSubmit = jest.fn();
     const wrapper = setup({ handleSubmit });
   });
-  it("calls submit fxn when submitted", () => {
-    const handleSubmit = jest.fn();
-    const wrapper = setup({ handleSubmit });
-    const form = findByTestAttr(wrapper, "login-form");
-    form.simulate("submit");
-    expect(handleSubmit).toBeCalled();
-  });
 });

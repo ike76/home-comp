@@ -10,8 +10,8 @@ describe("homeForm", () => {
   });
   it("displays address if avail", () => {
     const wrapper = shallow(<HomeForm />);
-    wrapper.setState({ formatted_address: "12345 main st" });
+    wrapper.setState({ address: "12345 main st" });
     const displayAddress = findByTestAttr(wrapper, "display-address");
-    expect(displayAddress.text()).toContain("12345 main st");
+    expect(displayAddress.html()).toContain("12345 main st");
   });
 });
