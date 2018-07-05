@@ -13,14 +13,14 @@ import "./Box.css";
 export class ImageBox extends Component {
   state = {
     selectedFile: null,
-    showModal: false,
-    imageURL: "",
     rating: 0,
     imagePublicId: ""
   };
 
   openModal = () => {
-    this.props.dispatch(openModal(`image ${this.props.home._id}`));
+    this.props.dispatch(
+      openModal(`image ${this.props.name.slug} ${this.props.home._id}`)
+    );
   };
   closeModal = () => {
     this.props.dispatch(closeModal());
@@ -38,9 +38,7 @@ export class ImageBox extends Component {
   changeRating = newRating => {
     this.handleChange({ value: newRating });
   };
-  setImageURL = url => {
-    this.setState({ imageURL: url });
-  };
+
   render() {
     const { home, name, heights } = this.props;
     const imagePublicId =
@@ -61,9 +59,11 @@ export class ImageBox extends Component {
       <Fragment>
         <StyledBox className="box" onClick={this.openModal}>
           {!imagePublicId && (
-            <button onClick={this.openModal} data-test="add-image-button">
-              ADD IMAGE
-            </button>
+            <div>
+              <button onClick={this.openModal} data-test="add-image-button">
+                ADD IMAGE
+              </button>
+            </div>
           )}
           <StarRow
             home={home}
@@ -73,9 +73,11 @@ export class ImageBox extends Component {
           />
           <Attribute style={{ zIndex: "5" }}>{name.pretty}</Attribute>
         </StyledBox>
-        {this.props.modalOpen === `image ${this.props.home._id}` && (
-          <Modal close={this.closeModal} data-test="modal">
+        {this.props.modalOpen ===
+          `image ${name.slug} ${this.props.home._id}` && (
+          <Modal data-test="modal">
             <CloudinaryDB
+              attribute={home.attributes[name.slug]}
               imagePublicId={imagePublicId}
               setImagePublicID={this.setImagePublicID}
               closeModal={this.closeModal}

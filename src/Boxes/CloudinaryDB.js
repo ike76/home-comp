@@ -28,15 +28,18 @@ const styles = theme => ({
   }
 });
 
-class ContactForm extends React.Component {
+class Cloudinary extends React.Component {
   state = {
     cloudPublicId: "",
     newImage: false,
     uploading: false
   };
   componentDidMount() {
-    if (this.props.imagePublicId)
+    if (this.props.imagePublicId) {
       this.setState({ cloudPublicId: this.props.imagePublicId });
+    } else {
+      this.setState({ cloudPublicId: null });
+    }
   }
   onImageDrop(files) {
     this.setState({ uploading: true });
@@ -143,22 +146,9 @@ class ContactForm extends React.Component {
         >
           CANCEL
         </Button>
-        {/* {this.state.uploadedFileCloudinaryUrl === "" ? (
-            this.dropZone
-          ) : (
-            <div>
-              <Image
-                cloudName="homecomp"
-                publicId={this.state.cloudPublicId}
-                width="250"
-                crop="scale"
-              />
-              <button onClick={this.onClickSave}>Use This Image</button>
-            </div>
-          )} */}
       </ImageGrid>
     );
   }
 }
 
-export default withStyles(styles)(ContactForm);
+export default withStyles(styles)(Cloudinary);

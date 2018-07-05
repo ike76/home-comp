@@ -32,7 +32,7 @@ const House = props => {
           case "price":
             return (
               <Box
-                key={name + i}
+                key={name.slug + i}
                 name={name}
                 home={home}
                 slug={name.slug}
@@ -42,10 +42,12 @@ const House = props => {
 
           case "image":
             return (
-              <ImageBox key={name + i} name={name} home={home} index={i} />
+              <ImageBox key={name.slug + i} name={name} home={home} index={i} />
             );
           case "map":
-            return <MapBox key={name + i} name={name} home={home} index={i} />;
+            return (
+              <MapBox key={name.slug + i} name={name} home={home} index={i} />
+            );
           default:
             return null;
         }
