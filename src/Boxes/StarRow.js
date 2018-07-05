@@ -9,9 +9,6 @@ const StarDiv = styled.div`
   font-size: small;
 `;
 const StarRow = props => {
-  const handleClick = e => {
-    e.stopPropagation();
-  };
   const { home, name, changeRating } = props;
   const rating = home.attributes[name] && home.attributes[name].value;
   return (

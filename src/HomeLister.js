@@ -54,6 +54,7 @@ const HouseDiv = styled.div`
   overflow: scroll;
   padding: 10px 5px 1.5rem;
   justify-content: center;
+  background: linear-gradient(#fd7c7c00 84%, #3c6730 93%);
 `;
 
 const listStyle = {

@@ -28,9 +28,12 @@
   background: lightgrey;
 }
 .footer {
-  background: grey;
+  /* background: #5a5a5a; */
   grid-area: -1 / 1 / -1 / -1;
   position: relative;
+  display: flex;
+  padding: 0.8rem 2rem;
+  align-items: center;
 }
 .links {
   display: flex;
