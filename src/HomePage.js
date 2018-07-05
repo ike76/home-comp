@@ -43,7 +43,7 @@ const styles = {
   card: {
     width: "80%",
     padding: "1rem",
-    margin: ".5rem",
+    margin: "2rem .5rem",
     textAlign: "center"
   },
   bullet: {
@@ -87,14 +87,13 @@ const HomePage = props => {
           </CenterDiv>
           <Typography variant="body1" color="textSecondary">
             {bull} helps you organize your favorite homes by making 'apples to
-            apples' comparisons. <br />
+            apples' comparisons <br />
             {bull} sorts your home candidates by any attribute <br />
-            {bull} helps clarify your decision-making process.
+            {bull} helps clarify your decision-making process
           </Typography>
         </Card>
       </CenterDiv>
 
-      <hr />
       <Typography gutterBottom>Sort by price:</Typography>
       <ImgStyle src={priceStrip} alt="sort houses by price" />
       <Typography gutterBottom>Sort by size:</Typography>
@@ -111,7 +110,6 @@ const HomePage = props => {
         <br /> (Upload a photo and rate each house on a 7-star scale)
       </Typography>
       <ImgStyle src={kitchenStrip} alt="sort houses by price" />
-      <hr />
       <CenterDiv>
         <Card className={classes.card}>
           <div style={{ width: "100%", textAlign: "center" }}>
@@ -120,7 +118,7 @@ const HomePage = props => {
           </div>
           <Typography gutterBottom color="textSecondary">
             {bull} allows you to think through your own priorities <br />
-            {bull} helps you make a more informed decision.
+            {bull} helps you make a more informed decision
           </Typography>
         </Card>
       </CenterDiv>
