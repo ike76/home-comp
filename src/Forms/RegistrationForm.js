@@ -56,8 +56,7 @@ export class RegistrationForm extends React.Component {
     password: "",
     passwordConfirm: "",
     firstName: "",
-    lastName: "",
-    passwordsOK: true
+    lastName: ""
   };
   componentDidMount() {
     ValidatorForm.addValidationRule("isPasswordMatch", value => {
@@ -71,18 +70,12 @@ export class RegistrationForm extends React.Component {
     this.setState({
       [name]: event.target.value
     });
-    const { password, passwordConfirm } = this.state;
-    if (passwordConfirm && password !== passwordConfirm) {
-      this.setState({ passwordsOK: false });
-    } else {
-      this.setState({ passwordsOK: true });
-    }
   };
-  onSubmit() {
+  onSubmit = () => {
     const { email, password, firstName, lastName } = this.state;
     const user = { email, password, firstName, lastName };
     this.props.dispatch(registerUser(user));
-  }
+  };
   render() {
     const { classes } = this.props;
     return (
