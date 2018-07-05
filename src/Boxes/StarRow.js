@@ -9,6 +9,9 @@ const StarDiv = styled.div`
   font-size: small;
 `;
 const StarRow = props => {
+  const handleClick = e => {
+    e.stopPropagation();
+  };
   const { home, name, changeRating } = props;
   const rating = home.attributes[name] && home.attributes[name].value;
   return (
@@ -20,7 +23,10 @@ const StarRow = props => {
           rating={i + 1}
           homeId={home._id}
           name={name}
-          changeRating={() => changeRating(i + 1)}
+          changeRating={e => {
+            e.stopPropagation();
+            changeRating(i + 1);
+          }}
           data-test="star"
         />
       ))}
