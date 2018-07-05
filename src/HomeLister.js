@@ -53,6 +53,7 @@ const HouseDiv = styled.div`
   flex-direction: row;
   overflow: scroll;
   padding: 10px 5px 1.5rem;
+  justify-content: center;
 `;
 
 const listStyle = {
