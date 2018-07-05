@@ -44,12 +44,14 @@ export class HomeForm extends Component {
     const { lat, lng } = this.state;
     return (
       <div>
-        <HomeFormMap
-          isMarkerShown
-          lat={lat}
-          lng={lng}
-          address={this.state.address}
-        />
+        {this.state.lat && (
+          <HomeFormMap
+            isMarkerShown
+            lat={lat}
+            lng={lng}
+            address={this.state.address}
+          />
+        )}
         <Typography variant="subheading" style={{ marginTop: ".5rem" }}>
           {this.props.home ? "Edit" : "New"} Home Address
         </Typography>
