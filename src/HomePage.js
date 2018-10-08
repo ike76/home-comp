@@ -9,10 +9,11 @@ import priceStrip from "./Images/pricestrip.jpg";
 import sizeStrip from "./Images/sizeStrip.jpg";
 import kitchenStrip from "./Images/kitchenStrip.jpg";
 import distanceStrip from "./Images/distanceStrip.jpg";
-import compHouses from "./Images/compHouses.png";
+import screenshot from "./Images/HomeCompScreenshot.png";
+import House from "./House";
+import uuid from "uuid";
 import { withStyles } from "@material-ui/core";
 const HomeDiv = styled.div`
-  margin: 1rem auto;
   padding: 2rem;
 `;
 
@@ -53,32 +54,27 @@ const styles = {
   }
 };
 
+const attrNames = [
+  { slug: "price", pretty: "Price", type: "price", id: uuid() }
+  // { slug: "square_ft", pretty: "Square Ft", type: "number", id: uuid() },
+  // { slug: "bedrooms", pretty: "Bedrooms", type: "number", id: uuid() },
+  // {
+  //   slug: "to_work",
+  //   pretty: "To Work",
+  //   type: "map",
+  //   address: "1234 Something Street",
+  //   lat: 36.155165,
+  //   lng: -86.782559,
+  //   id: uuid()
+  // },
+  // { slug: "kitchen", pretty: "Kitchen", type: "image", id: uuid() }
+];
+
 const HomePage = props => {
   const { classes } = props;
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <HomeDiv>
-      <Typography variant="display1" gutterBottom>
-        House Hunting can be overwhelming
-      </Typography>
-
-      <Typography gutterBottom>
-        Each house has its own unique array of pros and cons
-      </Typography>
-      <Typography>
-        Comparing <em>"prices"</em> or <em>"number of bedrooms"</em> is easy,
-        but after seeing a few houses, it can be hard to remember (and even
-        harder to
-        <em> compare</em>) the other less-obvious attributes.
-      </Typography>
-
-      <div style={{ width: "100%", textAlign: "center", marginTop: "2rem" }}>
-        <img
-          src={compHouses}
-          alt=""
-          style={{ maxWidth: "85%", maxHeight: "300px" }}
-        />
-      </div>
       <CenterDiv>
         <Card className={classes.card}>
           <CenterDiv>
@@ -93,23 +89,10 @@ const HomePage = props => {
           </Typography>
         </Card>
       </CenterDiv>
+      <div style={{ textAlign: "center" }}>
+        <img src={screenshot} style={{ width: "100%", maxWidth: "600px" }} />
+      </div>
 
-      <Typography gutterBottom>Sort by price:</Typography>
-      <ImgStyle src={priceStrip} alt="sort houses by price" />
-      <Typography gutterBottom>Sort by size:</Typography>
-      <ImgStyle src={sizeStrip} alt="sort houses by size" />
-      <Typography gutterBottom>
-        Sort by <em>driving time</em> to any address (work? school? family
-        members?)
-      </Typography>
-      <ImgStyle src={distanceStrip} alt="sort houses by price" />
-      <Typography gutterBottom>
-        You can even sort by non-numerical qualities, such as{" "}
-        <em>"Kitchen quality" </em>
-        or <em>"Neighborhood vibe"</em>
-        <br /> (Upload a photo and rate each house on a 7-star scale)
-      </Typography>
-      <ImgStyle src={kitchenStrip} alt="sort houses by price" />
       <CenterDiv>
         <Card className={classes.card}>
           <div style={{ width: "100%", textAlign: "center" }}>

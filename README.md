@@ -10,11 +10,10 @@ view your favorite homes and sort by:
 
 ... and/or make your own attributes, and sort by:
 
-- Your favorite back yard
+- Your favorite kitchen
 - Distance from work (or any address)
-- Bathrooms
 
-etc etc.  
+![Home screent shot](./src/Images/HomeCompScreenshot.png)
 sort your candidates by whatever attributes matter to you.
 
 live site at: [homecomp.netlify.com](https://homecomp.netlify.com "HOMECOMP")

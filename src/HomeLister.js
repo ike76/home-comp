@@ -20,6 +20,7 @@ class HomeLister extends Component {
     if (loading) {
       return <Spinner />;
     }
+    console.log("homes", JSON.stringify(homes));
     return (
       <HomeListerGrid>
         <ControlHouse />

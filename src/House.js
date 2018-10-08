@@ -9,7 +9,6 @@ import MapBox from "./Boxes/MapBox";
 import bricks from "./Images/brick-wall.jpg";
 const House = props => {
   const { home, attrNames } = props;
-
   const BrickHouse = styled.div`
     margin: 10px;
     background: url(${bricks});
