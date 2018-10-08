@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
-import priceStrip from "./Images/pricestrip.jpg";
-import sizeStrip from "./Images/sizeStrip.jpg";
-import kitchenStrip from "./Images/kitchenStrip.jpg";
-import distanceStrip from "./Images/distanceStrip.jpg";
 import screenshot from "./Images/HomeCompScreenshot.png";
-import House from "./House";
 import uuid from "uuid";
 import { withStyles } from "@material-ui/core";
 const HomeDiv = styled.div`
@@ -35,10 +30,7 @@ const CenterDiv = styled.div`
   width: 100%;
 `;
 
-const ImgStyle = styled.img`
-  max-width: 90%;
-  margin-bottom: 1.5rem;
-`;
+
 
 const styles = {
   card: {
@@ -54,21 +46,6 @@ const styles = {
   }
 };
 
-const attrNames = [
-  { slug: "price", pretty: "Price", type: "price", id: uuid() }
-  // { slug: "square_ft", pretty: "Square Ft", type: "number", id: uuid() },
-  // { slug: "bedrooms", pretty: "Bedrooms", type: "number", id: uuid() },
-  // {
-  //   slug: "to_work",
-  //   pretty: "To Work",
-  //   type: "map",
-  //   address: "1234 Something Street",
-  //   lat: 36.155165,
-  //   lng: -86.782559,
-  //   id: uuid()
-  // },
-  // { slug: "kitchen", pretty: "Kitchen", type: "image", id: uuid() }
-];
 
 const HomePage = props => {
   const { classes } = props;
@@ -90,7 +67,7 @@ const HomePage = props => {
         </Card>
       </CenterDiv>
       <div style={{ textAlign: "center" }}>
-        <img src={screenshot} style={{ width: "100%", maxWidth: "600px" }} />
+        <img src={screenshot} style={{ width: "100%", maxWidth: "600px" }} alt='home page screen shot' />
       </div>
 
       <CenterDiv>
@@ -109,7 +86,8 @@ const HomePage = props => {
         style={{
           width: "100%",
           display: "flex",
-          justifyContent: "center"
+          justifyContent: "center",
+          marginBottom: '3rem'
         }}
       >
         <Link to="/signin">
