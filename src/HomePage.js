@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import screenshot from "./Images/HomeCompScreenshot.png";
-import uuid from "uuid";
 import { withStyles } from "@material-ui/core";
 const HomeDiv = styled.div`
   padding: 2rem;
